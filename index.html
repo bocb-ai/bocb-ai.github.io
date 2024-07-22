@@ -1,1 +1,1012 @@
-<p>hello</p>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Evaluation of Trustworthiness in Medical Vision Language Models">
+  <meta name="keywords" content="Trustworthiness in medical vision language models">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BOCB</title>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!-- <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/954/954591.png"> -->
+  <link rel="icon" href="/images/logo.png">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
+  <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/4.16.0/gradio.js"></script>
+  <link rel="stylesheet" href="./static/css/leaderboard.css">
+  <script src="./static/js/leaderboard_testmini.js"></script>
+</head>
+
+<style>
+  .expandable-card .card-text-container {
+    max-height: 200px;
+    overflow-y: hidden;
+    position: relative;
+  }
+
+  .expandable-card.expanded .card-text-container {
+    max-height: none;
+  }
+
+  .expand-btn {
+    position: relative;
+    display: none;
+    background-color: rgba(255, 255, 255, 0.8);
+    /* margin-top: -20px; */
+    /* justify-content: center; */
+    color: #510c75;
+    border-color: transparent;
+  }
+
+  .expand-btn:hover {
+    background-color: rgba(200, 200, 200, 0.8);
+    text-decoration: none;
+    border-color: transparent;
+    color: #510c75;
+  }
+
+  .expand-btn:focus {
+    outline: none;
+    text-decoration: none;
+  }
+
+  .expandable-card:not(.expanded) .card-text-container:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 1));
+  }
+
+  .expandable-card:not(.expanded) .expand-btn {
+    margin-top: -40px;
+  }
+
+  .card-body {
+    padding-bottom: 5px;
+  }
+
+  .vertical-flex-layout {
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .figure-img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .adjustable-font-size {
+    font-size: calc(0.5rem + 2vw);
+  }
+
+  .chat-history {
+    flex-grow: 1;
+    overflow-y: auto;
+    /* overflow-x: hidden; */
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+
+  #gradio pre {
+    background-color: transparent;
+  }
+</style>
+
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title"><img id="painting_icon" width="5%" src="images/logo.png"> CARES</h1>
+            <h3 class="title is-3 publication-title">A Comprehensive Benchmark of Trustworthiness in Medical Vision Language Models</h3>
+            <!-- <h5 class="subtitle is-5 publication-awards">NeurIPS 2023 (Oral)</h5> -->
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://richard-peng-xia.github.io/" style="color:#f68946;font-weight:normal;">Peng Xia</a>,
+              </span>
+              <span class="author-block">
+                <a href="" style="color:#008AD7;font-weight:normal;">Ze Chen</a>,
+              </span>
+              <span class="author-block">
+                <a href="" style="color:#F2A900;font-weight:normal;">Juanxi Tian<sup>*</sup></a>,
+              </span>
+              <span class="author-block">
+                <a href="" style="color:#f68946;font-weight:normal;">Yangrui Gong<sup>*</sup></a>,
+              </span>
+              <span class="author-block">
+                <a href="" style="color:#f68946;font-weight:normal;">Ruibo Hou</a>,
+              </span>
+              <span class="author-block">
+                <a href="" style="color:#f68946;font-weight:normal;">Yue Xu</a>,
+              </span>
+              <span class="author-block">
+                <a href="https://zzachw.github.io/" style="color:#f68946;font-weight:normal;">Zhenbang Wu</a>,
+              </span>
+              <span class="author-block">
+                <a href="" style="color:#f68946;font-weight:normal;">Zhiyuan Fan</a>,
+              </span>
+              <span class="author-block">
+                <a href="https://yiyangzhou.github.io/" style="color:#f68946;font-weight:normal;">Yiyang Zhou</a>,
+              </span>
+              <span class="author-block">
+                <a href="" style="color:#f68946;font-weight:normal;">Kangyu Zhu</a>,
+              </span>
+              <span class="author-block">
+                <a href="https://shenmishajing.github.io/" style="color:#f68946;font-weight:normal;">Wenhao Zheng</a>,
+              </span>
+              <span class="author-block">
+                <a href="" style="color:#f68946;font-weight:normal;">Zhaoyang Wang</a>,
+              </span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=AGS_dK8AAAAJ&hl=en" style="color:#f68946;font-weight:normal;">Xiao Wang</a>,
+              </span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=bWvMtN8AAAAJ&hl=en" style="color:#f68946;font-weight:normal;">Xuchao Zhang</a>,
+              </span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=tm5kow8AAAAJ&hl=en" style="color:#f68946;font-weight:normal;">Chetan Bansal</a>,
+              </span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=KqtBi6MAAAAJ&hl=en" style="color:#f68946;font-weight:normal;">Marc Niethammer</a>,
+              </span>
+              <span class="author-block">
+                <a href="https://ranger.uta.edu/~huang/" style="color:#f68946;font-weight:normal;">Junzhou Huang</a>,
+              </span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=lI8rKkoAAAAJ&hl=en" style="color:#f68946;font-weight:normal;">Hongtu Zhu</a>,
+              </span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=WtDQgqQAAAAJ&hl=en" style="color:#f68946;font-weight:normal;">Yun Li</a>,
+              </span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=9jmmp5sAAAAJ&hl=en" style="color:#f68946;font-weight:normal;">Jimeng Sun</a>,
+              </span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=Q0gUrcIAAAAJ&hl=en" style="color:#f68946;font-weight:normal;">Zongyuan Ge</a>,
+              </span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=S6-aJl8AAAAJ&hl=en" style="color:#f68946;font-weight:normal;">Gang Li</a>,
+              </span>
+              <span class="author-block">
+                <a href="https://www.james-zou.com/" style="color:#f68946;font-weight:normal;">James Zou</a>,
+              </span>
+              <span class="author-block">
+                <a href="https://www.huaxiuyao.io/" style="color:#f68946;font-weight:normal;">Huaxiu Yao</a>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><b style="color:#f68946; font-weight:normal">&#x25B6 </b> UNC-Chapel Hill</b></span>
+              <span class="author-block"><b style="color:#008AD7; font-weight:normal">&#x25B6 </b> University of Illinois Urbana-Champaign</span>
+              <span class="author-block"><b style="color:#F2A900; font-weight:normal">&#x25B6 </b> Brown University</span>
+              <span class="author-block"><b style="color:#34a853; font-weight:normal">&#x25B6 </b> University of Washington</span>
+              <span class="author-block"><b style="color:#d32f2f; font-weight:normal">&#x25B6 </b> Microsoft Research</span>
+              <span class="author-block"><b style="color:#ea4335; font-weight:normal">&#x25B6 </b> UT Arlington</span>
+              <span class="author-block"><b style="color:#fbbc05; font-weight:normal">&#x25B6 </b> Monash University</span>
+              <span class="author-block"><b style="color:#9c27b0; font-weight:normal">&#x25B6 </b> Stanford University</span>
+            </div>
+
+            <div class="is-size-6 publication-authors">
+              <span class="author-block"><sup>*</sup>Equal Contribution</span>
+            </div>
+
+            
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2406.06007" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://github.com/richard-peng-xia/CARES" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://github.com/richard-peng-xia/CARES/tree/main/data" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-database"></i>
+                    </span>
+                    <span>Dataset</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://x.com/HuaxiuYaoML/status/1800373984493547588" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-share-square"></i>
+                    </span>
+                    <span>Twitter</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                    <a href="#leaderboard" class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                         <i class="far fa-images"></i>
+                        </span>
+                    <span>Leaderboard</span>
+                    </a>
+                </span>
+
+
+                
+
+                <!-- <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                  </a>
+              </span> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <h4 class="subtitle has-text-centered">
+          🔥<span style="color: #ff3860">[NEW!]</span> We delve into the trustworthiness of Med-LVLMs across 5 key dimensions: trustfulness, fairness, safety, privacy, & robustness. With 41K Q&A pairs, spanning 16 image modalities & 27 anatomical regions.
+          
+          <br><br>
+          🧐🔍 Findings: Models often show factual inaccuracies & fail to maintain fairness, also proving vulnerable to attacks with a lack of privacy awareness.
+        </h4>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section"  style="background-color:#efeff081">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-six-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+            Artificial intelligence has significantly impacted medical applications, particularly with the advent of Medical Large Vision Language Models (Med-LVLMs), sparking optimism for the future of automated and personalized healthcare. However, the trustworthiness of Med-LVLMs remains unverified, posing significant risks for future model deployment.
+              <ol type="1">
+                <li><b>Evaluation Dimensions</b>. <span style="font-size: 95%;">We introduce <b>CARES</b> and aim to <b>C</b>omprehensively ev<b>A</b>luate the t<b>R</b>ustworthin<b>ES</b>s of Med-LVLMs across the medical domain. We assess the trustworthiness of Med-LVLMs across five dimensions, including trustfulness, fairness, safety, privacy, and robustness </span></li>
+                <li><b>Data Format and Scale</b>. <span style="font-size: 95%;"> CARES comprises about <b>41K</b> question-answer pairs in both <b>closed and open-ended </b>formats, covering
+                    <b>16 </b>medical image modalities and <b>27</b> anatomical regions. </li>
+                <li><b>Performance</b>. <span style="font-size: 95%;">Our analysis reveals
+                    that the models consistently exhibit concerns regarding trustworthiness, often
+                    displaying factual inaccuracies and failing to maintain fairness across different
+                    demographic groups. Furthermore, they are vulnerable to attacks and demonstrate
+                    a lack of privacy awareness. </li>
+                <li><b>Open-source</b>. <span style="font-size: 95%;">We make GPT-4 generated evaluation data and code base publicly available.</li>
+              </ol>
+           </p>
+  
+          </div>
+        </div>
+      </div>
+        
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container">
+      
+      <div class="columns is-centered">
+        <div class="column is-full has-text-centered content">
+  
+          <h2 class="title is-3" id="leaderboard">🏆 Leaderboard</h2>
+          <div class="content">
+            <p class="mt-3">Scores on CARES benchmark. Here "ACC": Accuracy, "OC": Over-Confident ratio, "Abs": Abstention rate, "Tox": Toxicity score, "AED": Accuracy Equality Difference. We report "Abs" in Privacy and Overcautiousness.
+              To view detailed results, please see the paper.
+            </p>
+            <!-- <div class="video-duration">
+              <p>
+                <strong>Short Video:</strong> &lt; 2min  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <strong>Medium Video:</strong> 4min ~ 15min  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <strong>Long Video:</strong> 30min ~ 60min
+              </p>
+              <p>
+                By default, this leaderboard is sorted by results with subtitles. To view other sorted results, please click on the corresponding cell.
+              </p>
+            </div> -->
+  
+            <table class="js-sort-table" id="results" style="margin-left: auto; margin-right: auto;">
+              <thead>
+                <tr>
+                  <th rowspan="2" style="vertical-align: middle; width: 50px;" ><strong>#</strong></th>
+                  <th rowspan="2" style="vertical-align: middle; width: 180px;"><strong>Model</strong></th>
+                  <th colspan="2" style="vertical-align: middle; width: 300px;" data-js-sort-colNum="5"><strong>Trustfulness (%)</strong></th>
+                  <th colspan="3" style="vertical-align: middle; width: 300px;" data-js-sort-colNum="7"><strong>Fairness (%)</strong></th>
+                  <th colspan="3" style="vertical-align: middle; width: 300px;" data-js-sort-colNum="9"><strong>Safety (%)</strong></th> 
+                  <th colspan="2" style="vertical-align: middle; width: 300px;" data-js-sort-colNum="11"><strong>Privacy (%)</strong></th> 
+                  <th colspan="2" style="vertical-align: middle; width: 300px;" data-js-sort-colNum="11"><strong>Robustness (%)</strong></th>
+                </tr>
+                <tr>
+                  <th data-js-sort-colNum="4"><strong>Factuality <br> ACC↑ </strong></th>
+                  <th data-js-sort-colNum="5"><strong>Uncertainty <br> ACC↑ / OC↓</strong></th>
+                  <th data-js-sort-colNum="6"><strong>Age<br> AED↓</strong></th>
+                  <th data-js-sort-colNum="7"><strong>Gender<br> AED↓</strong></th>
+                  <th data-js-sort-colNum="8"><strong>Race<br> AED↓</strong></th>
+                  <th data-js-sort-colNum="9"><strong>Jailbreaking<br>ACC↑/Abs↑</strong></th>
+                  <th data-js-sort-colNum="10"><strong>Overcaut<br>iousness↓</strong></th>
+                  <th data-js-sort-colNum="11"><strong>Toxicity<br>Tox↓/Abs↑</strong></th>
+                  <th data-js-sort-colNum="12"><strong>Zero-shot↑</strong></th>
+                  <th data-js-sort-colNum="13"><strong>Few-shot↑</strong></th>
+                  <th data-js-sort-colNum="14"><strong>Input<br>ACC↑/Abs↑</strong></th>
+                  <th data-js-sort-colNum="15"><strong>Semantic<br>Abs↑</strong></th>
+                </tr>
+              </thead>
+              <tbody>
+  
+                <tr>
+                  <td style="vertical-align: middle;">1</td>
+                  <td style="text-align: left; padding: 2px 10px;">
+                    <b class="">
+                      <a href="https://github.com/microsoft/LLaVA-Med/tree/v1.0.0" class="ext-link" style="font-size: 16px; margin-left: 5px;">LLaVA-Med</a>
+                      <p style="font-size: 12px; margin-left: 5px; color: #858383;">Microsoft</p>
+                    </b>
+                  </td>
+                  <td style="vertical-align: middle;"><b class="">40.4</b></td>
+                  <td style="vertical-align: middle;">38.4 / 38.3</td>
+                  <td style="vertical-align: middle;">18.3</td>
+                  <td style="vertical-align: middle;">2.7</td>
+                  <td style="vertical-align: middle;">4.7</td>
+                  <td style="vertical-align: middle;"><strong>35.6 / 30.2</strong></td>
+                  <td style="vertical-align: middle;">59.0</td>
+                  <td style="vertical-align: middle;">1.37 / <strong>17.4</strong></td>    
+                  <td style="vertical-align: middle;">2.71</td>        
+                  <td style="vertical-align: middle;">2.04</td>   
+                  <td style="vertical-align: middle;">42.9 / <strong>6.68</strong></td>
+                  <td style="vertical-align: middle;"> / </td>               
+                </tr>
+                <tr>
+                  <td style="vertical-align: middle;">2</td>
+                  <td style="text-align: left; padding: 2px 10px;"><b class=""><a href="https://github.com/snap-stanford/med-flamingo" class="ext-link" style="font-size: 16px; margin-left: 5px;">Med-Flamingo
+                    <p style="font-size: 12px; margin-left: 5px; color: #858383;">Stanford & Hospital Israelita Albert Einstein & Harvard </p>
+                  </a></b></td>
+                  <td style="vertical-align: middle;">29.0</td>
+                  <td style="vertical-align: middle;">33.7 / 59.1</td>
+                  <td style="vertical-align: middle;"><strong>11.8</strong></td>
+                  <td style="vertical-align: middle;">1.6</td>
+                  <td style="vertical-align: middle;">4.8</td>
+                  <td style="vertical-align: middle;">22.5 / 0.00</td>
+                  <td style="vertical-align: middle;"><strong>0.00</strong></td> 
+                  <td style="vertical-align: middle;">1.88 / 0.35</td>  
+                  <td style="vertical-align: middle;">0.76</td>     
+                  <td style="vertical-align: middle;">0.65</td> 
+                  <td style="vertical-align: middle;">37.5 / 0.00</td>   
+                  <td style="vertical-align: middle;">/</td>                          
+                </tr>
+                <tr>
+                  <td style="vertical-align: middle;">3</td>
+                  <td style="text-align: left; padding: 2px 10px;">
+                    <b class="">
+                      <a href="https://github.com/xiaoman-zhang/PMC-VQA" class="ext-link" style="font-size: 16px; margin-left: 5px;">MedVInT</a>
+                      <p style="font-size: 12px; margin-left: 5px; color: #858383;">SJTU & Shanghai AI Lab</p>
+                    </b>
+                  </td>
+                  <td style="vertical-align: middle;">39.3</td>
+                  <td style="vertical-align: middle;">32.9 / 52.9</td>
+                  <td style="vertical-align: middle;">19.7</td>
+                  <td style="vertical-align: middle;"><strong>0.8</strong></td>
+                  <td style="vertical-align: middle;"><strong>2.0</strong></td>
+                  <td style="vertical-align: middle;">34.1 / 0.00</td>
+                  <td style="vertical-align: middle;"><strong>0.00</strong></td>
+                  <td style="vertical-align: middle;">1.53 / 0.04</td>  
+                  <td style="vertical-align: middle;">0.00</td>  
+                  <td style="vertical-align: middle;">0.00</td>  
+                  <td style="vertical-align: middle;"><strong>57.9</strong> / 0.00</td>
+                  <td style="vertical-align: middle;">0.01</td>                                
+              </tr>
+              <tr>
+                <td style="vertical-align: middle;">4</td>
+                <td style="text-align: left; padding: 2px 10px;"><b class=""><a href="https://github.com/chaoyi-wu/RadFM" class="ext-link" style="font-size: 16px; margin-left: 5px;">RadFM
+                  <p style="font-size: 12px; margin-left: 5px; color: #858383;">SJTU & Shanghai AI Lab</p>
+                </a> </b></td>
+                <td style="vertical-align: middle;">27.5</td>
+                <td style="vertical-align: middle;">35.9 / 58.5</td>
+                <td style="vertical-align: middle;">14.0 </td>
+                <td style="vertical-align: middle;">2.7 </td>
+                <td style="vertical-align: middle;">13.8 </td>
+                <td style="vertical-align: middle;">25.4 / 0.65 </td>
+                <td style="vertical-align: middle;">1.00</td>   
+                <td style="vertical-align: middle;"><strong>0.83</strong> / 2.58</td> 
+                <td style="vertical-align: middle;">0.00</td>  
+                <td style="vertical-align: middle;">0.00</td> 
+                <td style="vertical-align: middle;">22.2 / 0.02</td> 
+                <td style="vertical-align: middle;"><strong>0.06</strong></td>                            
+              </tr>
+              <tr>
+                <td style="vertical-align: middle;">5</td>
+                <td style="text-align: left; padding: 2px 10px;"><b class=""><a href="https://llava-vl.github.io/blog/2024-01-30-llava-next/" class="ext-link" style="font-size: 16px; margin-left: 5px;">LLaVA-v1.6
+                  <p style="font-size: 12px; margin-left: 5px; color: #858383;">Microsoft & UW Madison</p>
+                </a> </b></td>
+                <td style="vertical-align: middle;">32.3</td>
+                <td style="vertical-align: middle;">42.5 / 44.7</td>
+                <td style="vertical-align: middle;">19.7 </td>
+                <td style="vertical-align: middle;">1.9 </td>
+                <td style="vertical-align: middle;">6.4 </td>
+                <td style="vertical-align: middle;">29.4 / 1.13 </td>
+                <td style="vertical-align: middle;">3.67 </td>   
+                <td style="vertical-align: middle;">13.0 / 5.18</td>
+                <td style="vertical-align: middle;"><strong>14.0</strong></td>  
+                <td style="vertical-align: middle;"><strong>13.2</strong></td>
+                <td style="vertical-align: middle;">/</td>   
+                <td style="vertical-align: middle;">/</td>                            
+              </tr>
+              <tr>
+                <td style="vertical-align: middle;">6</td>
+                <td style="text-align: left; padding: 2px 10px;"><b class=""><a href="https://github.com/QwenLM/Qwen-VL" class="ext-link" style="font-size: 16px; margin-left: 5px;">Qwen-VL-Chat
+                  <p style="font-size: 12px; margin-left: 5px; color: #858383;">Alibaba </p>
+                </a></b></td>
+                <td style="vertical-align: middle;">33.8</td>
+                <td style="vertical-align: middle;"><strong>50.7 / 17.0</strong></td>
+                <td style="vertical-align: middle;">16.1</td>
+                <td style="vertical-align: middle;">1.0</td>
+                <td style="vertical-align: middle;">3.1</td>
+                <td style="vertical-align: middle;">31.1 / 5.36</td>
+                <td style="vertical-align: middle;">2.67</td>
+                <td style="vertical-align: middle;">1.69 / 7.26</td>      
+                <td style="vertical-align: middle;">10.4</td> 
+                <td style="vertical-align: middle;">9.82</td>
+                <td style="vertical-align: middle;">/</td> 
+                <td style="vertical-align: middle;">/</td>                                   
+              </tr>
+              
+              
+          
+            </tbody>                                                   
+          </table> 
+  
+          <!-- <p style="margin-top: -20px;">
+            <strong style="color: #22a56e; font-size: 18px;" >Green date</strong> indicates the newly added models  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            - indicates closed-source models
+          </p> -->
+  
+          <!-- <p style=" text-align: left;">
+            1* The short and medium videos are sampled at 1 fps, while the long videos are sampled at 2 fps to ensure the stability of the API.
+            </br>2* The videos less than 384 seconds are sampled at 1 fps, and for those longer than 384 seconds, we extract 384 frames uniformly. All the frames are resized to 512x512 resolution to fit within GPT-4o’s max context length.
+          </p> -->
+  
+          </div>
+
+        </div>
+      </div>
+  
+    </div>
+  </section>
+  
+<section class="section">
+  <!-- Results. -->
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-six-fifths">
+      <h2 class="title is-3"><img id="painting_icon" width="3%" src="https://cdn-icons-png.flaticon.com/512/5886/5886212.png"> CARES Datasets</h2>
+    </div>
+  </div>
+  <!-- </div> -->
+  <!--/ Results. -->    
+<div class="container is-max-desktop">
+
+  <div class="columns is-centered">
+    <div class="column is-full-width">
+      <div class="content has-text-justified">
+        <p>
+        We utilize open-source medical vision-language datasets and image classification datasets to construct CARES benchmark, which cover a wide range of medical image modalities
+        and body parts. The diversity of the datasets ensures richness in question formats and indicates coverage of 16 medical
+        image modalities and 27 human anatomical structures.
+
+<!-- CSS Code: Place this code in the document's head (between the 'head' tags) -->
+<style>
+  table.GeneratedTable {
+    width: 100%;
+    background-color: #ffffff;
+    border-collapse: collapse;
+    border-width: 2px;
+    border-color: #c1c4c5;
+    border-style: solid;
+    color: #000000;
+  }
+  
+  table.GeneratedTable td, table.GeneratedTable th {
+    border-width: 2px;
+    border-color: #9b9d9e;
+    border-style: solid;
+    padding: 3px;
+  }
+  
+  table.GeneratedTable thead {
+    background-color: #6691ee;
+  }
+  </style>
+  
+  <!-- HTML Code: Place this code in the document's body (between the 'body' tags) where the table should appear -->
+  <div class="column is-six-fifths" width="80%">
+  <table class="GeneratedTable">
+    <thead>
+      <tr>
+        <th>Data Source</th>
+        <th>Data Modality </th>
+        <th># Images </th>
+        <th># QAs </th>
+        <th>Dataset Type </th>
+        <th> Answer Type </th>
+        <th> Demography </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="https://physionet.org/content/mimic-cxr-jpg/2.0.0/">MIMIC-CXR</a> </td>
+        <td>Chest X-ray</td>
+        <td>1.9K</td>
+        <td>10.3K</td>
+        <td>VL</td>
+        <td>Open-ended</td>
+        <td>Age, Gender, Race</td>
+      </tr>
+      <tr>
+        <td><a href="https://iuhealth.org/find-medical-services/x-rays">IU-Xray</a> </td>
+        <td>Chest X-ray</td>
+        <td>0.5k</td>
+        <td>2.5K</td>
+        <td>VL</td>
+        <td>Yes/No</td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <td><a href="https://ophai.hms.harvard.edu/datasets/harvard-fairvlmed10k/">Harvard-FairVLMed</a> </td>
+        <td>SLO Fundus</td>
+        <td>0.7K</td>
+        <td>2.8K</td>
+        <td>VL</td>
+        <td>Open-ended</td>
+        <td>Age, Gender, Race</td>
+      </tr>
+      <tr>
+        <td><a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DBW86T">HAM10000</a> </td>
+        <td>Dermatoscopy</td>
+        <td>1K</td>
+        <td>2K</td>
+        <td>Classification</td>
+        <td>Multi-choice</td>
+        <td>Age, Gender</td>
+      </tr>
+      <tr>
+        <td><a href="https://stanfordaimi.azurewebsites.net/datasets/3263e34a-252e-460f-8f63-d585a9bfecfc">OL3I</a> </td>
+        <td>Heart CT</td>
+        <td>1K</td>
+        <td>1K</td>
+        <td>Classification</td>
+        <td>Yes/No</td>
+        <td>Age, Gender</td>
+      </tr>
+      <tr>
+        <td><a href="https://huggingface.co/datasets/axiong/pmc_oa">PMC-OA</a> </td>
+        <td>Mixture</td>
+        <td>2.5K</td>
+        <td>13K</td>
+        <td>VL</td>
+        <td>Open-ended</td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <td><a href="https://github.com/OpenGVLab/Multi-Modality-Arena">OmniMedVQA</a> </td>
+        <td>Mixture</td>
+        <td>11K</td>
+        <td>12K</td>
+        <td>VQA</td>
+        <td>Multi-choice</td>
+        <td>-</td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+  <!-- Codes by Quackit.com -->
+  
+        </p>
+        <p>
+        There are two types of questions in CARES: (1) Closed-ended
+        questions: Two or more candidate options are provided for each question as the prompt, with only one
+        being correct. We calculate the accuracy by matching the option in the model output; (2) Open-ended
+        questions: Open-ended questions do not have a fixed set of possible answers and require more detailed,
+        explanatory or descriptive responses. It is more challenging, as fully open settings encourage a deeper
+        analysis of medical scenarios, enabling a comprehensive assessment of the model’s understanding of
+        medical knowledge. We quantify the accuracy of model responses using GPT-4.
+        </p>
+      </div>
+
+  
+      
+      <div class="columns is-centered has-text-centered">
+      <div class="column is-six-fifths" style="display: flex; align-items: flex-start; justify-content: center;">
+        <figure style="text-align: center;">
+          <img id="teaser" width="70%" src="images/data.png">
+          <figcaption>
+              Statistical overview of CARES
+              datasets. (left) CARES covers numerous anatomical structures, including the brain, eyes, heart,
+              chest, etc. (right) the involved medical imaging
+              modalities, including major radiological modalities, pathology, etc.
+          </figcaption>
+        </figure>
+      </div>
+      </div>
+
+
+    </div>
+  </div>
+
+
+</section>
+ 
+
+<section class="section">
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-six-fifths">
+      <h2 class="title is-3"><img id="painting_icon" width="5%" src="images/logo.png"> CARES: A Benchmark of Trustworthiness in Medical Vision Language Models </h2>
+    </div>
+  </div>
+<div class="container is-max-desktop">
+
+  <div class="columns is-centered">
+    <div class="column is-full-width">
+      <div class="content has-text-justified"> 
+        <p>
+        CARES is designed to provide a comprehensive evaluation of trustworthiness in MedLVLMs, reflecting the issues present in model responses. We assess trustworthiness across five
+        critical dimensions: trustfulness, fairness, safety, privacy, and robustness.
+          <ul type="1">
+            <li><b>Trustfulness</b>. <span style="font-size: 95%;">We discuss the trustfulness of MedLVLMs, defined as the extent to which a Med-LVLM
+                can provide factual responses and recognize when
+                those responses may potentially be incorrect.</span></li>
+            <ul type="1">
+              <li> <b>Factuality</b>: Med-LVLMs are susceptible to factual hallucination, wherein the model may generate incorrect or misleading information about medical conditions,
+                  including erroneous judgments regarding symptoms or diseases, and inaccurate descriptions of medical images.
+                  interventions.
+              <li> <b>Uncertainty</b>: A trustful Med-LVLM should produce
+                  confidence scores that accurately reflect the probability of its predictions being correct, essentially
+                  offering precise uncertainty estimation. However, as various authors have noted, LLM-based models
+                  often display overconfidence in their responses, which could potentially lead to a significant number
+                  of misdiagnoses or erroneous diagnoses. </span></li>
+            </ul>
+            <li><b> Fairness</b>. <span style="font-size: 95%;">Med-LVLMs have the potential to unintentionally cause health disparities, especially among underrepresented groups. These disparities can reinforce stereotypes and lead to biased medical advice. It
+                is essential to prioritize fairness in healthcare to guarantee that every individual receives equitable and
+                accurate medical treatment.
+          <li><b>Safety</b>. <span style="font-size: 95%;">Med-LVLMs present safety concerns, which include several aspects such as jailbreaking, overcautious behavior, and toxicity. </span></li>
+          <ul type="1">
+            <li> <b>Jailbreaking</b>: Jailbreaking refers to attempts or actions that
+                manipulate or exploit a model to deviate from its intended
+                functions or restrictions. For Med-LVLMs, it involves
+                prompting the model in ways that allow access to restricted
+                information or generating responses that violate medical guidelines.
+            <li> <b>Overcautiousness</b>: Overcautiousness describes how
+                Med-LVLMs often refrain from responding to medical queries they are capable of answering. In medical
+                settings, this excessively cautious approach can lead
+                models to decline answering common clinical diagnostic questions.
+            <li> <b>Toxicity</b>: In Med-LVLMs, toxicity refers to outputs that are harmful, such as those containing biased,
+                offensive, or inappropriate content. In medical applications, the impact of toxic outputs is
+                particularly severe because they may generate rude or disrespectful medical advice, eroding trust in
+                the application of clinical management. </span></li>
+          </ul>
+          <li><b> Privacy</b>. <span style="font-size: 95%;">Privacy breaches in Med-LVLMs is a critical issue due to the sensitive nature of health-related data.
+              These models are expected to refrain from disclosing private information, such as marital status, as
+              this can compromise both the reliability of the model and compliance with legal regulations.
+          
+          <li><b> Robustness </b>. <span style="font-size: 95%;"> Robustness in Med-LVLMs aims to evaluate whether the models perform reliably across various
+              clinical settings. We focus on evaluating out-of-distribution (OOD) robustness, aiming
+              to assess the model’s ability to handle test data whose distributions significantly differ from those
+              of the training data.
+          </ul>
+        </p>
+      </div>
+      <centering>
+        <div style="text-align: center;">
+          <img id="teaser" width="80%" src="images/overview.png">
+        </div>
+
+      
+      </centering>           
+    </div>
+  </div>
+
+
+</section>
+  
+
+
+<section class="section">
+  <!-- Results. -->
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-six-fifths">
+      <h2 class="title is-3"><img id="painting_icon" width="3%" src="https://cdn-icons-png.flaticon.com/512/3515/3515174.png"> Performance</h2>
+    </div>
+  </div>
+   
+<div class="container is-max-desktop">
+
+    <ul type="1">
+      <li><b>Trustfulness</b>. <span style="font-size: 95%;">The evaluation of trustfulness includes assessments of factuality and uncertainty. The
+          key findings are: (1) Existing Med-LVLMs encounter significant factuality hallucination, with
+          accuracy exceeding 50% on the comprehensive VQA benchmark we constructed, especially when
+          facing open-ended questions and rare modalities or anatomical regions; (2) The performance of
+          Med-LVLMs in uncertainty estimation is unsatisfactory, revealing a poor understanding of their
+          medical knowledge limits. These models also tend to exhibit overconfidence, thereby
+          increasing the risk of misdiagnoses.  <b>[1-2]</b></span></li>
+      <li><b> Fairness</b>. <span style="font-size: 95%;">In fairness evaluation, our results reveal significant disparities in model performance
+          across various demographic groups that categorized by age, gender and races. Specifically, agerelated findings show the highest performance in the 40-60 age group, with reduced accuracy among the elderly due to imbalanced training data distribution. Gender disparities are less pronounced,
+          suggesting relative fairness; however, notable discrepancies still exist in specific datasets like CT
+          and dermatology. Racial analysis indicates better model performance for Hispanic or Caucasian
+          populations, though some models achieve more balanced results across different races. <b>[3]</b>  </span></li>
+    <li><b>Safety</b>. <span style="font-size: 95%;">The safety evaluation of includes assessments of jailbreaking, overcautiousness, and
+        toxicity. Our key findings are: (1) Under the attack of "jailbreaking" prompts, the accuracy of all
+        models decreases. LLaVA-Med demonstrates the strongest resistance, refusing to answer many
+        unsafe questions, whereas other models typically respond without notable defenses; (2) All MedLVLMs exhibit a slight increase in toxicity when prompted with toxic inputs. Compared to other
+        Med-LVLMs, only LLaVA-Med demonstrates significant resistance to induced toxic outputs, as
+        evidenced by a notable increase in its abstention rate; (3) Due to excessively conservative tuning,
+        LLaVA-Med exhibits severe over-cautiousness, resulting in a higher refusal rate compared to other
+        models, even for manageable questions in routine medical inquiries. <b>[4-6]</b> </span></li>
+    <li><b> Privacy</b>. <span style="font-size: 95%;">The privacy assessment reveals significant gaps in Med-LVLMs regarding the protection
+        of patient privacy, highlighting several key issues: (1) Med-LVLMs lack effective defenses against
+        queries that seek private information, in contrast to general LVLMs, which typically refuse to
+        produce content related to private information; (2) While Med-LVLMs often generate what appears
+        to be private information, it is usually fabricated rather than an actual disclosure; (3) Current
+        Med-LVLMs tend to leak private information that is included in the input prompts. <b>[7]</b> </span></li>
+    <li><b> Robustness </b>. <span style="font-size: 95%;"> The evaluation of robustness focuses on out-of-distribution (OOD) robustness, specifically targeting input-level and semantic-level distribution shifts. The findings indicate that: (1)
+        when significant noise is introduced to input images, Med-LVLMs fail to make accurate judgments
+        and seldom refuse to respond; (2) when tested on unfamiliar modalities, these models continue to
+        respond, despite lacking sufficient medical knowledge. <b>[8]</b> </span></li>
+    </ul>
+
+  </div>
+</section>
+
+
+<section class="section">
+
+<div class="container mt-5">
+    <div class="form-row" style="justify-content: flex-end;">
+      <div class="form-group col-md-1">
+        <div class="col-md-2" style="width: 100%"><label>&nbsp;</label></div>
+        <div class="btn-group" role="group" aria-label="Left and Right Controller"
+          style="width: 100%;align-items: flex-end;justify-content: center;flex-direction: row;display: flex;">
+          <button type="button" class="form-control btn btn-primary" id="prev-question"><i
+              class="material-icons">keyboard_arrow_left</i></button>
+          <button type="button" class="form-control btn btn-primary" id="next-question"><i
+              class="material-icons">keyboard_arrow_right</i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Question Card -->
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <div class="card mb-4" style="width: 60%; display: flex; align-items: center;">
+        <div class="card-body" id="selected-question" style="display: flex; height: 50vh;">
+          <div class="chat-history">
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>
+@article{xia2024cares,
+    title={CARES: A Comprehensive Benchmark of Trustworthiness in Medical Vision Language Models},
+    author={Xia, Peng and Chen, Ze and Tian, Juanxi and Gong, Yangrui and Hou, Ruibo and Xu, Yue and Wu, Zhenbang and Fan, Zhiyuan and Zhou, Yiyang and Zhu, Kangyu and others},
+    journal={arXiv preprint arXiv:2406.06007},
+    year={2024}
+}
+  </code></pre>
+    </div>
+  </section>
+  
+  <section class="section" id="Acknowledgement">
+    <div class="container is-max-desktop content">
+      <h2 class="title">Acknowledgement</h2>
+      <p>
+        This website is adapted from <a
+        href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>, licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+        Commons Attribution-ShareAlike 4.0 International License</a>.  We thank the LLaVA team for giving us access to their models, and open-source projects.
+      </p>
+
+      <p>
+<b>Usage and License Notices</b>: The data and code is intended and licensed for research use only. They are also restricted to uses that follow the license agreement of CLIP,  LLaMA, Vicuna, GPT-4, LLaVA. The dataset is CC BY NC 4.0 (allowing only non-commercial use) and models trained using the dataset should not be used outside of research purposes.
+</p>
+
+      <p>
+      <a href='https://github.com/Computer-Vision-in-the-Wild/'><img id="painting_icon" width="10%" src="https://avatars.githubusercontent.com/u/97258247?s=200&v=4"></a> 
+<!--      Related Links: -->
+<!--      <a href='https://react-vl.github.io/'>[REACT]</a>  -->
+<!--      <a href='https://gligen.github.io/'>[GLIGEN]</a> -->
+<!--      <a href='https://github.com/Computer-Vision-in-the-Wild/'>[Computer Vision in the Wild (CVinW)]</a> -->
+<!--      <a href='https://instruction-tuning-with-gpt-4.github.io/'>[Insutrction Tuning with GPT-4]</a>      -->
+      </p>    
+    </div>
+  </section>
+
+  <script>
+    // Handle message showing
+    function createChatRow(sender, text, imageSrc) {
+      var article = document.createElement("article");
+      article.className = "media"
+
+      var figure = document.createElement("figure");
+      figure.className = "media-left";
+
+      var span = document.createElement("span");
+      span.className = "icon is-large";
+
+      var icon = document.createElement("i");
+      icon.className = "fas fas fa-2x" + (sender === "User" ? " fa-user " : sender === "LLaVA" ? " fa-robot" : "");
+
+      var media = document.createElement("div");
+      media.className = "media-content";
+
+      var content = document.createElement("div");
+      content.className = "content";
+
+      var para = document.createElement("p");
+
+      // wrap text in pre tag to preserve whitespace and line breaks
+      var pre_text = document.createElement("pre");
+      pre_text.style = "background-color: white; font-size: 18px; font-family: Arial; padding: 0; margin: 0; white-space: pre-wrap; word-wrap: break-word;";
+      var paraText = document.createTextNode(text);
+      pre_text.appendChild(paraText);
+
+      var strong = document.createElement("strong");
+      strong.innerHTML = sender;
+      var br = document.createElement("br");
+
+      para.appendChild(strong);
+      para.appendChild(br);
+      para.appendChild(pre_text);
+
+      // Add image if imageSrc is provided
+      if (imageSrc) {
+        var img = document.createElement("img");
+        img.src = imageSrc;
+        img.style = "max-width: 100%; max-height: 300px;"; // Adjust the style as needed
+        para.appendChild(img);
+      }
+
+      content.appendChild(para);
+      media.appendChild(content);
+      span.appendChild(icon);
+      figure.appendChild(span);
+      if (sender !== "Description") {
+        article.appendChild(figure);
+      };
+      article.appendChild(media);
+      return article;
+    }
+
+    function addMessageToChatHistory(sender, message, imageSrc) {
+      const chatHistory = document.querySelector('.chat-history');
+      const chatRow = createChatRow(sender, message, imageSrc);
+      chatHistory.appendChild(chatRow);
+      chatHistory.scrollTop = chatHistory.scrollHeight;
+    }
+
+    function clearChatHistory() {
+      const chatHistory = document.querySelector('.chat-history');
+      chatHistory.innerHTML = "";
+    }
+
+    // 
+    const conversations = [
+      {
+        "turns": [
+          ["User", "", "images/result1.png"],
+        ]
+      },
+      {
+        "turns": [
+          ["User", "", "images/result2.png"]]
+      },
+      {
+        "turns": [
+          ["User", "", "images/result3.png"]]
+      },
+      {
+        "turns": [
+          ["User", "", "images/result4.png"],
+      ]
+      },
+        {
+         "turns": [
+        ["User", "", "images/result5.png"]]
+     },
+                           {
+                            "turns": [
+                           ["User", "", "images/result6.png"]]
+                        },
+                           {
+                            "turns": [
+                           ["User", "", "images/result7.png"]]
+                        },
+                           {
+                            "turns": [
+                           ["User", "", "images/result8.png"]]
+                        },
+    ];
+
+    // The current image index
+    let currentIndex = 0;
+
+    // The function to update the displayed chat history
+    function update_dialog_demo() {
+      // Clear the chat history
+      clearChatHistory();
+
+      for (let i = 0; i < conversations[currentIndex].turns.length; i++) {
+        if (conversations[currentIndex].turns[i].length == 2) {
+          addMessageToChatHistory(conversations[currentIndex].turns[i][0], conversations[currentIndex].turns[i][1]);
+        }
+        else {
+          addMessageToChatHistory(conversations[currentIndex].turns[i][0], conversations[currentIndex].turns[i][1], conversations[currentIndex].turns[i][2]);
+        }
+      }
+
+      // scroll to the top of the chat history
+      document.querySelector('.chat-history').scrollTop = 0;
+    }
+
+    // Initialize the displayed image
+    update_dialog_demo();
+
+    // Event listeners for the buttons
+    document.getElementById('prev-question').addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + conversations.length) % conversations.length;
+      update_dialog_demo();
+    });
+
+    document.getElementById('next-question').addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % conversations.length;
+      update_dialog_demo();
+    });
+
+
+  </script>
+
+</body>
+
+</html>
