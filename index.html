@@ -297,7 +297,6 @@
       </div>
     </div>
   </section>
-
   <section class="section">
     <div class="container">
         <div class="columns is-centered">
@@ -1516,206 +1515,205 @@
 </div>
 </div>
 </section>
-
-  <section class="section">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-six-fifths">
-        <h2 class="title is-3"> A Decade's Battle on the Bias of Vision Backbone and Optimizer </h2>
+<section class="section">
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-six-fifths">
+      <h2 class="title is-3"> A Decade's Battle on the Bias of Vision Backbone and Optimizer </h2>
+    </div>
+  </div>
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="content has-text-justified"> 
+          <p>
+            CARES is designed to provide a comprehensive evaluation of trustworthiness in MedLVLMs, reflecting the issues present in model responses. We assess trustworthiness across five critical dimensions: trustfulness, fairness, safety, privacy, and robustness.
+            <ul>
+              <li><b>Trustfulness</b>. We discuss the trustfulness of MedLVLMs, defined as the extent to which a Med-LVLM can provide factual responses and recognize when those responses may potentially be incorrect.
+                <ul>
+                  <li><b>Factuality</b>: Med-LVLMs are susceptible to factual hallucination, wherein the model may generate incorrect or misleading information about medical conditions, including erroneous judgments regarding symptoms or diseases, and inaccurate descriptions of medical images.</li>
+                  <li><b>Uncertainty</b>: A trustful Med-LVLM should produce confidence scores that accurately reflect the probability of its predictions being correct, essentially offering precise uncertainty estimation. However, as various authors have noted, LLM-based models often display overconfidence in their responses, which could potentially lead to a significant number of misdiagnoses or erroneous diagnoses.</li>
+                </ul>
+              </li>
+              <li><b>Fairness</b>. Med-LVLMs have the potential to unintentionally cause health disparities, especially among underrepresented groups. These disparities can reinforce stereotypes and lead to biased medical advice. It is essential to prioritize fairness in healthcare to guarantee that every individual receives equitable and accurate medical treatment.</li>
+              <li><b>Safety</b>. Med-LVLMs present safety concerns, which include several aspects such as jailbreaking, overcautious behavior, and toxicity.
+                <ul>
+                  <li><b>Jailbreaking</b>: Jailbreaking refers to attempts or actions that manipulate or exploit a model to deviate from its intended functions or restrictions. For Med-LVLMs, it involves prompting the model in ways that allow access to restricted information or generating responses that violate medical guidelines.</li>
+                  <li><b>Overcautiousness</b>: Overcautiousness describes how Med-LVLMs often refrain from responding to medical queries they are capable of answering. In medical settings, this excessively cautious approach can lead models to decline answering common clinical diagnostic questions.</li>
+                  <li><b>Toxicity</b>: In Med-LVLMs, toxicity refers to outputs that are harmful, such as those containing biased, offensive, or inappropriate content. In medical applications, the impact of toxic outputs is particularly severe because they may generate rude or disrespectful medical advice, eroding trust in the application of clinical management.</li>
+                </ul>
+              </li>
+              <li><b>Privacy</b>. Privacy breaches in Med-LVLMs is a critical issue due to the sensitive nature of health-related data. These models are expected to refrain from disclosing private information, such as marital status, as this can compromise both the reliability of the model and compliance with legal regulations.</li>
+              <li><b>Robustness</b>. Robustness in Med-LVLMs aims to evaluate whether the models perform reliably across various clinical settings. We focus on evaluating out-of-distribution (OOD) robustness, aiming to assess the model’s ability to handle test data whose distributions significantly differ from those of the training data.</li>
+            </ul>
+          </p>
+        </div>
+        <div class="has-text-centered">
+          <img id="teaser" class="figure-img" src="images/overview.png" alt="Overview Image">
+        </div>         
       </div>
     </div>
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-full-width">
-          <div class="content has-text-justified"> 
-            <p>
-              CARES is designed to provide a comprehensive evaluation of trustworthiness in MedLVLMs, reflecting the issues present in model responses. We assess trustworthiness across five critical dimensions: trustfulness, fairness, safety, privacy, and robustness.
-              <ul>
-                <li><b>Trustfulness</b>. We discuss the trustfulness of MedLVLMs, defined as the extent to which a Med-LVLM can provide factual responses and recognize when those responses may potentially be incorrect.
-                  <ul>
-                    <li><b>Factuality</b>: Med-LVLMs are susceptible to factual hallucination, wherein the model may generate incorrect or misleading information about medical conditions, including erroneous judgments regarding symptoms or diseases, and inaccurate descriptions of medical images.</li>
-                    <li><b>Uncertainty</b>: A trustful Med-LVLM should produce confidence scores that accurately reflect the probability of its predictions being correct, essentially offering precise uncertainty estimation. However, as various authors have noted, LLM-based models often display overconfidence in their responses, which could potentially lead to a significant number of misdiagnoses or erroneous diagnoses.</li>
-                  </ul>
-                </li>
-                <li><b>Fairness</b>. Med-LVLMs have the potential to unintentionally cause health disparities, especially among underrepresented groups. These disparities can reinforce stereotypes and lead to biased medical advice. It is essential to prioritize fairness in healthcare to guarantee that every individual receives equitable and accurate medical treatment.</li>
-                <li><b>Safety</b>. Med-LVLMs present safety concerns, which include several aspects such as jailbreaking, overcautious behavior, and toxicity.
-                  <ul>
-                    <li><b>Jailbreaking</b>: Jailbreaking refers to attempts or actions that manipulate or exploit a model to deviate from its intended functions or restrictions. For Med-LVLMs, it involves prompting the model in ways that allow access to restricted information or generating responses that violate medical guidelines.</li>
-                    <li><b>Overcautiousness</b>: Overcautiousness describes how Med-LVLMs often refrain from responding to medical queries they are capable of answering. In medical settings, this excessively cautious approach can lead models to decline answering common clinical diagnostic questions.</li>
-                    <li><b>Toxicity</b>: In Med-LVLMs, toxicity refers to outputs that are harmful, such as those containing biased, offensive, or inappropriate content. In medical applications, the impact of toxic outputs is particularly severe because they may generate rude or disrespectful medical advice, eroding trust in the application of clinical management.</li>
-                  </ul>
-                </li>
-                <li><b>Privacy</b>. Privacy breaches in Med-LVLMs is a critical issue due to the sensitive nature of health-related data. These models are expected to refrain from disclosing private information, such as marital status, as this can compromise both the reliability of the model and compliance with legal regulations.</li>
-                <li><b>Robustness</b>. Robustness in Med-LVLMs aims to evaluate whether the models perform reliably across various clinical settings. We focus on evaluating out-of-distribution (OOD) robustness, aiming to assess the model’s ability to handle test data whose distributions significantly differ from those of the training data.</li>
-              </ul>
-            </p>
-          </div>
-          <div class="has-text-centered">
-            <img id="teaser" class="figure-img" src="images/overview.png" alt="Overview Image">
-          </div>         
+  </div>
+</section>
+
+<section class="section">
+  <div class="container mt-5">
+    <div class="form-row" style="justify-content: flex-end;">
+      <div class="form-group col-md-1">
+        <div class="col-md-2"><label>&nbsp;</label></div>
+        <div class="btn-group" role="group" aria-label="Left and Right Controller" style="width: 100%;align-items: flex-end;justify-content: center;flex-direction: row;display: flex;">
+          <button type="button" class="form-control btn btn-primary" id="prev-question"><i class="material-icons">keyboard_arrow_left</i></button>
+          <button type="button" class="form-control btn btn-primary" id="next-question"><i class="material-icons">keyboard_arrow_right</i></button>
         </div>
       </div>
     </div>
-  </section>
 
-  <section class="section">
-    <div class="container mt-5">
-      <div class="form-row" style="justify-content: flex-end;">
-        <div class="form-group col-md-1">
-          <div class="col-md-2"><label>&nbsp;</label></div>
-          <div class="btn-group" role="group" aria-label="Left and Right Controller" style="width: 100%;align-items: flex-end;justify-content: center;flex-direction: row;display: flex;">
-            <button type="button" class="form-control btn btn-primary" id="prev-question"><i class="material-icons">keyboard_arrow_left</i></button>
-            <button type="button" class="form-control btn btn-primary" id="next-question"><i class="material-icons">keyboard_arrow_right</i></button>
-          </div>
-        </div>
-      </div>
-
-      <div class="d-flex justify-content-center align-items-center">
-        <div class="card mb-4" style="width: 60%;">
-          <div class="card-body" id="selected-question" style="display: flex; height: 50vh;">
-            <div class="chat-history"></div>
-          </div>
+    <div class="d-flex justify-content-center align-items-center">
+      <div class="card mb-4" style="width: 60%;">
+        <div class="card-body" id="selected-question" style="display: flex; height: 50vh;">
+          <div class="chat-history"></div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="section" id="BibTeX">
-    <div class="container content">
-      <h2 class="title">BibTeX</h2>
-      <pre><code>
+<section class="section" id="BibTeX">
+  <div class="container content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>
 @article{li2024battle,
-  title={A Decade's Battle on Bias of Visual Backbone and Optimizer},
-  author={Siyuan Li and Juanxi Tian and Zedong Wang and Luyuan Zhang and Zicheng Liu and Cheng Tan and Weiyang Jin and Lei Xin and Yang Liu and Baigui Sun and Stan Z. Li},
-  year={2024},
+title={A Decade's Battle on Bias of Visual Backbone and Optimizer},
+author={Siyuan Li and Juanxi Tian and Zedong Wang and Luyuan Zhang and Zicheng Liu and Cheng Tan and Weiyang Jin and Lei Xin and Yang Liu and Baigui Sun and Stan Z. Li},
+year={2024},
 }
-      </code></pre>
-    </div>
-  </section>
+    </code></pre>
+  </div>
+</section>
 
-  <section class="section" id="Acknowledgement">
-    <div class="container content">
-      <h2 class="title">Acknowledgement</h2>
-      <p>This website is adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>, licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
-      <p>
-        <a href='https://github.com/Computer-Vision-in-the-Wild/'><img id="painting_icon" width="10%" src="https://avatars.githubusercontent.com/u/97258247?s=200&v=4" alt="CVinW"></a>
-      </p>    
-    </div>
-  </section>
+<section class="section" id="Acknowledgement">
+  <div class="container content">
+    <h2 class="title">Acknowledgement</h2>
+    <p>This website is adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>, licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
+    <p>
+      <a href='https://github.com/Computer-Vision-in-the-Wild/'><img id="painting_icon" width="10%" src="https://avatars.githubusercontent.com/u/97258247?s=200&v=4" alt="CVinW"></a>
+    </p>    
+  </div>
+</section>
 
-  <script>
-    function createChatRow(sender, text, imageSrc) {
-      var article = document.createElement("article");
-      article.className = "media";
+<script>
+  function createChatRow(sender, text, imageSrc) {
+    var article = document.createElement("article");
+    article.className = "media";
 
-      var figure = document.createElement("figure");
-      figure.className = "media-left";
+    var figure = document.createElement("figure");
+    figure.className = "media-left";
 
-      var span = document.createElement("span");
-      span.className = "icon is-large";
+    var span = document.createElement("span");
+    span.className = "icon is-large";
 
-      var icon = document.createElement("i");
-      icon.className = "fas fas fa-2x" + (sender === "BOCB" ? " fa-user " : sender === "LLaVA" ? " fa-robot" : "");
+    var icon = document.createElement("i");
+    icon.className = "fas fas fa-2x" + (sender === "BOCB" ? " fa-user " : sender === "LLaVA" ? " fa-robot" : "");
 
-      var media = document.createElement("div");
-      media.className = "media-content";
+    var media = document.createElement("div");
+    media.className = "media-content";
 
-      var content = document.createElement("div");
-      content.className = "content";
+    var content = document.createElement("div");
+    content.className = "content";
 
-      var para = document.createElement("p");
+    var para = document.createElement("p");
 
-      var preText = document.createElement("pre");
-      preText.style = "background-color: white; font-size: 18px; font-family: Arial; padding: 0; margin: 0; white-space: pre-wrap; word-wrap: break-word;";
-      var paraText = document.createTextNode(text);
-      preText.appendChild(paraText);
+    var preText = document.createElement("pre");
+    preText.style = "background-color: white; font-size: 18px; font-family: Arial; padding: 0; margin: 0; white-space: pre-wrap; word-wrap: break-word;";
+    var paraText = document.createTextNode(text);
+    preText.appendChild(paraText);
 
-      var strong = document.createElement("strong");
-      strong.innerHTML = sender;
-      var br = document.createElement("br");
+    var strong = document.createElement("strong");
+    strong.innerHTML = sender;
+    var br = document.createElement("br");
 
-      para.appendChild(strong);
-      para.appendChild(br);
-      para.appendChild(preText);
+    para.appendChild(strong);
+    para.appendChild(br);
+    para.appendChild(preText);
 
-      if (imageSrc) {
-        var img = document.createElement("img");
-        img.src = imageSrc;
-        img.style = "max-width: 100%; max-height: 300px;";
-        para.appendChild(img);
+    if (imageSrc) {
+      var img = document.createElement("img");
+      img.src = imageSrc;
+      img.style = "max-width: 100%; max-height: 300px;";
+      para.appendChild(img);
+    }
+
+    content.appendChild(para);
+    media.appendChild(content);
+    span.appendChild(icon);
+    figure.appendChild(span);
+    if (sender !== "Description") {
+      article.appendChild(figure);
+    }
+    article.appendChild(media);
+    return article;
+  }
+
+  function addMessageToChatHistory(sender, message, imageSrc) {
+    const chatHistory = document.querySelector('.chat-history');
+    const chatRow = createChatRow(sender, message, imageSrc);
+    chatHistory.appendChild(chatRow);
+    chatHistory.scrollTop = chatHistory.scrollHeight;
+  }
+
+  function clearChatHistory() {
+    const chatHistory = document.querySelector('.chat-history');
+    chatHistory.innerHTML = "";
+  }
+
+  const conversations = [
+    {
+      "turns": [
+        ["BOCB", "Backbone Roadmap", "images/Macro_design.svg"],
+      ]
+    },
+    {
+      "turns": [
+        ["BOCB", "Four categories optimizer", "images/Optimizer.svg"]
+      ]
+    },
+    {
+      "turns": [
+        ["BOCB", "Hyper-parameters consistency across optimizers for certain backbone", "images/violinplot_backbone_hyper.svg"]
+      ]
+    },
+    {
+      "turns": [
+        ["BOCB", "Optimizer generality against backbones", "images/violinplot_opt_hyper.svg"]
+      ]
+    },
+  ];
+
+  let currentIndex = 0;
+
+  function update_dialog_demo() {
+    clearChatHistory();
+    for (let i = 0; i < conversations[currentIndex].turns.length; i++) {
+      if (conversations[currentIndex].turns[i].length == 2) {
+        addMessageToChatHistory(conversations[currentIndex].turns[i][0], conversations[currentIndex].turns[i][1]);
+      } else {
+        addMessageToChatHistory(conversations[currentIndex].turns[i][0], conversations[currentIndex].turns[i][1], conversations[currentIndex].turns[i][2]);
       }
-
-      content.appendChild(para);
-      media.appendChild(content);
-      span.appendChild(icon);
-      figure.appendChild(span);
-      if (sender !== "Description") {
-        article.appendChild(figure);
-      }
-      article.appendChild(media);
-      return article;
     }
+    document.querySelector('.chat-history').scrollTop = 0;
+  }
 
-    function addMessageToChatHistory(sender, message, imageSrc) {
-      const chatHistory = document.querySelector('.chat-history');
-      const chatRow = createChatRow(sender, message, imageSrc);
-      chatHistory.appendChild(chatRow);
-      chatHistory.scrollTop = chatHistory.scrollHeight;
-    }
+  update_dialog_demo();
 
-    function clearChatHistory() {
-      const chatHistory = document.querySelector('.chat-history');
-      chatHistory.innerHTML = "";
-    }
-
-    const conversations = [
-      {
-        "turns": [
-          ["BOCB", "Backbone Roadmap", "images/Macro_design.svg"],
-        ]
-      },
-      {
-        "turns": [
-          ["BOCB", "Four categories optimizer", "images/Optimizer.svg"]
-        ]
-      },
-      {
-        "turns": [
-          ["BOCB", "Hyper-parameters consistency across optimizers for certain backbone", "images/violinplot_backbone_hyper.svg"]
-        ]
-      },
-      {
-        "turns": [
-          ["BOCB", "Optimizer generality against backbones", "images/violinplot_opt_hyper.svg"]
-        ]
-      },
-    ];
-
-    let currentIndex = 0;
-
-    function update_dialog_demo() {
-      clearChatHistory();
-      for (let i = 0; i < conversations[currentIndex].turns.length; i++) {
-        if (conversations[currentIndex].turns[i].length == 2) {
-          addMessageToChatHistory(conversations[currentIndex].turns[i][0], conversations[currentIndex].turns[i][1]);
-        } else {
-          addMessageToChatHistory(conversations[currentIndex].turns[i][0], conversations[currentIndex].turns[i][1], conversations[currentIndex].turns[i][2]);
-        }
-      }
-      document.querySelector('.chat-history').scrollTop = 0;
-    }
-
+  document.getElementById('prev-question').addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + conversations.length) % conversations.length;
     update_dialog_demo();
+  });
 
-    document.getElementById('prev-question').addEventListener('click', () => {
-      currentIndex = (currentIndex - 1 + conversations.length) % conversations.length;
-      update_dialog_demo();
-    });
-
-    document.getElementById('next-question').addEventListener('click', () => {
-      currentIndex = (currentIndex + 1) % conversations.length;
-      update_dialog_demo();
-    });
-  </script>
+  document.getElementById('next-question').addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % conversations.length;
+    update_dialog_demo();
+  });
+</script>
 </body>
 
 </html>
