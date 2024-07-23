@@ -1648,7 +1648,7 @@ slides[slideIndex].style.display = 'block';
 <div class="column is-full-width">
 <div class="content has-text-justified">
 <p>
-CARES is designed to provide a comprehensive evaluation of trustworthiness in MedLVLMs, reflecting the issues present in model responses. We assess trustworthiness across five critical dimensions: trustfulness, fairness, safety, privacy, and robustness.
+The <strong><em>backbone-optimizer coupling bias (BOCB)</em></strong> is a phenomenon we observed during the benchmarking, which arises from the intricate interplay between the design principles of vision backbones and the inherent properties of optimizers. In particular, we notice that traditional CNNs, such as VGG and ResNets, exhibit a marked coupling with SGD optimizers. In contrast, modern meta-architectures like ViTs and ConvNeXt strongly correlate with adaptive learning rate optimizers, particularly AdamW. We assume that such a coupling bias may stem from the increasing complexity of optimization as backbone architectures evolve. Concretely, modern backbones incorporate complex elements such as stage-wise hierarchical structures, advanced token mixing, and block-wise heterogeneity. These designs shape a more intricate and challenging optimization landscape, necessitating adaptive learning rate strategies and effective momentum handling. Thus, modern backbones have stronger couplings with optimizers that can navigate these complex landscapes. The BOCB phenomenon has several implications for the design and deployment of vision backbones:
 <ul>
 <li><b>Trustfulness</b>. We discuss the trustfulness of MedLVLMs, defined as the extent to which a Med-LVLM can provide factual responses and recognize when those responses may potentially be incorrect.
 <ul>
