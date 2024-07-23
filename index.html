@@ -1650,22 +1650,15 @@ slides[slideIndex].style.display = 'block';
 <p>
 The <strong><em>backbone-optimizer coupling bias (BOCB)</em></strong> is a phenomenon we observed during the benchmarking, which arises from the intricate interplay between the design principles of vision backbones and the inherent properties of optimizers. In particular, we notice that traditional CNNs, such as VGG and ResNets, exhibit a marked coupling with SGD optimizers. In contrast, modern meta-architectures like ViTs and ConvNeXt strongly correlate with adaptive learning rate optimizers, particularly AdamW. We assume that such a coupling bias may stem from the increasing complexity of optimization as backbone architectures evolve. Concretely, modern backbones incorporate complex elements such as stage-wise hierarchical structures, advanced token mixing, and block-wise heterogeneity. These designs shape a more intricate and challenging optimization landscape, necessitating adaptive learning rate strategies and effective momentum handling. Thus, modern backbones have stronger couplings with optimizers that can navigate these complex landscapes. The BOCB phenomenon has several implications for the design and deployment of vision backbones:
 <ul>
-<li><b>Trustfulness</b>. We discuss the trustfulness of MedLVLMs, defined as the extent to which a Med-LVLM can provide factual responses and recognize when those responses may potentially be incorrect.
+<li><b>User-Friendliness</b>: Backbones with weaker coupling, typically traditional CNNs, offer greater flexibility as they can be effectively optimized with different optimizers. This makes them more user-friendly, especially for practitioners with limited resources for extensive hyper-parameter tuning. Conversely, modern architectures like ViTs and ConvNeXt, which exhibit strong coupling with adaptive learning rate optimizers, demand careful optimizer selection and meticulous hyper-parameter tuning for optimal performance.</li>
 <ul>
-<li><b>Factuality</b>: Med-LVLMs are susceptible to factual hallucination, wherein the model may generate incorrect or misleading information about medical conditions, including erroneous judgments regarding symptoms or diseases, and inaccurate descriptions of medical images.</li>
-<li><b>Uncertainty</b>: A trustful Med-LVLM should produce confidence scores that accurately reflect the probability of its predictions being correct, essentially offering precise uncertainty estimation. However, as various authors have noted, LLM-based models often display overconfidence in their responses, which could potentially lead to a significant number of misdiagnoses or erroneous diagnoses.</li>
+<li><b>Performance and Generalization</b>: While weaker coupling offers more user-friendliness, stronger coupling can potentially lead to better performance and generalization. Tailoring the optimization process to certain architectural characteristics of modern backbones, such as stage-wise hierarchical structures and attention mechanisms for token mixing, can more effectively navigate complex optimization landscapes, unlocking superior performance and generalization capabilities.</li>
+<li><b>Design Principles</b>: The BOCB phenomenon highlights the need to consider the coupling between backbone designs and optimizer choices. When designing new backbone architectures, it is crucial to account for both the inductive bias introduced by the macro design principles (e.g., hierarchical structures, attention mechanisms) and the optimizer matching bias. A balanced approach that harmonizes the backbone design with the appropriate optimizer choice can lead to optimal performance and efficient optimization, enabling the full potential of the proposed architecture to be realized.</li>
 </ul>
 </li>
 <li><b>Fairness</b>. Med-LVLMs have the potential to unintentionally cause health disparities, especially among underrepresented groups. These disparities can reinforce stereotypes and lead to biased medical advice. It is essential to prioritize fairness in healthcare to guarantee that every individual receives equitable and accurate medical treatment.</li>
 <li><b>Safety</b>. Med-LVLMs present safety concerns, which include several aspects such as jailbreaking, overcautious behavior, and toxicity.
-<ul>
-<li><b>Jailbreaking</b>: Jailbreaking refers to attempts or actions that manipulate or exploit a model to deviate from its intended functions or restrictions. For Med-LVLMs, it involves prompting the model in ways that allow access to restricted information or generating responses that violate medical guidelines.</li>
-<li><b>Overcautiousness</b>: Overcautiousness describes how Med-LVLMs often refrain from responding to medical queries they are capable of answering. In medical settings, this excessively cautious approach can lead models to decline answering common clinical diagnostic questions.</li>
-<li><b>Toxicity</b>: In Med-LVLMs, toxicity refers to outputs that are harmful, such as those containing biased, offensive, or inappropriate content. In medical applications, the impact of toxic outputs is particularly severe because they may generate rude or disrespectful medical advice, eroding trust in the application of clinical management.</li>
-</ul>
 </li>
-<li><b>Privacy</b>. Privacy breaches in Med-LVLMs is a critical issue due to the sensitive nature of health-related data. These models are expected to refrain from disclosing private information, such as marital status, as this can compromise both the reliability of the model and compliance with legal regulations.</li>
-<li><b>Robustness</b>. Robustness in Med-LVLMs aims to evaluate whether the models perform reliably across various clinical settings. We focus on evaluating out-of-distribution (OOD) robustness, aiming to assess the model’s ability to handle test data whose distributions significantly differ from those of the training data.</li>
 </ul>
 </p>
 </div>
@@ -1673,7 +1666,6 @@ The <strong><em>backbone-optimizer coupling bias (BOCB)</em></strong> is a pheno
 </div>
 </div>
 </section>
-
 
 <section class="section" id="BibTeX">
 <div class="container content">
