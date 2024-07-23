@@ -2,301 +2,319 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="description" content="Explore the critical yet poorly studied relationship between vision backbones and optimizers, revealing the phenomenon of backbone-optimizer coupling bias (BOCB) for the first time.">
-  <meta name="keywords" content="Provide the first backbone-optimizer benchmark that encompasses a wide range of mainstream vision backbones.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BOCB</title>
+<meta charset="UTF-8">
+<meta name="description" content="Explore the critical yet poorly studied relationship between vision backbones and optimizers, revealing the phenomenon of backbone-optimizer coupling bias (BOCB) for the first time.">
+<meta name="keywords" content="Provide the first backbone-optimizer benchmark that encompasses a wide range of mainstream vision backbones.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BOCB</title>
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<link rel="stylesheet" href="./static/css/index.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
-  <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/4.16.0/gradio.js"></script>
-  <link rel="stylesheet" href="./static/css/leaderboard.css">
-  <script src="./static/js/leaderboard_testmini.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
+<script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/4.16.0/gradio.js"></script>
+<link rel="stylesheet" href="./static/css/leaderboard.css">
+<script src="./static/js/leaderboard_testmini.js"></script>
 
-  <style>
-    body {
-      font-family: 'Google Sans', 'Noto Sans', sans-serif;
-      background: linear-gradient(to right, #f7f7f7, #e9ecef);
-      color: #333;
-    }
+<style>
+body {
+font-family: 'Google Sans', 'Noto Sans', sans-serif;
+background: linear-gradient(to right, #f7f7f7, #e9ecef);
+color: #333;
+}
 
-    h1, h2, h3 {
-      font-family: 'Castoro', serif;
-      color: #333;
-      text-align: center;
-    }
+h1, h2, h3 {
+font-family: 'Castoro', serif;
+color: #333;
+text-align: center;
+}
 
-    h1 {
-      font-size: 3em;
-    }
+h1 {
+font-size: 3em;
+}
 
-    h2 {
-      font-size: 2.5em;
-    }
+h2 {
+font-size: 2.5em;
+}
 
-    h3 {
-      font-size: 2em;
-    }
+h3 {
+font-size: 2em;
+}
 
-    .section {
-      padding: 40px 20px;
-    }
+.section {
+padding: 40px 20px;
+}
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+.container {
+max-width: 1200px;
+margin: 0 auto;
+}
 
-    .has-text-centered {
-      text-align: center;
-    }
+.has-text-centered {
+text-align: center;
+}
 
-    .content {
-      margin-top: 20px;
-      font-size: 1.1em;
-    }
+.content {
+margin-top: 20px;
+font-size: 1.1em;
+line-height: 1.6;
+}
 
-    .publication-links .button {
-      margin: 0.5rem;
-      border-radius: 30px;
-    }
+.publication-links .button {
+margin: 0.5rem;
+border-radius: 30px;
+transition: background-color 0.3s ease;
+}
 
-    .button:hover {
-      background-color: #00d1b2;
-      border-color: transparent;
-    }
+.button:hover {
+background-color: #00d1b2;
+border-color: transparent;
+}
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: center;
-    }
+table {
+width: 100%;
+border-collapse: collapse;
+}
+td {
+border: 1px solid #ddd;
+padding: 8px;
+text-align: center;
+transition: background-color 0.3s ease;
+}
 
-    th {
-      background-color: #f2f2f2;
-    }
+th {
+background-color: #f2f2f2;
+}
 
-    .chig {
-      background-color: #cce5ff;
-    }
+td:hover {
+background-color: #e9ecef;
+}
 
-    .chhg {
-      background-color: #5d94ec;
-    }
+.chig {
+background-color: #cce5ff;
+}
 
-    .clow {
-      background-color: #bab7b7;
-    }
+.chhg {
+background-color: #5d94ec;
+}
 
-    .cllw {
-      background-color: #918e8e;
-    }
+.clow {
+background-color: #bab7b7;
+}
 
-    .expandable-card .card-text-container {
-      max-height: 200px;
-      overflow-y: hidden;
-      position: relative;
-    }
+.cllw {
+background-color: #918e8e;
+}
 
-    .expandable-card.expanded .card-text-container {
-      max-height: none;
-    }
+.expandable-card .card-text-container {
+max-height: 200px;
+overflow-y: hidden;
+position: relative;
+}
 
-    .expand-btn {
-      position: relative;
-      display: none;
-      background-color: rgba(255, 255, 255, 0.8);
-      color: #510c75;
-      border-color: transparent;
-    }
+.expandable-card.expanded .card-text-container {
+max-height: none;
+}
 
-    .expand-btn:hover {
-      background-color: rgba(200, 200, 200, 0.8);
-      text-decoration: none;
-      border-color: transparent;
-      color: #510c75;
-    }
+.expand-btn {
+position: relative;
+display: none;
+background-color: rgba(255, 255, 255, 0.8);
+color: #510c75;
+border-color: transparent;
+transition: background-color 0.3s ease;
+}
 
-    .expand-btn:focus {
-      outline: none;
-      text-decoration: none;
-    }
+.expand-btn:hover {
+background-color: rgba(200, 200, 200, 0.8);
+text-decoration: none;
+border-color: transparent;
+color: #510c75;
+}
 
-    .expandable-card:not(.expanded) .card-text-container::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 90px;
-      background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 1));
-    }
+.expand-btn:focus {
+outline: none;
+text-decoration: none;
+}
 
-    .expandable-card:not(.expanded) .expand-btn {
-      margin-top: -40px;
-    }
+.expandable-card:not(.expanded) .card-text-container::after {
+content: "";
+position: absolute;
+bottom: 0;
+left: 0;
+width: 100%;
+height: 90px;
+background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 1));
+}
 
-    .card-body {
-      padding-bottom: 5px;
-    }
+.expandable-card:not(.expanded) .expand-btn {
+margin-top: -40px;
+}
 
-    .vertical-flex-layout {
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
+.card-body {
+padding-bottom: 5px;
+}
 
-    .figure-img {
-      max-width: 100%;
-      height: auto;
-    }
+.vertical-flex-layout {
+justify-content: center;
+align-items: center;
+height: 100%;
+display: flex;
+flex-direction: column;
+gap: 5px;
+}
 
-    .adjustable-font-size {
-      font-size: calc(0.5rem + 2vw);
-    }
+.figure-img {
+max-width: 100%;
+height: auto;
+transition: transform 0.3s ease;
+}
 
-    .chat-history {
-      flex-grow: 1;
-      overflow-y: auto;
-      padding: 5px;
-      border-bottom: 1px solid #ccc;
-      margin-bottom: 10px;
-    }
+.figure-img:hover {
+transform: scale(1.05);
+}
 
-    #gradio pre {
-      background-color: transparent;
-    }
+.adjustable-font-size {
+font-size: calc(0.5rem + 2vw);
+}
 
-    .hero {
-      background: #fff;
-      padding: 3rem 1.5rem;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
+.chat-history {
+flex-grow: 1;
+overflow-y: auto;
+padding: 5px;
+border-bottom: 1px solid #ccc;
+margin-bottom: 10px;
+}
 
-    .publication-title {
-      color: #333;
-      font-weight: 700;
-    }
+#gradio pre {
+background-color: transparent;
+}
 
-    .publication-authors a {
-      color: #f68946;
-      font-weight: normal;
-    }
+.hero {
+background: #fff;
+padding: 3rem 1.5rem;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-    .publication-links .button {
-      margin: 0.5rem;
-    }
+.publication-title {
+color: #333;
+font-weight: 700;
+}
 
-    .subtitle span {
-      color: #ff3860;
-    }
+.publication-authors a {
+color: #f68946;
+font-weight: normal;
+}
 
-    .btn-group .btn {
-      font-size: 1.2em;
-      border-radius: 50%;
-    }
-  </style>
+.publication-links .button {
+margin: 0.5rem;
+}
+
+.subtitle span {
+color: #ff3860;
+}
+
+.btn-group .btn {
+font-size: 1.2em;
+border-radius: 50%;
+transition: background-color 0.3s ease;
+}
+
+.btn-group .btn:hover {
+background-color: #00d1b2;
+}
+</style>
 </head>
 
 <body>
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-            <h1 class="title publication-title">BOCB</h1>
-            <h3 class="title publication-title">A Decade's Battle on the Bias of Vision Backbone and Optimizer</h3>
-            <div class="is-size-5 publication-authors">
-              <span class="author-block"><a href="https://lupin1998.github.io">Siyuan Li<sup>*</sup></a>,</span>
-              <span class="author-block"><a href="https://tianshijing.github.io">Juanxi Tian<sup>*</sup></a>,</span>
-              <span class="author-block"><a href="https://jacky1128.github.io/">Zedong Wang<sup>*</sup></a>,</span>
-              <span class="author-block"><a href="">Luyuan Zhang</a>,</span>
-              <span class="author-block"><a href="https://pone7.github.io/">Zicheng Liu</a>,</span>
-              <span class="author-block"><a href="https://zzachw.github.io/">Cheng Tan</a>,</span>
-              <span class="author-block"><a href="">Weiyang Jin</a>,</span>
-              <span class="author-block"><a href="https://yiyangzhou.github.io/">Lei Xin</a>,</span>
-              <span class="author-block"><a href="" style="color:#008AD7;">Yang Liu</a>,</span>
-              <span class="author-block"><a href="https://shenmishajing.github.io/" style="color:#008AD7;">Baigui Sun</a>,</span>
-              <span class="author-block"><a href="">Stan Z. Li<sup>†</sup></a>,</span>
-            </div>
-            <div class="is-size-5 publication-authors">
-              <span class="author-block"><b style="color:#f68946;">&#x25B6</b> AI Lab, Research Center for Industries of the Future, Westlake University, Hangzhou, China</span>
-              <span class="author-block"><b style="color:#008AD7;">&#x25B6</b> DAMO Academy, Hangzhou, China</span>
-            </div>
-            <div class="is-size-6 publication-authors">
-              <span class="author-block"><sup>*</sup>Equal Contribution</span>
-              <span class="author-block"><sup>†</sup>Corresponding author</span>
-            </div>
-            <div class="column has-text-centered">
-              <div class="publication-links">
-                <span class="link-block">
-                  <a href="https://arxiv.org/abs/2406.06007" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon"><i class="ai ai-arxiv"></i></span>
-                    <span>arXiv</span>
-                  </a>
-                </span>
-                <span class="link-block">
-                  <a href="https://github.com/Westlake-AI/Backbone-vs-Optimizer" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon"><i class="fab fa-github"></i></span>
-                    <span>Code</span>
-                  </a>
-                </span>
-                <span class="link-block">
-                  <a href="#leaderboard" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon"><i class="far fa-images"></i></span>
-                    <span>Benchmark</span>
-                  </a>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<section class="hero">
+<div class="hero-body">
+<div class="container">
+<div class="columns is-centered">
+<div class="column has-text-centered">
+<h1 class="title publication-title">BOCB</h1>
+<h3 class="title publication-title">A Decade's Battle on the Bias of Vision Backbone and Optimizer</h3>
+<div class="is-size-5 publication-authors">
+<span class="author-block"><a href="https://lupin1998.github.io">Siyuan Li<sup>*</sup></a>,</span>
+<span class="author-block"><a href="https://tianshijing.github.io">Juanxi Tian<sup>*</sup></a>,</span>
+<span class="author-block"><a href="https://jacky1128.github.io/">Zedong Wang<sup>*</sup></a>,</span>
+<span class="author-block"><a href="">Luyuan Zhang</a>,</span>
+<span class="author-block"><a href="https://pone7.github.io/">Zicheng Liu</a>,</span>
+<span class="author-block"><a href="https://zzachw.github.io/">Cheng Tan</a>,</span>
+<span class="author-block"><a href="">Weiyang Jin</a>,</span>
+<span class="author-block"><a href="https://yiyangzhou.github.io/">Lei Xin</a>,</span>
+<span class="author-block"><a href="" style="color:#008AD7;">Yang Liu</a>,</span>
+<span class="author-block"><a href="https://shenmishajing.github.io/" style="color:#008AD7;">Baigui Sun</a>,</span>
+<span class="author-block"><a href="">Stan Z. Li<sup>†</sup></a>,</span>
+</div>
+<div class="is-size-5 publication-authors">
+<span class="author-block"><b style="color:#f68946;">&#x25B6</b> AI Lab, Research Center for Industries of the Future, Westlake University, Hangzhou, China</span>
+<span class="author-block"><b style="color:#008AD7;">&#x25B6</b> DAMO Academy, Hangzhou, China</span>
+</div>
+<div class="is-size-6 publication-authors">
+<span class="author-block"><sup>*</sup>Equal Contribution</span>
+<span class="author-block"><sup>†</sup>Corresponding author</span>
+</div>
+<div class="column has-text-centered">
+<div class="publication-links">
+<span class="link-block">
+<a href="https://arxiv.org/abs/2406.06007" target="_blank" class="external-link button is-normal is-rounded is-dark">
+<span class="icon"><i class="ai ai-arxiv"></i></span>
+<span>arXiv</span>
+</a>
+</span>
+<span class="link-block">
+<a href="https://github.com/Westlake-AI/Backbone-vs-Optimizer" target="_blank" class="external-link button is-normal is-rounded is-dark">
+<span class="icon"><i class="fab fa-github"></i></span>
+<span>Code</span>
+</a>
+</span>
+<span class="link-block">
+<a href="#leaderboard" class="external-link button is-normal is-rounded is-dark">
+<span class="icon"><i class="far fa-images"></i></span>
+<span>Benchmark</span>
+</a>
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 
-  <section class="hero teaser">
-    <div class="container">
-      <div class="hero-body">
-        <h4 class="subtitle has-text-centered">
-          ⭐️<span>[NEW!]</span> We provide the first backbone-optimizer benchmark that encompasses a wide range of mainstream vision backbones, from classical CNNs to modern transformer-based architectures, and evaluates their performance against 20 popular optimizers on CIFAR-100, ImageNet-1K, and COCO, unveiling the practical limitations of BOCB in pre-training and transfer learning.
-          <br><br>
-          🧐🗣️ Appeal: From the BOCB perspective, we summarize backbone design recommendations. The benchmarking results also serve as takeaways for user-friendly deployment. We open-source the code and models and also call for further explorations of BOCB in the research community.
-        </h4>
-      </div>
-    </div>
-  </section>
+<section class="hero teaser">
+<div class="container">
+<div class="hero-body">
+<h4 class="subtitle has-text-centered">
+⭐️<span>[NEW!]</span> We provide the first backbone-optimizer benchmark that encompasses a wide range of mainstream vision backbones, from classical CNNs to modern transformer-based architectures, and evaluates their performance against 20 popular optimizers on CIFAR-100, ImageNet-1K, and COCO, unveiling the practical limitations of BOCB in pre-training and transfer learning.
+<br><br>
+🧐🗣️ Appeal: From the BOCB perspective, we summarize backbone design recommendations. The benchmarking results also serve as takeaways for user-friendly deployment. We open-source the code and models and also call for further explorations of BOCB in the research community.
+</h4>
+</div>
+</div>
+</section>
 
-  <section class="section" style="background-color:#efeff081">
-    <div class="container">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-six-fifths">
-          <h2 class="title is-3">Abstract</h2>
-          <div class="content has-text-justified">
-            <p>
-              The past decade has witnessed rapid progress in vision backbones and an evolution of deep optimizers from SGD to Adam variants. This paper, for the first time, delves into the relationship between vision network design and optimizer selection. We conduct comprehensive benchmarking studies on mainstream vision backbones and widely-used optimizers, revealing an intriguing phenomenon termed backbone-optimizer coupling bias (BOCB). Notably, classical ConvNets, such as VGG and ResNet, exhibit a marked co-dependency with SGD, while modern architectures, including ViTs and ConvNeXt, demonstrate a strong coupling with optimizers with adaptive learning rates like AdamW. More importantly, we uncover the adverse impacts of BOCB on popular backbones in real-world practice, such as additional tuning time and resource overhead, which indicates the remaining challenges and even potential risks. Through in-depth analysis and apples-to-apples comparisons, however, we surprisingly observe that specific types of network architecture can significantly mitigate BOCB, which might serve as promising guidelines for future backbone design. We hope this work as a kick-start can inspire the community to further question the long-held assumptions on vision backbones and optimizers, consider BOCB in future studies, and thus contribute to more robust, efficient, and effective vision systems. It is time to go beyond those usual choices and confront the elephant in the room. The source code and models are publicly available.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<section class="section" style="background-color:#efeff081">
+<div class="container">
+<div class="columns is-centered has-text-centered">
+<div class="column is-six-fifths">
+<h2 class="title is-3">Abstract</h2>
+<div class="content has-text-justified">
+<p>
+The past decade has witnessed rapid progress in vision backbones and an evolution of deep optimizers from SGD to Adam variants. This paper, for the first time, delves into the relationship between vision network design and optimizer selection. We conduct comprehensive benchmarking studies on mainstream vision backbones and widely-used optimizers, revealing an intriguing phenomenon termed backbone-optimizer coupling bias (BOCB). Notably, classical ConvNets, such as VGG and ResNet, exhibit a marked co-dependency with SGD, while modern architectures, including ViTs and ConvNeXt, demonstrate a strong coupling with optimizers with adaptive learning rates like AdamW. More importantly, we uncover the adverse impacts of BOCB on popular backbones in real-world practice, such as additional tuning time and resource overhead, which indicates the remaining challenges and even potential risks. Through in-depth analysis and apples-to-apples comparisons, however, we surprisingly observe that specific types of network architecture can significantly mitigate BOCB, which might serve as promising guidelines for future backbone design. We hope this work as a kick-start can inspire the community to further question the long-held assumptions on vision backbones and optimizers, consider BOCB in future studies, and thus contribute to more robust, efficient, and effective vision systems. It is time to go beyond those usual choices and confront the elephant in the room. The source code and models are publicly available.
+</p>
+</div>
+</div>
+</div>
+</div>
+</section>
   <section class="section">
     <div class="container">
         <div class="columns is-centered">
@@ -1516,203 +1534,203 @@
 </div>
 </section>
 <section class="section">
-  <div class="columns is-centered has-text-centered">
-    <div class="column is-six-fifths">
-      <h2 class="title is-3"> A Decade's Battle on the Bias of Vision Backbone and Optimizer </h2>
-    </div>
-  </div>
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <div class="content has-text-justified"> 
-          <p>
-            CARES is designed to provide a comprehensive evaluation of trustworthiness in MedLVLMs, reflecting the issues present in model responses. We assess trustworthiness across five critical dimensions: trustfulness, fairness, safety, privacy, and robustness.
-            <ul>
-              <li><b>Trustfulness</b>. We discuss the trustfulness of MedLVLMs, defined as the extent to which a Med-LVLM can provide factual responses and recognize when those responses may potentially be incorrect.
-                <ul>
-                  <li><b>Factuality</b>: Med-LVLMs are susceptible to factual hallucination, wherein the model may generate incorrect or misleading information about medical conditions, including erroneous judgments regarding symptoms or diseases, and inaccurate descriptions of medical images.</li>
-                  <li><b>Uncertainty</b>: A trustful Med-LVLM should produce confidence scores that accurately reflect the probability of its predictions being correct, essentially offering precise uncertainty estimation. However, as various authors have noted, LLM-based models often display overconfidence in their responses, which could potentially lead to a significant number of misdiagnoses or erroneous diagnoses.</li>
-                </ul>
-              </li>
-              <li><b>Fairness</b>. Med-LVLMs have the potential to unintentionally cause health disparities, especially among underrepresented groups. These disparities can reinforce stereotypes and lead to biased medical advice. It is essential to prioritize fairness in healthcare to guarantee that every individual receives equitable and accurate medical treatment.</li>
-              <li><b>Safety</b>. Med-LVLMs present safety concerns, which include several aspects such as jailbreaking, overcautious behavior, and toxicity.
-                <ul>
-                  <li><b>Jailbreaking</b>: Jailbreaking refers to attempts or actions that manipulate or exploit a model to deviate from its intended functions or restrictions. For Med-LVLMs, it involves prompting the model in ways that allow access to restricted information or generating responses that violate medical guidelines.</li>
-                  <li><b>Overcautiousness</b>: Overcautiousness describes how Med-LVLMs often refrain from responding to medical queries they are capable of answering. In medical settings, this excessively cautious approach can lead models to decline answering common clinical diagnostic questions.</li>
-                  <li><b>Toxicity</b>: In Med-LVLMs, toxicity refers to outputs that are harmful, such as those containing biased, offensive, or inappropriate content. In medical applications, the impact of toxic outputs is particularly severe because they may generate rude or disrespectful medical advice, eroding trust in the application of clinical management.</li>
-                </ul>
-              </li>
-              <li><b>Privacy</b>. Privacy breaches in Med-LVLMs is a critical issue due to the sensitive nature of health-related data. These models are expected to refrain from disclosing private information, such as marital status, as this can compromise both the reliability of the model and compliance with legal regulations.</li>
-              <li><b>Robustness</b>. Robustness in Med-LVLMs aims to evaluate whether the models perform reliably across various clinical settings. We focus on evaluating out-of-distribution (OOD) robustness, aiming to assess the model’s ability to handle test data whose distributions significantly differ from those of the training data.</li>
-            </ul>
-          </p>
-        </div>
-        <div class="has-text-centered">
-          <img id="teaser" class="figure-img" src="images/overview.png" alt="Overview Image">
-        </div>         
-      </div>
-    </div>
-  </div>
+<div class="columns is-centered has-text-centered">
+<div class="column is-six-fifths">
+<h2 class="title is-3"> A Decade's Battle on the Bias of Vision Backbone and Optimizer </h2>
+</div>
+</div>
+<div class="container">
+<div class="columns is-centered">
+<div class="column is-full-width">
+<div class="content has-text-justified">
+<p>
+CARES is designed to provide a comprehensive evaluation of trustworthiness in MedLVLMs, reflecting the issues present in model responses. We assess trustworthiness across five critical dimensions: trustfulness, fairness, safety, privacy, and robustness.
+<ul>
+<li><b>Trustfulness</b>. We discuss the trustfulness of MedLVLMs, defined as the extent to which a Med-LVLM can provide factual responses and recognize when those responses may potentially be incorrect.
+<ul>
+<li><b>Factuality</b>: Med-LVLMs are susceptible to factual hallucination, wherein the model may generate incorrect or misleading information about medical conditions, including erroneous judgments regarding symptoms or diseases, and inaccurate descriptions of medical images.</li>
+<li><b>Uncertainty</b>: A trustful Med-LVLM should produce confidence scores that accurately reflect the probability of its predictions being correct, essentially offering precise uncertainty estimation. However, as various authors have noted, LLM-based models often display overconfidence in their responses, which could potentially lead to a significant number of misdiagnoses or erroneous diagnoses.</li>
+</ul>
+</li>
+<li><b>Fairness</b>. Med-LVLMs have the potential to unintentionally cause health disparities, especially among underrepresented groups. These disparities can reinforce stereotypes and lead to biased medical advice. It is essential to prioritize fairness in healthcare to guarantee that every individual receives equitable and accurate medical treatment.</li>
+<li><b>Safety</b>. Med-LVLMs present safety concerns, which include several aspects such as jailbreaking, overcautious behavior, and toxicity.
+<ul>
+<li><b>Jailbreaking</b>: Jailbreaking refers to attempts or actions that manipulate or exploit a model to deviate from its intended functions or restrictions. For Med-LVLMs, it involves prompting the model in ways that allow access to restricted information or generating responses that violate medical guidelines.</li>
+<li><b>Overcautiousness</b>: Overcautiousness describes how Med-LVLMs often refrain from responding to medical queries they are capable of answering. In medical settings, this excessively cautious approach can lead models to decline answering common clinical diagnostic questions.</li>
+<li><b>Toxicity</b>: In Med-LVLMs, toxicity refers to outputs that are harmful, such as those containing biased, offensive, or inappropriate content. In medical applications, the impact of toxic outputs is particularly severe because they may generate rude or disrespectful medical advice, eroding trust in the application of clinical management.</li>
+</ul>
+</li>
+<li><b>Privacy</b>. Privacy breaches in Med-LVLMs is a critical issue due to the sensitive nature of health-related data. These models are expected to refrain from disclosing private information, such as marital status, as this can compromise both the reliability of the model and compliance with legal regulations.</li>
+<li><b>Robustness</b>. Robustness in Med-LVLMs aims to evaluate whether the models perform reliably across various clinical settings. We focus on evaluating out-of-distribution (OOD) robustness, aiming to assess the model’s ability to handle test data whose distributions significantly differ from those of the training data.</li>
+</ul>
+</p>
+</div>
+<div class="has-text-centered">
+<img id="teaser" class="figure-img" src="images/overview.png" alt="Overview Image">
+</div>
+</div>
+</div>
+</div>
 </section>
 
 <section class="section">
-  <div class="container mt-5">
-    <div class="form-row" style="justify-content: flex-end;">
-      <div class="form-group col-md-1">
-        <div class="col-md-2"><label>&nbsp;</label></div>
-        <div class="btn-group" role="group" aria-label="Left and Right Controller" style="width: 100%;align-items: flex-end;justify-content: center;flex-direction: row;display: flex;">
-          <button type="button" class="form-control btn btn-primary" id="prev-question"><i class="material-icons">keyboard_arrow_left</i></button>
-          <button type="button" class="form-control btn btn-primary" id="next-question"><i class="material-icons">keyboard_arrow_right</i></button>
-        </div>
-      </div>
-    </div>
+<div class="container mt-5">
+<div class="form-row" style="justify-content: flex-end;">
+<div class="form-group col-md-1">
+<div class="col-md-2"><label>&nbsp;</label></div>
+<div class="btn-group" role="group" aria-label="Left and Right Controller" style="width: 100%;align-items: flex-end;justify-content: center;flex-direction: row;display: flex;">
+<button type="button" class="form-control btn btn-primary" id="prev-question"><i class="material-icons">keyboard_arrow_left</i></button>
+<button type="button" class="form-control btn btn-primary" id="next-question"><i class="material-icons">keyboard_arrow_right</i></button>
+</div>
+</div>
+</div>
 
-    <div class="d-flex justify-content-center align-items-center">
-      <div class="card mb-4" style="width: 60%;">
-        <div class="card-body" id="selected-question" style="display: flex; height: 50vh;">
-          <div class="chat-history"></div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="d-flex justify-content-center align-items-center">
+<div class="card mb-4" style="width: 60%;">
+<div class="card-body" id="selected-question" style="display: flex; height: 50vh;">
+<div class="chat-history"></div>
+</div>
+</div>
+</div>
+</div>
 </section>
 
 <section class="section" id="BibTeX">
-  <div class="container content">
-    <h2 class="title">BibTeX</h2>
-    <pre><code>
+<div class="container content">
+<h2 class="title">BibTeX</h2>
+<pre><code>
 @article{li2024battle,
 title={A Decade's Battle on Bias of Visual Backbone and Optimizer},
 author={Siyuan Li and Juanxi Tian and Zedong Wang and Luyuan Zhang and Zicheng Liu and Cheng Tan and Weiyang Jin and Lei Xin and Yang Liu and Baigui Sun and Stan Z. Li},
 year={2024},
 }
-    </code></pre>
-  </div>
+</code></pre>
+</div>
 </section>
 
 <section class="section" id="Acknowledgement">
-  <div class="container content">
-    <h2 class="title">Acknowledgement</h2>
-    <p>This website is adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>, licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
-    <p>
-      <a href='https://github.com/Computer-Vision-in-the-Wild/'><img id="painting_icon" width="10%" src="https://avatars.githubusercontent.com/u/97258247?s=200&v=4" alt="CVinW"></a>
-    </p>    
-  </div>
+<div class="container content">
+<h2 class="title">Acknowledgement</h2>
+<p>This website is adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>, licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
+<p>
+<a href='https://github.com/Computer-Vision-in-the-Wild/'><img id="painting_icon" width="10%" src="https://avatars.githubusercontent.com/u/97258247?s=200&v=4" alt="CVinW"></a>
+</p>
+</div>
 </section>
 
 <script>
-  function createChatRow(sender, text, imageSrc) {
-    var article = document.createElement("article");
-    article.className = "media";
+function createChatRow(sender, text, imageSrc) {
+var article = document.createElement("article");
+article.className = "media";
 
-    var figure = document.createElement("figure");
-    figure.className = "media-left";
+var figure = document.createElement("figure");
+figure.className = "media-left";
 
-    var span = document.createElement("span");
-    span.className = "icon is-large";
+var span = document.createElement("span");
+span.className = "icon is-large";
 
-    var icon = document.createElement("i");
-    icon.className = "fas fas fa-2x" + (sender === "BOCB" ? " fa-user " : sender === "LLaVA" ? " fa-robot" : "");
+var icon = document.createElement("i");
+icon.className = "fas fas fa-2x" + (sender === "BOCB" ? " fa-user " : sender === "LLaVA" ? " fa-robot" : "");
 
-    var media = document.createElement("div");
-    media.className = "media-content";
+var media = document.createElement("div");
+media.className = "media-content";
 
-    var content = document.createElement("div");
-    content.className = "content";
+var content = document.createElement("div");
+content.className = "content";
 
-    var para = document.createElement("p");
+var para = document.createElement("p");
 
-    var preText = document.createElement("pre");
-    preText.style = "background-color: white; font-size: 18px; font-family: Arial; padding: 0; margin: 0; white-space: pre-wrap; word-wrap: break-word;";
-    var paraText = document.createTextNode(text);
-    preText.appendChild(paraText);
+var preText = document.createElement("pre");
+preText.style = "background-color: white; font-size: 18px; font-family: Arial; padding: 0; margin: 0; white-space: pre-wrap; word-wrap: break-word;";
+var paraText = document.createTextNode(text);
+preText.appendChild(paraText);
 
-    var strong = document.createElement("strong");
-    strong.innerHTML = sender;
-    var br = document.createElement("br");
+var strong = document.createElement("strong");
+strong.innerHTML = sender;
+var br = document.createElement("br");
 
-    para.appendChild(strong);
-    para.appendChild(br);
-    para.appendChild(preText);
+para.appendChild(strong);
+para.appendChild(br);
+para.appendChild(preText);
 
-    if (imageSrc) {
-      var img = document.createElement("img");
-      img.src = imageSrc;
-      img.style = "max-width: 100%; max-height: 300px;";
-      para.appendChild(img);
-    }
+if (imageSrc) {
+var img = document.createElement("img");
+img.src = imageSrc;
+img.style = "max-width: 100%; max-height: 300px;";
+para.appendChild(img);
+}
 
-    content.appendChild(para);
-    media.appendChild(content);
-    span.appendChild(icon);
-    figure.appendChild(span);
-    if (sender !== "Description") {
-      article.appendChild(figure);
-    }
-    article.appendChild(media);
-    return article;
-  }
+content.appendChild(para);
+media.appendChild(content);
+span.appendChild(icon);
+figure.appendChild(span);
+if (sender !== "Description") {
+article.appendChild(figure);
+}
+article.appendChild(media);
+return article;
+}
 
-  function addMessageToChatHistory(sender, message, imageSrc) {
-    const chatHistory = document.querySelector('.chat-history');
-    const chatRow = createChatRow(sender, message, imageSrc);
-    chatHistory.appendChild(chatRow);
-    chatHistory.scrollTop = chatHistory.scrollHeight;
-  }
+function addMessageToChatHistory(sender, message, imageSrc) {
+const chatHistory = document.querySelector('.chat-history');
+const chatRow = createChatRow(sender, message, imageSrc);
+chatHistory.appendChild(chatRow);
+chatHistory.scrollTop = chatHistory.scrollHeight;
+}
 
-  function clearChatHistory() {
-    const chatHistory = document.querySelector('.chat-history');
-    chatHistory.innerHTML = "";
-  }
+function clearChatHistory() {
+const chatHistory = document.querySelector('.chat-history');
+chatHistory.innerHTML = "";
+}
 
-  const conversations = [
-    {
-      "turns": [
-        ["BOCB", "Backbone Roadmap", "images/Macro_design.svg"],
-      ]
-    },
-    {
-      "turns": [
-        ["BOCB", "Four categories optimizer", "images/Optimizer.svg"]
-      ]
-    },
-    {
-      "turns": [
-        ["BOCB", "Hyper-parameters consistency across optimizers for certain backbone", "images/violinplot_backbone_hyper.svg"]
-      ]
-    },
-    {
-      "turns": [
-        ["BOCB", "Optimizer generality against backbones", "images/violinplot_opt_hyper.svg"]
-      ]
-    },
-  ];
+const conversations = [
+{
+"turns": [
+["BOCB", "Backbone Roadmap", "images/Macro_design.svg"],
+]
+},
+{
+"turns": [
+["BOCB", "Four categories optimizer", "images/Optimizer.svg"]
+]
+},
+{
+"turns": [
+["BOCB", "Hyper-parameters consistency across optimizers for certain backbone", "images/violinplot_backbone_hyper.svg"]
+]
+},
+{
+"turns": [
+["BOCB", "Optimizer generality against backbones", "images/violinplot_opt_hyper.svg"]
+]
+},
+];
 
-  let currentIndex = 0;
+let currentIndex = 0;
 
-  function update_dialog_demo() {
-    clearChatHistory();
-    for (let i = 0; i < conversations[currentIndex].turns.length; i++) {
-      if (conversations[currentIndex].turns[i].length == 2) {
-        addMessageToChatHistory(conversations[currentIndex].turns[i][0], conversations[currentIndex].turns[i][1]);
-      } else {
-        addMessageToChatHistory(conversations[currentIndex].turns[i][0], conversations[currentIndex].turns[i][1], conversations[currentIndex].turns[i][2]);
-      }
-    }
-    document.querySelector('.chat-history').scrollTop = 0;
-  }
+function update_dialog_demo() {
+clearChatHistory();
+for (let i = 0; i < conversations[currentIndex].turns.length; i++) {
+if (conversations[currentIndex].turns[i].length == 2) {
+addMessageToChatHistory(conversations[currentIndex].turns[i][0], conversations[currentIndex].turns[i][1]);
+} else {
+addMessageToChatHistory(conversations[currentIndex].turns[i][0], conversations[currentIndex].turns[i][1], conversations[currentIndex].turns[i][2]);
+}
+}
+document.querySelector('.chat-history').scrollTop = 0;
+}
 
-  update_dialog_demo();
+update_dialog_demo();
 
-  document.getElementById('prev-question').addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + conversations.length) % conversations.length;
-    update_dialog_demo();
-  });
+document.getElementById('prev-question').addEventListener('click', () => {
+currentIndex = (currentIndex - 1 + conversations.length) % conversations.length;
+update_dialog_demo();
+});
 
-  document.getElementById('next-question').addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % conversations.length;
-    update_dialog_demo();
-  });
+document.getElementById('next-question').addEventListener('click', () => {
+currentIndex = (currentIndex + 1) % conversations.length;
+update_dialog_demo();
+});
 </script>
 </body>
 
