@@ -81,41 +81,36 @@ background-color: #00d1b2;
 border-color: transparent;
 }
 
+.divider {
+border-top: 1px solid black;
+margin: 20px 0;
+}
+.table-container {
+overflow-x: auto;
+width: 100%;
+}
 table {
 width: 100%;
 border-collapse: collapse;
 }
-
-td {
+th, td {
 border: 1px solid #ddd;
 padding: 8px;
 text-align: center;
-transition: background-color 0.3s ease;
 }
-
 th {
 background-color: #f2f2f2;
+position: sticky;
+top: 0;
+z-index: 1;
 }
-
-td:hover {
-background-color: #e9ecef;
+.chig, .chhg, .clow, .cllw {
+font-weight: bold;
 }
-
-.chig {
-  background-color: #add8e6; /* 浅蓝色 */
-}
-
-.chhg {
-  background-color: #4169e1; /* 蓝色 */
-}
-
-.clow {
-  background-color: #d3d3d3; /* 浅灰色 */
-}
-
-.cllw {
-  background-color: #808080; /* 灰色 */
-}
+.chig { color: blue; }
+.chhg { color: darkblue; }
+.clow { color: gray; }
+.cllw { color: lightgray; }
 
 .expandable-card .card-text-container {
 max-height: 200px;
@@ -158,10 +153,6 @@ height: 90px;
 background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 1));
 }
 
-.separator {
-  border-top: 1px solid #000; 
-  margin: 20px 0; 
-}
 .expandable-card:not(.expanded) .expand-btn {
 margin-top: -40px;
 }
@@ -489,6 +480,7 @@ slides.forEach(slide => slide.style.display = 'none');
 slides[slideIndex].style.display = 'block';
 }
 </script>
+<div class="divider"></div>
   <section class="section">
     <div class="container">
         <div class="columns is-centered">
@@ -918,7 +910,7 @@ slides[slideIndex].style.display = 'block';
                             <td class="clow">79.72</td>
                             <td>81.83</td>
                         </tr>
-                            <!-- Add more rows similarly -->
+            
                         </tbody>
                     </table>
                 </div>
@@ -1244,7 +1236,7 @@ slides[slideIndex].style.display = 'block';
       </div>
   </div>
 </section>
-<div class="separator"></div>
+
 <section class="section">
   <div class="container">
       <div class="columns is-centered">
