@@ -1702,129 +1702,17 @@ year={2024},
 </section>
 
 <section class="section" id="Acknowledgement">
-<div class="container content">
-<h2 class="title">Acknowledgement</h2>
-<p>This website is adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>, licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
-<p>
-<a href='https://github.com/Computer-Vision-in-the-Wild/'><img id="painting_icon" width="10%" src="https://avatars.githubusercontent.com/u/97258247?s=200&v=4" alt="CVinW"></a>
-</p>
-</div>
-</section>
+  <div class="container content">
+  <h2 class="title">Acknowledgement</h2>
+  <p>This website is adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>, licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
+  <p>
+  <a href='https://github.com/Computer-Vision-in-the-Wild/'><img id="painting_icon" width="10%" src="https://avatars.githubusercontent.com/u/97258247?s=200&v=4" alt="CVinW"></a>
+  </p>
+  <p>© 2024 BOCB. All rights reserved.</p>
+  </div>
+  </section>
 
-<script>
-function createChatRow(sender, text, imageSrc) {
-var article = document.createElement("article");
-article.className = "media";
 
-var figure = document.createElement("figure");
-figure.className = "media-left";
-
-var span = document.createElement("span");
-span.className = "icon is-large";
-
-var icon = document.createElement("i");
-icon.className = "fas fas fa-2x" + (sender === "BOCB" ? " fa-user " : sender === "LLaVA" ? " fa-robot" : "");
-
-var media = document.createElement("div");
-media.className = "media-content";
-
-var content = document.createElement("div");
-content.className = "content";
-
-var para = document.createElement("p");
-
-var preText = document.createElement("pre");
-preText.style = "background-color: white; font-size: 18px; font-family: Arial; padding: 0; margin: 0; white-space: pre-wrap; word-wrap: break-word;";
-var paraText = document.createTextNode(text);
-preText.appendChild(paraText);
-
-var strong = document.createElement("strong");
-strong.innerHTML = sender;
-var br = document.createElement("br");
-
-para.appendChild(strong);
-para.appendChild(br);
-para.appendChild(preText);
-
-if (imageSrc) {
-var img = document.createElement("img");
-img.src = imageSrc;
-img.style = "max-width: 100%; max-height: 300px;";
-para.appendChild(img);
-}
-
-content.appendChild(para);
-media.appendChild(content);
-span.appendChild(icon);
-figure.appendChild(span);
-if (sender !== "Description") {
-article.appendChild(figure);
-}
-article.appendChild(media);
-return article;
-}
-
-function addMessageToChatHistory(sender, message, imageSrc) {
-const chatHistory = document.querySelector('.chat-history');
-const chatRow = createChatRow(sender, message, imageSrc);
-chatHistory.appendChild(chatRow);
-chatHistory.scrollTop = chatHistory.scrollHeight;
-}
-
-function clearChatHistory() {
-const chatHistory = document.querySelector('.chat-history');
-chatHistory.innerHTML = "";
-}
-
-const conversations = [
-{
-"turns": [
-["BOCB", "Backbone Roadmap", "images/Macro_design.svg"],
-]
-},
-{
-"turns": [
-["BOCB", "Four categories optimizer", "images/Optimizer.svg"]
-]
-},
-{
-"turns": [
-["BOCB", "Hyper-parameters consistency across optimizers for certain backbone", "images/violinplot_backbone_hyper.svg"]
-]
-},
-{
-"turns": [
-["BOCB", "Optimizer generality against backbones", "images/violinplot_opt_hyper.svg"]
-]
-},
-];
-
-let currentIndex = 0;
-
-function update_dialog_demo() {
-clearChatHistory();
-for (let i = 0; i < conversations[currentIndex].turns.length; i++) {
-if (conversations[currentIndex].turns[i].length == 2) {
-addMessageToChatHistory(conversations[currentIndex].turns[i][0], conversations[currentIndex].turns[i][1]);
-} else {
-addMessageToChatHistory(conversations[currentIndex].turns[i][0], conversations[currentIndex].turns[i][1], conversations[currentIndex].turns[i][2]);
-}
-}
-document.querySelector('.chat-history').scrollTop = 0;
-}
-
-update_dialog_demo();
-
-document.getElementById('prev-question').addEventListener('click', () => {
-currentIndex = (currentIndex - 1 + conversations.length) % conversations.length;
-update_dialog_demo();
-});
-
-document.getElementById('next-question').addEventListener('click', () => {
-currentIndex = (currentIndex + 1) % conversations.length;
-update_dialog_demo();
-});
-</script>
 </body>
 
 </html>
