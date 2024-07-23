@@ -66,6 +66,10 @@ font-size: 1.1em;
 line-height: 1.6;
 }
 
+.centered-text {
+  text-align: center;
+}
+
 .publication-links .button {
 margin: 0.5rem;
 border-radius: 30px;
@@ -272,6 +276,13 @@ transform: scale(1.05);
   max-width: 100%;
 }
 }
+.static-image {
+  transition: none !important;
+}
+
+.static-image:hover {
+  transform: none !important;
+}
 </style>
 </head>
 
@@ -282,7 +293,7 @@ transform: scale(1.05);
 <div class="columns is-centered">
 <div class="column has-text-centered">
   <h1 class="title publication-title" style="font-size: 3em;">
-    <img src="images/bocb_logo.png" alt="Logo" style="width: 2.11em; height: 3em; vertical-align: middle; margin-right: 0.2em;"> BOCB
+    <img src="images/bocb_logo.png" alt="Logo" class="static-image" style="width: 2.11em; height: 3em; vertical-align: middle; margin-right: 0.2em;"> BOCB
   </h1>
   <h3 class="title publication-title">A Decade's Battle on the Bias of Vision Backbone and Optimizer</h3>
   <div class="is-size-5 publication-authors">
@@ -1740,7 +1751,7 @@ year={2024},
   <p>
   <a href='https://github.com/Computer-Vision-in-the-Wild/'><img id="painting_icon" width="10%" src="https://avatars.githubusercontent.com/u/97258247?s=200&v=4" alt="CVinW"></a>
   </p>
-  <p>© 2024 BOCB. All rights reserved.</p>
+  <p class="centered-text">© 2024 BOCB. All rights reserved.</p>
   </div>
   </section>
 
