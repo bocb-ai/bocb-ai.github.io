@@ -271,15 +271,6 @@ transform: scale(1.05);
   max-width: 100%;
 }
 }
-.static-image {
-  border: none; 
-  box-shadow: none; 
-  transition: none; 
-}
-
-.static-image:hover {
-  transform: none; 
-}
 </style>
 </head>
 
@@ -487,6 +478,7 @@ slides[slideIndex].style.display = 'block';
               <h2 class="title is-3" id="leaderboard">CIFAR100 Benchmark</h2>
               <div class="content">
                   <p class="mt-3">Top-1 accuracy (%) of representative vision backbones with 20 popular optimizers on CIFAR-100. The torch-style training settings are used for AlexNet, VGG-13, R-50/101 (ResNet-50/101), and MobV2 (MobileNet.V2), while other backbones adopt modern training recipes, including Eff-B0 (EfficientNet-B0). IF-12, PF-12, CF-12, AF-12, and CA-12 are abbreviated for MetaFormer S12 variants. The blue and gray regions denote the top and outlier (trivial) results, while others are inliers.</p>
+                  <p class="mt-3">You can swipe left and right to see the full table.</p>
                   <div class="table-container">
                   <table class="js-sort-table" id="results">
                       <thead>
