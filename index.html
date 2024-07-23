@@ -334,6 +334,83 @@ The past decade has witnessed rapid progress in vision backbones and an evolutio
 </div>
 </div>
 </section>
+
+<section class="section" style="background-color:#f7f7f7">
+<div class="container">
+<div class="columns is-centered has-text-centered">
+<div class="column is-six-fifths">
+<h2 class="title is-3">Visual Insights</h2>
+<div class="slider">
+<div class="slide">
+<h3>Backbone Roadmap</h3>
+<img src="images/Macro_design.svg" alt="Backbone Roadmap">
+</div>
+<div class="slide">
+<h3>Four categories optimizer</h3>
+<img src="images/Optimizer.svg" alt="Four categories optimizer">
+</div>
+<div class="slide">
+<h3>Hyper-parameters consistency across optimizers for certain backbone</h3>
+<img src="images/violinplot_backbone_hyper.svg" alt="Hyper-parameters consistency">
+</div>
+<div class="slide">
+<h3>Optimizer generality against backbones</h3>
+<img src="images/violinplot_opt_hyper.svg" alt="Optimizer generality">
+</div>
+</div>
+<button class="slider-button prev" onclick="moveSlide(-1)">&#10094;</button>
+<button class="slider-button next" onclick="moveSlide(1)">&#10095;</button>
+</div>
+</div>
+</div>
+</section>
+<style>
+.slider {
+position: relative;
+overflow: hidden;
+}
+.slide {
+display: none;
+text-align: center;
+}
+.slide img {
+width: 100%;
+height: auto;
+}
+.slider-button {
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+background-color: rgba(0, 0, 0, 0.5);
+color: white;
+border: none;
+padding: 10px;
+cursor: pointer;
+}
+.slider-button.prev {
+left: 10px;
+}
+.slider-button.next {
+right: 10px;
+}
+</style>
+
+<script>
+let slideIndex = 0;
+showSlide(slideIndex);
+
+function moveSlide(n) {
+showSlide(slideIndex += n);
+}
+
+function showSlide(n) {
+const slides = document.querySelectorAll('.slide');
+if (n >= slides.length) { slideIndex = 0 }
+if (n < 0) { slideIndex = slides.length - 1 }
+slides.forEach(slide => slide.style.display = 'none');
+slides[slideIndex].style.display = 'block';
+}
+</script>
   <section class="section">
     <div class="container">
         <div class="columns is-centered">
