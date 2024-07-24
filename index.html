@@ -24,27 +24,27 @@
 
 <style>
 body {
-font-family: 'Google Sans', 'Noto Sans', sans-serif;
-background: linear-gradient(to right, #f7f7f7, #e9ecef);
-color: #333;
+    font-family: 'Google Sans', 'Noto Sans', sans-serif;
+    background: linear-gradient(to right, #f7f7f7, #e9ecef);
+    color: #333;
 }
 
 h1, h2, h3 {
-font-family: 'Castoro', serif;
-color: #333;
-text-align: center;
+    font-family: 'Castoro', serif;
+    color: #333;
+    text-align: center;
 }
 
 h1 {
-font-size: 3em;
+    font-size: 3em;
 }
 
 h2 {
-font-size: 2.5em;
+    font-size: 2.5em;
 }
 
 h3 {
-font-size: 2em;
+    font-size: 2em;
 }
 
 .section {
@@ -57,22 +57,22 @@ font-size: 2em;
 }
 
 .container {
-max-width: 1200px;
-margin: 0 auto;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .has-text-centered {
-text-align: center;
+    text-align: center;
 }
 
 .content {
-margin-top: 20px;
-font-size: 1.1em;
-line-height: 1.6;
+    margin-top: 20px;
+    font-size: 1.1em;
+    line-height: 1.6;
 }
 
 .centered-text {
-  text-align: center;
+    text-align: center;
 }
 
 .publication-links .button {
@@ -88,38 +88,51 @@ line-height: 1.6;
 }
 
 .divider {
-border-top: 1px solid black;
-margin: 20px 0;
+    border-top: 1px solid black;
+    margin: 20px 0;
 }
 
 .table-container {
-overflow-x: auto;
-width: 100%;
+    overflow-x: auto;
+    width: 100%;
 }
 
 table {
-width: 100%;
-border-collapse: collapse;
+    width: 100%;
+    border-collapse: collapse;
 }
 
 th, td {
-border: 1px solid #ddd;
-padding: 8px;
-text-align: center;
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    transition: background-color 0.3s ease;
 }
+
 th {
-background-color: #f2f2f2;
-position: sticky;
-top: 0;
-z-index: 1;
+    background-color: #f2f2f2;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
+
 .chig, .chhg, .clow, .cllw {
-font-weight: bold;
+    font-weight: bold;
 }
+
 .chig { color: blue; }
 .chhg { color: darkblue; }
 .clow { color: gray; }
 .cllw { color: lightgray; }
+
+td:hover {
+    background-color: #e0e0e0;
+}
+
+.chig:hover { background-color: #add8e6; } 
+.chhg:hover { background-color: #87ceeb; } 
+.clow:hover { background-color: #d3d3d3; } 
+.cllw:hover { background-color: #f0f0f0; } 
 
 .expandable-card .card-text-container {
 max-height: 200px;
