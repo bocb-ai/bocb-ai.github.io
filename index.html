@@ -298,6 +298,27 @@ transition: transform 0.3s ease-in-out;
 transform: scale(1.05);
 }
 
+.maintainers {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* 调整间距 */
+}
+
+.maintainer {
+  text-align: center;
+}
+
+.maintainer img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.maintainer span {
+  display: block;
+  margin-top: 5px;
+}
 @media (max-width: 768px) {
 .column img {
   max-width: 100%;
