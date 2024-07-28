@@ -328,1504 +328,1559 @@ transform: scale(1.05);
 </head>
 
 <body>
-<section class="hero">
-<div class="hero-body">
-<div class="container">
-<div class="columns is-centered">
-<div class="column has-text-centered">
-  <h1 class="title publication-title" style="font-size: 3em; text-align: center;">
-    <img src="images/bocb_logo.png" alt="Logo" class="static-image" style="width: 2.11em; height: 3em;">
-  </h1>
-  <h3 class="title publication-title">A Decade's Battle on the Bias of Vision Backbone and Optimizer</h3>
-  <div class="is-size-5 publication-authors">
-    <span class="author-block"><a href="https://lupin1998.github.io/" style="color:#f68946;">Siyuan Li<sup>1,2*</sup></a>,</span>
-    <span class="author-block"><a href="https://tianshijing.github.io/" style="color:#f68946;">Juanxi Tian<sup>1*</sup></a>,</span>
-    <span class="author-block"><a href="https://jacky1128.github.io/" style="color:#f68946;">Zedong Wang<sup>1*</sup></a>,</span>
-    <span class="author-block"><a href="" style="color:#f68946;">Luyuan Zhang<sup>1</sup></a>,</span>
-    <span class="author-block"><a href="https://pone7.github.io/" style="color:#f68946;">Zicheng Liu<sup>1</sup></a>,</span>
-    <span class="author-block"><a href="https://zzachw.github.io/" style="color:#f68946;">Cheng Tan<sup>1</sup></a>,</span>
-    <span class="author-block"><a href="https://waynejin0918.github.io/" style="color:#f68946;">Weiyang Jin<sup>1</sup></a>,</span>
-    <span class="author-block"><a href="https://yiyangzhou.github.io/" style="color:#f68946;">Lei Xin<sup>1</sup></a>,</span>
-    <span class="author-block"><a href="" style="color:#008AD7;">Yang Liu<sup>2</sup></a>,</span>
-    <span class="author-block"><a href="" style="color:#008AD7;">Baigui Sun<sup>2</sup></a>,</span>
-    <span class="author-block"><a href="">Stan Z. Li<sup>1†</sup></a>,</span>
+<nav class="navbar is-light" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="index.html">
+      <img src="images/logo1.jpg" width="28" height="28">
+    </a>
   </div>
-  <div class="is-size-5 publication-authors">
-    <span class="author-block"><b style="color:#f68946;">&#x25B6</b> <sup>1</sup>AI Lab, Research Center for Industries of the Future, Westlake University, Hangzhou, China</span>
-    <span class="author-block"><b style="color:#008AD7;">&#x25B6</b> <sup>2</sup>DAMO Academy, Hangzhou, China</span>
-  </div>
-  <div class="is-size-6 publication-authors">
-    <span class="author-block"><sup>*</sup>Equal Contribution</span>
-    <span class="author-block"><sup>†</sup>Corresponding author</span>
-  </div>
-  <div class="column has-text-centered">
-    <div class="publication-links">
-      <span class="link-block">
-        <a href="https://arxiv.org/abs/2406.06007" target="_blank" class="external-link button is-normal is-rounded is-dark">
-          <span class="icon"><i class="ai ai-arxiv"></i></span>
-          <span>arXiv</span>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href="index.html">
+        Home
+      </a>
+      <a class="navbar-item" href="about.html">
+        About Us
+      </a>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Project
         </a>
-      </span>
-      <span class="link-block">
-        <a href="https://github.com/Westlake-AI/Backbone-vs-Optimizer" target="_blank" class="external-link button is-normal is-rounded is-dark">
-          <span class="icon"><i class="fab fa-github"></i></span>
-          <span>Code</span>
-        </a>
-      </span>
-      <span class="link-block">
-        <a href="#leaderboard" class="external-link button is-normal is-rounded is-dark">
-          <span class="icon"><i class="far fa-images"></i></span>
-          <span>Benchmark</span>
-        </a>
-      </span>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="hero">
-  <div class="hero-body">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <img src="images/BOCB_ok.png" alt="BOCB Image" style="max-width: 90%; height: auto;">
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="project.html">
+            Overview
+          </a>
+          <a class="navbar-item" href="project_paper.html">
+            Paper
+          </a>
         </div>
       </div>
     </div>
   </div>
-</section>
-<section class="hero teaser">
-  <div class="container">
-    <div class="hero-body">
-      <h2 class="title is-3">Introduction</h2>
-      <h4 class="subtitle has-text-centered">
-        🌟<span>[NEW!]</span> We explore the critical yet poorly studied relationship between vision backbones and optimizers, revealing the phenomenon of <strong><em>backbone-optimizer coupling bias (BOCB)</em></strong> for the first time.
-        <br><br>
-        🌟<span>[NEW!]</span> We provide the first backbone-optimizer benchmark that encompasses a wide range of main-stream vision backbones, from classical CNNs to modern transformer-based architectures, and evaluates their performance against 20 popular optimizers on CIFAR-100, ImageNet-1K, and COCO, unveiling the practical limitations of BOCB in pre-training and transfer learning.
-        <br><br>
-        🌟<span>[NEW!]</span> From the BOCB perspective, we summarize backbone design recommendations. The benchmarking results also serve as takeaways for user-friendly deployment. We open-source the code and models and also call for further explorations of BOCB in the research community. 
-        <br><br>
-        <strong style="font-size: 1.2em;">🤔So, where the BOCB come from?</strong>
-        <br><br>
-        <span style="font-size: 1.5em; font-weight: bold; color: black;">&#8595;</span>
-        <br><br>
-        <strong style="font-size: 1.2em;">Q1:</strong> Does any dependency exist between existing vision backbones and various optimizers?<br><br>
-        <strong style="font-size: 1.2em;">Q2:</strong> If such dependencies exist, (how) do they affect the practice of vision backbones?<br><br>
-        <strong style="font-size: 1.2em;">Q3:</strong> In the case of adverse impacts, can we identify any correspondence between these negative dependencies and specific network architecture elements to minimize potential risks?
-        <br><br>
-        <div style="border: 2px solid black; padding: 10px; font-weight: bold;">
-          <strong>🗣️APPEAL:</strong>
-          <br>
-          From the BOCB perspective, we summarize backbone design recommendations. The benchmarking results also serve as takeaways for user-friendly deployment. We open-source the code and models and also call for further explorations of BOCB in the research community.
-        </div>
-      </h4>
-    </div>
-  </div>
-</section>
+</nav>
+
+<section class="section" id="bocb">
+    <div class="container">
+      <h1 class="title">BOCB</h1>
+      <div class="content">
+        <section class="hero">
+          <div class="hero-body">
+            <div class="container">
+              <div class="columns is-centered">
+                <div class="column has-text-centered">
+                  <h1 class="title publication-title" style="font-size: 3em; text-align: center;">
+                    <img src="images/bocb_logo.png" alt="Logo" class="static-image" style="width: 2.11em; height: 3em;">
+                  </h1>
+                  <h3 class="title publication-title">A Decade's Battle on the Bias of Vision Backbone and Optimizer</h3>
+                  <div class="is-size-5 publication-authors">
+                    <span class="author-block"><a href="https://lupin1998.github.io/" style="color:#f68946;">Siyuan Li<sup>1,2*</sup></a>,</span>
+                    <span class="author-block"><a href="https://tianshijing.github.io/" style="color:#f68946;">Juanxi Tian<sup>1*</sup></a>,</span>
+                    <span class="author-block"><a href="https://jacky1128.github.io/" style="color:#f68946;">Zedong Wang<sup>1*</sup></a>,</span>
+                    <span class="author-block"><a href="" style="color:#f68946;">Luyuan Zhang<sup>1</sup></a>,</span>
+                    <span class="author-block"><a href="https://pone7.github.io/" style="color:#f68946;">Zicheng Liu<sup>1</sup></a>,</span>
+                    <span class="author-block"><a href="https://zzachw.github.io/" style="color:#f68946;">Cheng Tan<sup>1</sup></a>,</span>
+                    <span class="author-block"><a href="https://waynejin0918.github.io/" style="color:#f68946;">Weiyang Jin<sup>1</sup></a>,</span>
+                    <span class="author-block"><a href="https://yiyangzhou.github.io/" style="color:#f68946;">Lei Xin<sup>1</sup></a>,</span>
+                    <span class="author-block"><a href="" style="color:#008AD7;">Yang Liu<sup>2</sup></a>,</span>
+                    <span class="author-block"><a href="" style="color:#008AD7;">Baigui Sun<sup>2</sup></a>,</span>
+                    <span class="author-block"><a href="">Stan Z. Li<sup>1†</sup></a>,</span>
+                  </div>
+                  <div class="is-size-5 publication-authors">
+                    <span class="author-block"><b style="color:#f68946;">&#x25B6</b> <sup>1</sup>AI Lab, Research Center for Industries of the Future, Westlake University, Hangzhou, China</span>
+                    <span class="author-block"><b style="color:#008AD7;">&#x25B6</b> <sup>2</sup>DAMO Academy, Hangzhou, China</span>
+                  </div>
+                  <div class="is-size-6 publication-authors">
+                    <span class="author-block"><sup>*</sup>Equal Contribution</span>
+                    <span class="author-block"><sup>†</sup>Corresponding author</span>
+                  </div>
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                      <span class="link-block">
+                        <a href="https://arxiv.org/abs/2406.06007" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                          <span class="icon"><i class="ai ai-arxiv"></i></span>
+                          <span>arXiv</span>
+                        </a>
+                      </span>
+                      <span class="link-block">
+                        <a href="https://github.com/Westlake-AI/Backbone-vs-Optimizer" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                          <span class="icon"><i class="fab fa-github"></i></span>
+                          <span>Code</span>
+                        </a>
+                      </span>
+                      <span class="link-block">
+                        <a href="#leaderboard" class="external-link button is-normal is-rounded is-dark">
+                          <span class="icon"><i class="far fa-images"></i></span>
+                          <span>Benchmark</span>
+                        </a>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="hero">
+          <div class="hero-body">
+            <div class="container">
+              <div class="columns is-centered">
+                <div class="column has-text-centered">
+                  <img src="images/BOCB_ok.png" alt="BOCB Image" style="max-width: 90%; height: auto;">
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="hero teaser">
+          <div class="container">
+            <div class="hero-body">
+              <h2 class="title is-3">Introduction</h2>
+              <h4 class="subtitle has-text-centered">
+                🌟<span>[NEW!]</span> We explore the critical yet poorly studied relationship between vision backbones and optimizers, revealing the phenomenon of <strong><em>backbone-optimizer coupling bias (BOCB)</em></strong> for the first time.
+                <br><br>
+                🌟<span>[NEW!]</span> We provide the first backbone-optimizer benchmark that encompasses a wide range of main-stream vision backbones, from classical CNNs to modern transformer-based architectures, and evaluates their performance against 20 popular optimizers on CIFAR-100, ImageNet-1K, and COCO, unveiling the practical limitations of BOCB in pre-training and transfer learning.
+                <br><br>
+                🌟<span>[NEW!]</span> From the BOCB perspective, we summarize backbone design recommendations. The benchmarking results also serve as takeaways for user-friendly deployment. We open-source the code and models and also call for further explorations of BOCB in the research community. 
+                <br><br>
+                <strong style="font-size: 1.2em;">🤔So, where the BOCB come from?</strong>
+                <br><br>
+                <span style="font-size: 1.5em; font-weight: bold; color: black;">&#8595;</span>
+                <br><br>
+                <strong style="font-size: 1.2em;">Q1:</strong> Does any dependency exist between existing vision backbones and various optimizers?<br><br>
+                <strong style="font-size: 1.2em;">Q2:</strong> If such dependencies exist, (how) do they affect the practice of vision backbones?<br><br>
+                <strong style="font-size: 1.2em;">Q3:</strong> In the case of adverse impacts, can we identify any correspondence between these negative dependencies and specific network architecture elements to minimize potential risks?
+                <br><br>
+                <div style="border: 2px solid black; padding: 10px; font-weight: bold;">
+                  <strong>🗣️APPEAL:</strong>
+                  <br>
+                  From the BOCB perspective, we summarize backbone design recommendations. The benchmarking results also serve as takeaways for user-friendly deployment. We open-source the code and models and also call for further explorations of BOCB in the research community.
+                </div>
+              </h4>
+            </div>
+          </div>
+        </section>
 
 <section class="section" style="background-color:#efeff081">
-<div class="container">
-<div class="columns is-centered has-text-centered">
-<div class="column is-six-fifths">
-<h2 class="title is-3">Abstract</h2>
-<div class="content has-text-justified">
-<p>
-The past decade has witnessed rapid progress in vision backbones and an evolution of deep optimizers from SGD to Adam variants. This paper, for the first time, delves into the relationship between vision network design and optimizer selection. We conduct comprehensive benchmarking studies on mainstream vision backbones and widely-used optimizers, revealing an intriguing phenomenon termed backbone-optimizer coupling bias (BOCB). Notably, classical ConvNets, such as VGG and ResNet, exhibit a marked co-dependency with SGD, while modern architectures, including ViTs and ConvNeXt, demonstrate a strong coupling with optimizers with adaptive learning rates like AdamW. More importantly, we uncover the adverse impacts of BOCB on popular backbones in real-world practice, such as additional tuning time and resource overhead, which indicates the remaining challenges and even potential risks. Through in-depth analysis and apples-to-apples comparisons, however, we surprisingly observe that specific types of network architecture can significantly mitigate BOCB, which might serve as promising guidelines for future backbone design. We hope this work as a kick-start can inspire the community to further question the long-held assumptions on vision backbones and optimizers, consider BOCB in future studies, and thus contribute to more robust, efficient, and effective vision systems. It is time to go beyond those usual choices and confront the elephant in the room. The <a href="https://github.com/Westlake-AI/Backbone-vs-Optimizer">source code</a> and models are publicly available.
-</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-
-<section class="section" style="background-color:#f7f7f7">
-<div class="container">
-<div class="columns is-centered has-text-centered">
-<div class="column is-six-fifths">
-<h2 class="title is-3">Visual Insights</h2>
-<div class="slider">
-<div class="slide">
-<h3>Backbone Roadmap</h3>
-<img src="images/Macro_design.svg" alt="Backbone Roadmap">
-</div>
-<div class="slide">
-<h3>General Algorithm of Optimizer for DNNs</h3>
-<img src="images/Opt.jpg" alt="General Algorithm of Optimizer for DNNs">
-</div>
-<div class="slide">
-<h3>Four categories optimizer</h3>
-<img src="images/Optimizer.svg" alt="Four categories optimizer">
-</div>
-<div class="slide">
-<h3>Hyper-parameters consistency across optimizers for certain backbone</h3>
-<img src="images/violinplot_backbone_hyper.svg" alt="Hyper-parameters consistency">
-</div>
-<div class="slide">
-<h3>Optimizer generality against backbones</h3>
-<img src="images/violinplot_opt_hyper.svg" alt="Optimizer generality">
-</div>
-<div class="slide">
-  <h3>Model parameter patterns</h3>
-  <img src="images/model_pattern.jpg" alt="Model parameter patterns">
-  </div>
-</div>
-<button class="slider-button prev" onclick="moveSlide(-1)">&#10094;</button>
-<button class="slider-button next" onclick="moveSlide(1)">&#10095;</button>
-</div>
-</div>
-</div>
-</section>
-<style>
-.slider {
-position: relative;
-overflow: hidden;
-}
-.slide {
-display: none;
-text-align: center;
-}
-.slide img {
-width: 100%;
-height: auto;
-}
-.slider-button {
-position: absolute;
-top: 50%;
-transform: translateY(-50%);
-background-color: rgba(0, 0, 0, 0.5);
-color: white;
-border: none;
-padding: 10px;
-cursor: pointer;
-}
-.slider-button.prev {
-left: 10px;
-}
-.slider-button.next {
-right: 10px;
-}
-</style>
-
-<script>
-let slideIndex = 0;
-showSlide(slideIndex);
-
-function moveSlide(n) {
-showSlide(slideIndex += n);
-}
-
-function showSlide(n) {
-const slides = document.querySelectorAll('.slide');
-if (n >= slides.length) { slideIndex = 0 }
-if (n < 0) { slideIndex = slides.length - 1 }
-slides.forEach(slide => slide.style.display = 'none');
-slides[slideIndex].style.display = 'block';
-}
-</script>
-<section class="section">
-  <div class="container">
-      <div class="columns is-centered">
-          <div class="column is-full has-text-centered content">
-              <h2 class="title is-3" id="leaderboard">CIFAR100 Benchmark</h2>
-              <div class="content">
-                  <p class="mt-3">Top-1 accuracy (%) of representative vision backbones with 20 popular optimizers on CIFAR-100. The torch-style training settings are used for AlexNet, VGG-13, R-50/101 (ResNet-50/101), and MobV2 (MobileNet.V2), while other backbones adopt modern training recipes, including Eff-B0 (EfficientNet-B0). IF-12, PF-12, CF-12, AF-12, and CA-12 are abbreviated for MetaFormer S12 variants. The blue and gray regions denote the top and outlier (trivial) results, while others are inliers.</p>
-                  <p class="mt-3"><strong>You can swipe left and right to see the full table.</strong></p>  
-                  <div class="table-container">
-                  <table class="js-sort-table" id="results">
-                      <thead>
-                          <tr>
-                              <th>Backbone</th>
-                              <th>Alex</th>
-                              <th>VGG</th>
-                              <th>R-50</th>
-                              <th>R-101</th>
-                              <th>MobV2</th>
-                              <th>Eff-B0</th>
-                              <th>DeiT-S</th>
-                              <th>MLP-S</th>
-                              <th>Swin-T</th>
-                              <th>CX-T</th>
-                              <th>Moga-S</th>
-                              <th>IF-12</th>
-                              <th>PF-12</th>
-                              <th>CF-12</th>
-                              <th>AF-12</th>
-                              <th>CA-12</th>
+    <div class="container">
+    <div class="columns is-centered has-text-centered">
+    <div class="column is-six-fifths">
+    <h2 class="title is-3">Abstract</h2>
+    <div class="content has-text-justified">
+    <p>
+    The past decade has witnessed rapid progress in vision backbones and an evolution of deep optimizers from SGD to Adam variants. This paper, for the first time, delves into the relationship between vision network design and optimizer selection. We conduct comprehensive benchmarking studies on mainstream vision backbones and widely-used optimizers, revealing an intriguing phenomenon termed backbone-optimizer coupling bias (BOCB). Notably, classical ConvNets, such as VGG and ResNet, exhibit a marked co-dependency with SGD, while modern architectures, including ViTs and ConvNeXt, demonstrate a strong coupling with optimizers with adaptive learning rates like AdamW. More importantly, we uncover the adverse impacts of BOCB on popular backbones in real-world practice, such as additional tuning time and resource overhead, which indicates the remaining challenges and even potential risks. Through in-depth analysis and apples-to-apples comparisons, however, we surprisingly observe that specific types of network architecture can significantly mitigate BOCB, which might serve as promising guidelines for future backbone design. We hope this work as a kick-start can inspire the community to further question the long-held assumptions on vision backbones and optimizers, consider BOCB in future studies, and thus contribute to more robust, efficient, and effective vision systems. It is time to go beyond those usual choices and confront the elephant in the room. The <a href="https://github.com/Westlake-AI/Backbone-vs-Optimizer">source code</a> and models are publicly available.
+    </p>
+    </div>
+    </div>
+    </div>
+    </div>
+    </section>
+    
+    <section class="section" style="background-color:#f7f7f7">
+    <div class="container">
+    <div class="columns is-centered has-text-centered">
+    <div class="column is-six-fifths">
+    <h2 class="title is-3">Visual Insights</h2>
+    <div class="slider">
+    <div class="slide">
+    <h3>Backbone Roadmap</h3>
+    <img src="images/Macro_design.svg" alt="Backbone Roadmap">
+    </div>
+    <div class="slide">
+    <h3>General Algorithm of Optimizer for DNNs</h3>
+    <img src="images/Opt.jpg" alt="General Algorithm of Optimizer for DNNs">
+    </div>
+    <div class="slide">
+    <h3>Four categories optimizer</h3>
+    <img src="images/Optimizer.svg" alt="Four categories optimizer">
+    </div>
+    <div class="slide">
+    <h3>Hyper-parameters consistency across optimizers for certain backbone</h3>
+    <img src="images/violinplot_backbone_hyper.svg" alt="Hyper-parameters consistency">
+    </div>
+    <div class="slide">
+    <h3>Optimizer generality against backbones</h3>
+    <img src="images/violinplot_opt_hyper.svg" alt="Optimizer generality">
+    </div>
+    <div class="slide">
+      <h3>Model parameter patterns</h3>
+      <img src="images/model_pattern.jpg" alt="Model parameter patterns">
+      </div>
+    </div>
+    <button class="slider-button prev" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="slider-button next" onclick="moveSlide(1)">&#10095;</button>
+    </div>
+    </div>
+    </div>
+    </section>
+    <style>
+    .slider {
+    position: relative;
+    overflow: hidden;
+    }
+    .slide {
+    display: none;
+    text-align: center;
+    }
+    .slide img {
+    width: 100%;
+    height: auto;
+    }
+    .slider-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    }
+    .slider-button.prev {
+    left: 10px;
+    }
+    .slider-button.next {
+    right: 10px;
+    }
+    </style>
+    
+    <script>
+    let slideIndex = 0;
+    showSlide(slideIndex);
+    
+    function moveSlide(n) {
+    showSlide(slideIndex += n);
+    }
+    
+    function showSlide(n) {
+    const slides = document.querySelectorAll('.slide');
+    if (n >= slides.length) { slideIndex = 0 }
+    if (n < 0) { slideIndex = slides.length - 1 }
+    slides.forEach(slide => slide.style.display = 'none');
+    slides[slideIndex].style.display = 'block';
+    }
+    </script>
+    <section class="section">
+      <div class="container">
+          <div class="columns is-centered">
+              <div class="column is-full has-text-centered content">
+                  <h2 class="title is-3" id="leaderboard">CIFAR100 Benchmark</h2>
+                  <div class="content">
+                      <p class="mt-3">Top-1 accuracy (%) of representative vision backbones with 20 popular optimizers on CIFAR-100. The torch-style training settings are used for AlexNet, VGG-13, R-50/101 (ResNet-50/101), and MobV2 (MobileNet.V2), while other backbones adopt modern training recipes, including Eff-B0 (EfficientNet-B0). IF-12, PF-12, CF-12, AF-12, and CA-12 are abbreviated for MetaFormer S12 variants. The blue and gray regions denote the top and outlier (trivial) results, while others are inliers.</p>
+                      <p class="mt-3"><strong>You can swipe left and right to see the full table.</strong></p>  
+                      <div class="table-container">
+                      <table class="js-sort-table" id="results">
+                          <thead>
+                              <tr>
+                                  <th>Backbone</th>
+                                  <th>Alex</th>
+                                  <th>VGG</th>
+                                  <th>R-50</th>
+                                  <th>R-101</th>
+                                  <th>MobV2</th>
+                                  <th>Eff-B0</th>
+                                  <th>DeiT-S</th>
+                                  <th>MLP-S</th>
+                                  <th>Swin-T</th>
+                                  <th>CX-T</th>
+                                  <th>Moga-S</th>
+                                  <th>IF-12</th>
+                                  <th>PF-12</th>
+                                  <th>CF-12</th>
+                                  <th>AF-12</th>
+                                  <th>CA-12</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td>SGD-M</td>
+                                  <td class="chig">66.78</td>
+                                  <td class="chig">77.08</td>
+                                  <td>78.76</td>
+                                  <td>84.87</td>
+                                  <td>77.16</td>
+                                  <td class="chig">79.41</td>
+                                  <td class="cllw">63.39</td>
+                                  <td>72.64</td>
+                                  <td class="clow">78.95</td>
+                                  <td class="clow">60.09</td>
+                                  <td class="clow">75.06</td>
+                                  <td>77.40</td>
+                                  <td>77.70</td>
+                                  <td>83.46</td>
+                                  <td>83.02</td>
+                                  <td class="clow">81.21</td>
+                              </tr>
+                              <tr>
+                                <td>SGD-M</td>
+                                <td class="chig">66.78</td>
+                                <td class="chig">77.08</td>
+                                <td>78.76</td>
+                                <td>84.87</td>
+                                <td>77.16</td>
+                                <td class="chig">79.41</td>
+                                <td class="cllw">63.39</td>
+                                <td>72.64</td>
+                                <td class="clow">78.95</td>
+                                <td class="clow">60.09</td>
+                                <td class="clow">75.06</td>
+                                <td>77.40</td>
+                                <td>77.70</td>
+                                <td>83.46</td>
+                                <td>83.02</td>
+                                <td class="clow">81.21</td>
+                            </tr>
+                            <tr>
+                              <td>SGDP</td>
+                              <td>66.54</td>
+                              <td class="chhg">77.56</td>
+                              <td class="chig">79.25</td>
+                              <td class="chig">85.30</td>
+                              <td class="chig">77.50</td>
+                              <td class="chig">79.55</td>
+                              <td class="clow">63.53</td>
+                              <td class="clow">69.24</td>
+                              <td>80.56</td>
+                              <td class="clow">61.25</td>
+                              <td class="clow">80.86</td>
+                              <td>77.55</td>
+                              <td>77.53</td>
+                              <td>83.54</td>
+                              <td>82.88</td>
+                              <td>81.56</td>
                           </tr>
-                      </thead>
-                      <tbody>
                           <tr>
-                              <td>SGD-M</td>
-                              <td class="chig">66.78</td>
-                              <td class="chig">77.08</td>
+                              <td>LION</td>
+                              <td>62.11</td>
+                              <td>73.87</td>
+                              <td>75.28</td>
+                              <td>82.79</td>
+                              <td>75.35</td>
+                              <td>76.97</td>
+                              <td class="chig">74.57</td>
+                              <td class="chig">74.19</td>
+                              <td class="chig">81.84</td>
+                              <td>82.29</td>
+                              <td>85.03</td>
+                              <td>78.65</td>
+                              <td>79.66</td>
+                              <td>84.62</td>
+                              <td>82.41</td>
+                              <td class="clow">79.59</td>
+                          </tr>
+                          <tr>
+                              <td>Adam</td>
+                              <td class="clow">65.29</td>
+                              <td class="clow">73.41</td>
+                              <td class="clow">74.10</td>
+                              <td>83.34</td>
+                              <td class="clow">74.56</td>
+                              <td class="clow">76.48</td>
+                              <td>71.04</td>
+                              <td>72.84</td>
+                              <td>80.71</td>
+                              <td>82.03</td>
+                              <td>84.92</td>
+                              <td>78.39</td>
+                              <td>79.18</td>
+                              <td>84.81</td>
+                              <td>81.54</td>
+                              <td>82.18</td>
+                          </tr>
+                          <tr>
+                              <td>Adamax</td>
+                              <td class="chig">67.30</td>
+                              <td>73.80</td>
+                              <td>75.21</td>
+                              <td>83.27</td>
+                              <td class="clow">74.60</td>
+                              <td>78.37</td>
+                              <td>73.31</td>
+                              <td>73.07</td>
+                              <td>81.28</td>
+                              <td>80.25</td>
+                              <td>84.51</td>
+                              <td>78.02</td>
+                              <td>79.55</td>
+                              <td>84.31</td>
+                              <td>81.42</td>
+                              <td>82.50</td>
+                          </tr>
+                          <tr>
+                              <td>AdamP</td>
+                              <td>60.27</td>
+                              <td>75.56</td>
+                              <td>78.17</td>
+                              <td>84.64</td>
+                              <td class="chhg">77.79</td>
+                              <td>78.65</td>
+                              <td>71.55</td>
+                              <td>73.66</td>
+                              <td>80.91</td>
+                              <td class="chig">84.47</td>
+                              <td class="chhg">86.45</td>
+                              <td>79.20</td>
+                              <td class="chig">81.70</td>
+                              <td>85.15</td>
+                              <td>82.12</td>
+                              <td>83.40</td>
+                          </tr>
+                          <tr>
+                              <td>AdamW</td>
+                              <td>62.71</td>
+                              <td>73.90</td>
+                              <td>75.56</td>
+                              <td>84.01</td>
+                              <td>76.88</td>
+                              <td>78.77</td>
+                              <td>72.15</td>
+                              <td>73.59</td>
+                              <td>81.30</td>
+                              <td>83.52</td>
+                              <td class="chig">86.19</td>
+                              <td class="chig">79.39</td>
+                              <td>80.55</td>
+                              <td class="chig">85.46</td>
+                              <td>82.24</td>
+                              <td class="chig">83.60</td>
+                          </tr>
+                          <tr>
+                              <td>Adan</td>
+                              <td>63.98</td>
+                              <td>74.90</td>
+                              <td>77.08</td>
+                              <td>84.96</td>
+                              <td class="chig">77.73</td>
+                              <td>78.43</td>
+                              <td class="chhg">76.33</td>
+                              <td class="chhg">79.94</td>
+                              <td class="chig">83.35</td>
+                              <td class="chhg">84.65</td>
+                              <td class="chhg">86.45</td>
+                              <td class="chhg">80.59</td>
+                              <td class="chhg">83.23</td>
+                              <td class="chhg">85.58</td>
+                              <td class="chhg">83.51</td>
+                              <td class="chhg">84.89</td>
+                          </tr>
+                          <tr>
+                              <td>LAMB</td>
+                              <td class="chhg">66.90</td>
+                              <td>75.55</td>
+                              <td>77.19</td>
+                              <td>85.05</td>
+                              <td>77.49</td>
+                              <td>78.77</td>
+                              <td class="chig">75.39</td>
+                              <td class="chig">74.98</td>
+                              <td class="chhg">83.47</td>
+                              <td class="chig">84.13</td>
+                              <td>86.04</td>
+                              <td class="chig">80.21</td>
+                              <td>80.01</td>
+                              <td class="chig">85.40</td>
+                              <td class="chig">83.16</td>
+                              <td class="chig">83.74</td>
+                          </tr>
+                          <tr>
+                              <td>NAdam</td>
+                              <td>60.49</td>
+                              <td>73.96</td>
+                              <td class="clow">74.56</td>
+                              <td>82.78</td>
+                              <td>75.69</td>
+                              <td>77.06</td>
+                              <td>72.75</td>
+                              <td>73.77</td>
+                              <td>81.80</td>
+                              <td>82.26</td>
+                              <td>85.23</td>
+                              <td>78.37</td>
+                              <td>80.32</td>
+                              <td>84.81</td>
+                              <td>81.82</td>
+                              <td>82.83</td>
+                          </tr>
+                          <tr>
+                              <td>RAdam</td>
+                              <td>61.69</td>
+                              <td>74.64</td>
+                              <td>75.19</td>
+                              <td class="clow">81.85</td>
+                              <td>75.62</td>
+                              <td>77.08</td>
+                              <td>72.41</td>
+                              <td>72.11</td>
+                              <td>79.84</td>
+                              <td>82.18</td>
+                              <td>84.95</td>
+                              <td>78.46</td>
+                              <td>79.71</td>
+                              <td>84.93</td>
+                              <td>81.44</td>
+                              <td>82.35</td>
+                          </tr>
+                          <tr>
+                              <td>AdaBelief</td>
+                              <td>62.98</td>
+                              <td>75.09</td>
+                              <td class="chhg">80.53</td>
+                              <td class="chhg">85.47</td>
+                              <td>75.78</td>
+                              <td>78.48</td>
+                              <td class="clow">70.66</td>
+                              <td>73.30</td>
+                              <td>80.98</td>
+                              <td>83.31</td>
+                              <td>84.80</td>
+                              <td>78.55</td>
+                              <td class="chig">81.00</td>
+                              <td>85.03</td>
+                              <td class="chig">83.21</td>
+                              <td>83.56</td>
+                          </tr>
+                          <tr>
+                              <td>AdaBound</td>
+                              <td>66.59</td>
+                              <td class="chig">77.00</td>
+                              <td>78.11</td>
+                              <td>84.45</td>
                               <td>78.76</td>
-                              <td>84.87</td>
-                              <td>77.16</td>
-                              <td class="chig">79.41</td>
-                              <td class="cllw">63.39</td>
-                              <td>72.64</td>
-                              <td class="clow">78.95</td>
-                              <td class="clow">60.09</td>
-                              <td class="clow">75.06</td>
-                              <td>77.40</td>
-                              <td>77.70</td>
-                              <td>83.46</td>
-                              <td>83.02</td>
-                              <td class="clow">81.21</td>
+                              <td class="chhg">79.88</td>
+                              <td class="clow">68.59</td>
+                              <td class="clow">70.31</td>
+                              <td>80.67</td>
+                              <td class="cllw">49.18</td>
+                              <td class="clow">78.48</td>
+                              <td class="clow">75.03</td>
+                              <td>77.62</td>
+                              <td class="clow">82.73</td>
+                              <td>83.08</td>
+                              <td>82.38</td>
                           </tr>
                           <tr>
-                            <td>SGD-M</td>
-                            <td class="chig">66.78</td>
-                            <td class="chig">77.08</td>
-                            <td>78.76</td>
-                            <td>84.87</td>
-                            <td>77.16</td>
-                            <td class="chig">79.41</td>
-                            <td class="cllw">63.39</td>
-                            <td>72.64</td>
-                            <td class="clow">78.95</td>
-                            <td class="clow">60.09</td>
-                            <td class="clow">75.06</td>
-                            <td>77.40</td>
-                            <td>77.70</td>
-                            <td>83.46</td>
-                            <td>83.02</td>
-                            <td class="clow">81.21</td>
+                              <td>AdaFactor</td>
+                              <td>63.91</td>
+                              <td>74.49</td>
+                              <td>75.41</td>
+                              <td>84.42</td>
+                              <td>75.38</td>
+                              <td>77.83</td>
+                              <td>74.02</td>
+                              <td class="clow">71.16</td>
+                              <td>80.36</td>
+                              <td>82.82</td>
+                              <td>85.17</td>
+                              <td>78.78</td>
+                              <td>78.81</td>
+                              <td>84.90</td>
+                              <td>81.94</td>
+                              <td>82.36</td>
+                          </tr>
+                          <tr>
+                              <td>LARS</td>
+                              <td>64.35</td>
+                              <td>75.71</td>
+                              <td>78.25</td>
+                              <td>84.45</td>
+                              <td>76.23</td>
+                              <td class="cllw">72.43</td>
+                              <td>71.36</td>
+                              <td>72.64</td>
+                              <td>81.29</td>
+                              <td class="clow">61.40</td>
+                              <td class="cllw">75.93</td>
+                              <td>77.66</td>
+                              <td>78.78</td>
+                              <td>82.98</td>
+                              <td class="cllw">81.00</td>
+                              <td>82.05</td>
+                          </tr>
+                          <tr>
+                              <td>NovoGrad</td>
+                              <td>64.24</td>
+                              <td>76.09</td>
+                              <td class="chig">79.36</td>
+                              <td class="chig">85.23</td>
+                              <td class="clow">74.83</td>
+                              <td class="clow">74.23</td>
+                              <td>73.13</td>
+                              <td class="cllw">67.03</td>
+                              <td>81.82</td>
+                              <td class="clow">79.99</td>
+                              <td class="clow">82.86</td>
+                              <td>77.16</td>
+                              <td>80.42</td>
+                              <td>83.51</td>
+                              <td>81.28</td>
+                              <td>82.98</td>
+                          </tr>
+                          <tr>
+                              <td>Sophia</td>
+                              <td>64.30</td>
+                              <td>74.18</td>
+                              <td>75.19</td>
+                              <td class="clow">82.54</td>
+                              <td>76.60</td>
+                              <td>78.95</td>
+                              <td>71.47</td>
+                              <td>72.74</td>
+                              <td>80.61</td>
+                              <td>83.76</td>
+                              <td>85.39</td>
+                              <td>77.67</td>
+                              <td>78.90</td>
+                              <td>84.58</td>
+                              <td>81.67</td>
+                              <td>82.96</td>
+                          </tr>
+                          <tr>
+                              <td>AdaGrad</td>
+                              <td class="cllw">45.79</td>
+                              <td class="cllw">71.29</td>
+                              <td class="cllw">73.30</td>
+                              <td class="clow">81.81</td>
+                              <td class="cllw">33.87</td>
+                              <td>77.93</td>
+                              <td class="clow">67.24</td>
+                              <td class="clow">67.50</td>
+                              <td class="cllw">75.83</td>
+                              <td>83.03</td>
+                              <td>83.03</td>
+                              <td class="cllw">32.28</td>
+                              <td class="cllw">44.40</td>
+                              <td class="cllw">79.67</td>
+                              <td class="clow">78.71</td>
+                              <td class="cllw">38.09</td>
+                          </tr>
+                          <tr>
+                              <td>AdaDelta</td>
+                              <td>66.72</td>
+                              <td>74.14</td>
+                              <td class="clow">75.07</td>
+                              <td>83.58</td>
+                              <td>75.32</td>
+                              <td>77.88</td>
+                              <td class="clow">65.44</td>
+                              <td class="clow">71.32</td>
+                              <td>80.25</td>
+                              <td class="clow">74.25</td>
+                              <td class="clow">81.06</td>
+                              <td class="clow">75.91</td>
+                              <td class="clow">76.40</td>
+                              <td>84.05</td>
+                              <td>82.62</td>
+                              <td>82.08</td>
+                          </tr>
+                          <tr>
+                              <td>RMSProp</td>
+                              <td class="clow">59.33</td>
+                              <td class="clow">73.30</td>
+                              <td class="clow">74.25</td>
+                              <td class="cllw">79.38</td>
+                              <td class="clow">73.94</td>
+                              <td class="clow">76.83</td>
+                              <td>70.71</td>
+                              <td class="clow">71.63</td>
+                              <td class="clow">77.52</td>
+                              <td>82.29</td>
+                              <td>85.17</td>
+                              <td>77.40</td>
+                              <td class="clow">77.14</td>
+                              <td>84.01</td>
+                              <td class="clow">79.72</td>
+                              <td>81.83</td>
+                          </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+    </section>
+    
+    <section class="section">
+      <div class="container">
+          <div class="columns is-centered">
+              <div class="column is-full has-text-centered content">
+                  <h2 class="title is-3">Transfer Learning to Object Detection and 2D Pose Estimation</h2>
+                  <div class="content">
+                      <p class="mt-3">Transfer learning to object detection (Det.) with RetinaNet and 2D pose estimation (Pose.) with TopDown on COCO, evaluated by mAP (%) and AP$^{50}$ (%). We employ pre-trained VGG, ResNet-50 (R-50), Swin-T, and ConvNeXt-T (CX-T) with different pre-training settings, where 100-epoch pre-train by SGD, LARS, or RSB A3 (LAMB), 300-epoch pre-train by AdamW or RSB A2 (LAMB), and 600-epoch pre-train with RSB A1 (LAMB).</p>
+                      <table>
+                          <thead>
+                              <tr>
+                                  <th>Pre-training</th>
+                                  <th colspan="3">2D Pose Estimation</th>
+                                  <th colspan="8">Object Detection</th>
+                              </tr>
+                              <tr>
+                                  <th></th>
+                                  <th>VGG (SGD)</th>
+                                  <th>R-50 (SGD)</th>
+                                  <th>Swin-T (AdamW)</th>
+                                  <th>VGG (SGD)</th>
+                                  <th>R-50 (SGD)</th>
+                                  <th>R-50 (A3)</th>
+                                  <th>R-50 (A3)</th>
+                                  <th>R-50 (A2)</th>
+                                  <th>R-50 (A1)</th>
+                                  <th>Swin-T (AdamW)</th>
+                                  <th>CX-T (AdamW)</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td>SGD-M</td>
+                                  <td class="clow">47.5</td>
+                                  <td class="clow">45.6</td>
+                                  <td class="clow">38.4</td>
+                                  <td class="clow">38.4</td>
+                                  <td>36.6</td>
+                                  <td class="clow">27.5</td>
+                                  <td class="clow">28.7</td>
+                                  <td class="cllw">23.7</td>
+                                  <td class="clow">34.6</td>
+                                  <td class="clow">37.2</td>
+                                  <td class="clow">38.5</td>
+                              </tr>
+                              <tr>
+                                  <td>SGDP</td>
+                                  <td class="clow">47.3</td>
+                                  <td class="cllw">41.2</td>
+                                  <td class="clow">38.9</td>
+                                  <td class="clow">38.9</td>
+                                  <td>36.6</td>
+                                  <td class="cllw">17.6</td>
+                                  <td class="cllw">18.5</td>
+                                  <td class="clow">26.8</td>
+                                  <td class="cllw">26.7</td>
+                                  <td class="clow">37.2</td>
+                                  <td class="cllw">22.5</td>
+                              </tr>
+                              <tr>
+                                  <td>LION</td>
+                                  <td>69.5</td>
+                                  <td>71.5</td>
+                                  <td>71.3</td>
+                                  <td>71.3</td>
+                                  <td class="clow">32.1</td>
+                                  <td>35.8</td>
+                                  <td>35.4</td>
+                                  <td>37.6</td>
+                                  <td>34.6</td>
+                                  <td class="chig">41.9</td>
+                                  <td></td>
+                              </tr>
+                              <tr>
+                                  <td>Adam</td>
+                                  <td class="chig">69.8</td>
+                                  <td>71.6</td>
+                                  <td>72.7</td>
+                                  <td>72.7</td>
+                                  <td>36.2</td>
+                                  <td>36.2</td>
+                                  <td>35.8</td>
+                                  <td>38.3</td>
+                                  <td>38.4</td>
+                                  <td class="chig">41.9</td>
+                                  <td>43.1</td>
+                              </tr>
+                              <tr>
+                                  <td>Adamax</td>
+                                  <td>69.0</td>
+                                  <td>71.2</td>
+                                  <td>72.4</td>
+                                  <td>72.4</td>
+                                  <td class="chig">36.8</td>
+                                  <td>36.8</td>
+                                  <td>36.4</td>
+                                  <td>38.3</td>
+                                  <td>38.4</td>
+                                  <td>41.5</td>
+                                  <td>42.0</td>
+                              </tr>
+                              <tr>
+                                  <td>AdamP</td>
+                                  <td>69.7</td>
+                                  <td>71.5</td>
+                                  <td class="chhg">72.8</td>
+                                  <td class="chhg">72.8</td>
+                                  <td>36.5</td>
+                                  <td class="chig">37.2</td>
+                                  <td class="chig">36.5</td>
+                                  <td class="chig">38.5</td>
+                                  <td>38.9</td>
+                                  <td>41.7</td>
+                                  <td class="chig">43.3</td>
+                              </tr>
+                              <tr>
+                                  <td>AdamW</td>
+                                  <td class="chig">70.0</td>
+                                  <td class="chig">72.0</td>
+                                  <td class="chhg">72.8</td>
+                                  <td class="chhg">72.8</td>
+                                  <td class="chig">37.1</td>
+                                  <td class="chig">37.1</td>
+                                  <td class="chig">36.7</td>
+                                  <td>38.4</td>
+                                  <td class="chhg">39.5</td>
+                                  <td>41.8</td>
+                                  <td class="chhg">43.4</td>
+                              </tr>
+                              <tr>
+                                  <td>Adan</td>
+                                  <td>69.7</td>
+                                  <td class="chhg">72.1</td>
+                                  <td class="chhg">72.8</td>
+                                  <td class="chhg">72.8</td>
+                                  <td class="chhg">37.7</td>
+                                  <td>37.0</td>
+                                  <td>36.0</td>
+                                  <td class="chhg">38.6</td>
+                                  <td class="chig">39.0</td>
+                                  <td class="chhg">42.0</td>
+                                  <td>43.2</td>
+                              </tr>
+                              <tr>
+                                  <td>LAMB</td>
+                                  <td>68.5</td>
+                                  <td>71.5</td>
+                                  <td>71.7</td>
+                                  <td>71.7</td>
+                                  <td class="chig">36.7</td>
+                                  <td class="chhg">37.5</td>
+                                  <td class="chhg">37.7</td>
+                                  <td class="chhg">38.6</td>
+                                  <td class="chig">38.9</td>
+                                  <td>41.8</td>
+                                  <td>42.6</td>
+                              </tr>
+                              <tr>
+                                  <td>NAdam</td>
+                                  <td>69.7</td>
+                                  <td class="chig">71.8</td>
+                                  <td>71.9</td>
+                                  <td>71.9</td>
+                                  <td>36.0</td>
+                                  <td>36.6</td>
+                                  <td>36.1</td>
+                                  <td>38.2</td>
+                                  <td>38.4</td>
+                                  <td class="chig">41.9</td>
+                                  <td class="chhg">43.4</td>
+                              </tr>
+                              <tr>
+                                  <td>RAdam</td>
+                                  <td class="chig">69.8</td>
+                                  <td class="chig">71.8</td>
+                                  <td>72.6</td>
+                                  <td>72.6</td>
+                                  <td>36.6</td>
+                                  <td>36.5</td>
+                                  <td>36.0</td>
+                                  <td>38.2</td>
+                                  <td>38.4</td>
+                                  <td>41.6</td>
+                                  <td class="chig">43.3</td>
+                              </tr>
+                              <tr>
+                                  <td>AdaBelief</td>
+                                  <td>69.6</td>
+                                  <td>67.0</td>
+                                  <td>61.8</td>
+                                  <td>61.8</td>
+                                  <td>36.2</td>
+                                  <td class="clow">34.4</td>
+                                  <td class="clow">33.1</td>
+                                  <td>36.4</td>
+                                  <td>38.2</td>
+                                  <td class="clow">40.0</td>
+                                  <td>41.4</td>
+                              </tr>
+                              <tr>
+                                  <td>AdaBound</td>
+                                  <td class="cllw">34.0</td>
+                                  <td class="clow">44.9</td>
+                                  <td class="cllw">28.4</td>
+                                  <td class="cllw">28.4</td>
+                                  <td>35.9</td>
+                                  <td class="clow">34.2</td>
+                                  <td class="clow">31.9</td>
+                                  <td>37.0</td>
+                                  <td class="clow">35.0</td>
+                                  <td class="clow">38.8</td>
+                                  <td>41.2</td>
+                              </tr>
+                              <tr>
+                                  <td>AdaFactor</td>
+                                  <td class="chhg">72.8</td>
+                                  <td>71.7</td>
+                                  <td class="chhg">72.8</td>
+                                  <td class="chhg">72.8</td>
+                                  <td>35.6</td>
+                                  <td>37.0</td>
+                                  <td>36.4</td>
+                                  <td class="chig">38.5</td>
+                                  <td>37.8</td>
+                                  <td>40.5</td>
+                                  <td>43.1</td>
+                              </tr>
+                              <tr>
+                                  <td>LARS</td>
+                                  <td>54.4</td>
+                                  <td>63.4</td>
+                                  <td class="clow">47.6</td>
+                                  <td class="clow">47.6</td>
+                                  <td>35.8</td>
+                                  <td class="clow">28.9</td>
+                                  <td class="clow">28.8</td>
+                                  <td class="clow">34.7</td>
+                                  <td>36.9</td>
+                                  <td class="clow">34.6</td>
+                                  <td>40.5</td>
+                              </tr>
+                              <tr>
+                                  <td>NovoGrad</td>
+                                  <td>64.2</td>
+                                  <td>70.7</td>
+                                  <td>69.8</td>
+                                  <td>69.8</td>
+                                  <td>35.6</td>
+                                  <td class="clow">27.2</td>
+                                  <td class="clow">26.3</td>
+                                  <td>35.2</td>
+                                  <td class="clow">28.6</td>
+                                  <td>40.4</td>
+                                  <td class="clow">39.0</td>
+                              </tr>
+                              <tr>
+                                  <td>Sophia</td>
+                                  <td>69.7</td>
+                                  <td>71.6</td>
+                                  <td>72.3</td>
+                                  <td>72.3</td>
+                                  <td>36.4</td>
+                                  <td>35.8</td>
+                                  <td>35.3</td>
+                                  <td>38.0</td>
+                                  <td>38.7</td>
+                                  <td>40.4</td>
+                                  <td>42.5</td>
+                              </tr>
+                              <tr>
+                                  <td>AdaGrad</td>
+                                  <td>66.0</td>
+                                  <td>61.2</td>
+                                  <td class="clow">48.4</td>
+                                  <td class="clow">48.4</td>
+                                  <td class="cllw">26.4</td>
+                                  <td class="clow">21.9</td>
+                                  <td class="clow">28.3</td>
+                                  <td class="clow">32.7</td>
+                                  <td class="clow">27.1</td>
+                                  <td class="cllw">32.9</td>
+                                  <td></td>
+                              </tr>
+                              <tr>
+                                  <td>AdaDelta</td>
+                                  <td class="clow">44.3</td>
+                                  <td class="clow">49.3</td>
+                                  <td>52.0</td>
+                                  <td>52.0</td>
+                                  <td class="clow">34.9</td>
+                                  <td class="clow">32.7</td>
+                                  <td class="clow">32.7</td>
+                                  <td>35.9</td>
+                                  <td class="clow">33.9</td>
+                                  <td>40.0</td>
+                                  <td></td>
+                              </tr>
+                              <tr>
+                                  <td>RMSProp</td>
+                                  <td>68.8</td>
+                                  <td>71.6</td>
+                                  <td>72.5</td>
+                                  <td>72.5</td>
+                                  <td>35.3</td>
+                                  <td>36.2</td>
+                                  <td>35.6</td>
+                                  <td>37.8</td>
+                                  <td>38.3</td>
+                                  <td>41.5</td>
+                                  <td>43.1</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </section>
+    
+    <section class="section">
+      <div class="container">
+          <div class="columns is-centered">
+              <div class="column is-full has-text-centered content">
+                  <h2 class="title is-3">ImageNet-1K Benchmark</h2>
+                  <div class="content">
+                      <p class="mt-3">Top-1 accuracy (%) of DeiT-S and ResNet-50 training 300 epochs by popular optimizers using DeiT and RSB A2 training recipes on ImageNet-1K.</p>
+                      <table>
+                          <thead>
+                              <tr>
+                                  <th>Backbone</th>
+                                  <th>DeiT-S (DeiT)</th>
+                                  <th>R-50 (A2)</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td>SGD-M</td>
+                                  <td class="clow">75.35</td>
+                                  <td>78.82</td>
+                              </tr>
+                              <tr>
+                                  <td>SGDP</td>
+                                  <td class="clow">76.34</td>
+                                  <td>78.02</td>
+                              </tr>
+                              <tr>
+                                  <td>LION</td>
+                                  <td>78.78</td>
+                                  <td>78.92</td>
+                              </tr>
+                              <tr>
+                                  <td>Adam</td>
+                                  <td>78.44</td>
+                                  <td>78.16</td>
+                              </tr>
+                              <tr>
+                                  <td>Adamax</td>
+                                  <td>77.71</td>
+                                  <td>78.05</td>
+                              </tr>
+                              <tr>
+                                  <td>AdamP</td>
+                                  <td>79.26</td>
+                                  <td>79.28</td>
+                              </tr>
+                              <tr>
+                                  <td>AdamW</td>
+                                  <td class="chig">80.38</td>
+                                  <td class="chig">79.88</td>
+                              </tr>
+                              <tr>
+                                  <td>Adan</td>
+                                  <td class="chhg">80.81</td>
+                                  <td class="chhg">79.91</td>
+                              </tr>
+                              <tr>
+                                  <td>LAMB</td>
+                                  <td class="chig">80.23</td>
+                                  <td class="chig">79.84</td>
+                              </tr>
+                              <tr>
+                                  <td>NAdam</td>
+                                  <td>78.26</td>
+                                  <td>78.97</td>
+                              </tr>
+                              <tr>
+                                  <td>RAdam</td>
+                                  <td>78.54</td>
+                                  <td>78.75</td>
+                              </tr>
+                              <tr>
+                                  <td>AdaBelief</td>
+                                  <td class="clow">75.32</td>
+                                  <td>78.25</td>
+                              </tr>
+                              <tr>
+                                  <td>AdaBound</td>
+                                  <td class="clow">72.96</td>
+                                  <td class="clow">75.37</td>
+                              </tr>
+                              <tr>
+                                  <td>AdaFactor</td>
+                                  <td>79.98</td>
+                                  <td>79.36</td>
+                              </tr>
+                              <tr>
+                                  <td>LARS</td>
+                                  <td class="clow">73.18</td>
+                                  <td>79.66</td>
+                              </tr>
+                              <tr>
+                                  <td>NovoGrad</td>
+                                  <td class="clow">71.26</td>
+                                  <td class="clow">76.83</td>
+                              </tr>
+                              <tr>
+                                  <td>Sophia</td>
+                                  <td>79.65</td>
+                                  <td>79.13</td>
+                              </tr>
+                              <tr>
+                                  <td>AdaGrad</td>
+                                  <td class="cllw">54.96</td>
+                                  <td class="cllw">74.92</td>
+                              </tr>
+                              <tr>
+                                  <td>AdaDelta</td>
+                                  <td class="clow">74.14</td>
+                                  <td class="clow">77.40</td>
+                              </tr>
+                              <tr>
+                                  <td>RMSProp</td>
+                                  <td>78.03</td>
+                                  <td>78.04</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </section>
+    
+    <section class="section">
+      <!-- Results. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-six-fifths">
+          <h2 class="title is-3">Implementation Details (Vision Backbones)</h2>
+        </div>
+      </div>
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-full-width">
+                <div class="content has-text-justified">
+                  <table>
+                    <caption>Three categories of typical vision backbones proposed in the past decade.</caption>
+                    <thead>
+                        <tr>
+                            <th>Backbone</th>
+                            <th>Date</th>
+                            <th>Stage-wise design</th>
+                            <th>Block-wise design</th>
+                            <th>Operator (token mixer)</th>
+                            <th>Resolution</th>
+                            <th>Training setting</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>AlexNet</td>
+                            <td>NIPS'2012</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>Conv</td>
+                            <td>224</td>
+                            <td>PyTorch</td>
                         </tr>
                         <tr>
-                          <td>SGDP</td>
-                          <td>66.54</td>
-                          <td class="chhg">77.56</td>
-                          <td class="chig">79.25</td>
-                          <td class="chig">85.30</td>
-                          <td class="chig">77.50</td>
-                          <td class="chig">79.55</td>
-                          <td class="clow">63.53</td>
-                          <td class="clow">69.24</td>
-                          <td>80.56</td>
-                          <td class="clow">61.25</td>
-                          <td class="clow">80.86</td>
-                          <td>77.55</td>
-                          <td>77.53</td>
-                          <td>83.54</td>
-                          <td>82.88</td>
-                          <td>81.56</td>
-                      </tr>
-                      <tr>
-                          <td>LION</td>
-                          <td>62.11</td>
-                          <td>73.87</td>
-                          <td>75.28</td>
-                          <td>82.79</td>
-                          <td>75.35</td>
-                          <td>76.97</td>
-                          <td class="chig">74.57</td>
-                          <td class="chig">74.19</td>
-                          <td class="chig">81.84</td>
-                          <td>82.29</td>
-                          <td>85.03</td>
-                          <td>78.65</td>
-                          <td>79.66</td>
-                          <td>84.62</td>
-                          <td>82.41</td>
-                          <td class="clow">79.59</td>
-                      </tr>
-                      <tr>
-                          <td>Adam</td>
-                          <td class="clow">65.29</td>
-                          <td class="clow">73.41</td>
-                          <td class="clow">74.10</td>
-                          <td>83.34</td>
-                          <td class="clow">74.56</td>
-                          <td class="clow">76.48</td>
-                          <td>71.04</td>
-                          <td>72.84</td>
-                          <td>80.71</td>
-                          <td>82.03</td>
-                          <td>84.92</td>
-                          <td>78.39</td>
-                          <td>79.18</td>
-                          <td>84.81</td>
-                          <td>81.54</td>
-                          <td>82.18</td>
-                      </tr>
-                      <tr>
-                          <td>Adamax</td>
-                          <td class="chig">67.30</td>
-                          <td>73.80</td>
-                          <td>75.21</td>
-                          <td>83.27</td>
-                          <td class="clow">74.60</td>
-                          <td>78.37</td>
-                          <td>73.31</td>
-                          <td>73.07</td>
-                          <td>81.28</td>
-                          <td>80.25</td>
-                          <td>84.51</td>
-                          <td>78.02</td>
-                          <td>79.55</td>
-                          <td>84.31</td>
-                          <td>81.42</td>
-                          <td>82.50</td>
-                      </tr>
-                      <tr>
-                          <td>AdamP</td>
-                          <td>60.27</td>
-                          <td>75.56</td>
-                          <td>78.17</td>
-                          <td>84.64</td>
-                          <td class="chhg">77.79</td>
-                          <td>78.65</td>
-                          <td>71.55</td>
-                          <td>73.66</td>
-                          <td>80.91</td>
-                          <td class="chig">84.47</td>
-                          <td class="chhg">86.45</td>
-                          <td>79.20</td>
-                          <td class="chig">81.70</td>
-                          <td>85.15</td>
-                          <td>82.12</td>
-                          <td>83.40</td>
-                      </tr>
-                      <tr>
-                          <td>AdamW</td>
-                          <td>62.71</td>
-                          <td>73.90</td>
-                          <td>75.56</td>
-                          <td>84.01</td>
-                          <td>76.88</td>
-                          <td>78.77</td>
-                          <td>72.15</td>
-                          <td>73.59</td>
-                          <td>81.30</td>
-                          <td>83.52</td>
-                          <td class="chig">86.19</td>
-                          <td class="chig">79.39</td>
-                          <td>80.55</td>
-                          <td class="chig">85.46</td>
-                          <td>82.24</td>
-                          <td class="chig">83.60</td>
-                      </tr>
-                      <tr>
-                          <td>Adan</td>
-                          <td>63.98</td>
-                          <td>74.90</td>
-                          <td>77.08</td>
-                          <td>84.96</td>
-                          <td class="chig">77.73</td>
-                          <td>78.43</td>
-                          <td class="chhg">76.33</td>
-                          <td class="chhg">79.94</td>
-                          <td class="chig">83.35</td>
-                          <td class="chhg">84.65</td>
-                          <td class="chhg">86.45</td>
-                          <td class="chhg">80.59</td>
-                          <td class="chhg">83.23</td>
-                          <td class="chhg">85.58</td>
-                          <td class="chhg">83.51</td>
-                          <td class="chhg">84.89</td>
-                      </tr>
-                      <tr>
-                          <td>LAMB</td>
-                          <td class="chhg">66.90</td>
-                          <td>75.55</td>
-                          <td>77.19</td>
-                          <td>85.05</td>
-                          <td>77.49</td>
-                          <td>78.77</td>
-                          <td class="chig">75.39</td>
-                          <td class="chig">74.98</td>
-                          <td class="chhg">83.47</td>
-                          <td class="chig">84.13</td>
-                          <td>86.04</td>
-                          <td class="chig">80.21</td>
-                          <td>80.01</td>
-                          <td class="chig">85.40</td>
-                          <td class="chig">83.16</td>
-                          <td class="chig">83.74</td>
-                      </tr>
-                      <tr>
-                          <td>NAdam</td>
-                          <td>60.49</td>
-                          <td>73.96</td>
-                          <td class="clow">74.56</td>
-                          <td>82.78</td>
-                          <td>75.69</td>
-                          <td>77.06</td>
-                          <td>72.75</td>
-                          <td>73.77</td>
-                          <td>81.80</td>
-                          <td>82.26</td>
-                          <td>85.23</td>
-                          <td>78.37</td>
-                          <td>80.32</td>
-                          <td>84.81</td>
-                          <td>81.82</td>
-                          <td>82.83</td>
-                      </tr>
-                      <tr>
-                          <td>RAdam</td>
-                          <td>61.69</td>
-                          <td>74.64</td>
-                          <td>75.19</td>
-                          <td class="clow">81.85</td>
-                          <td>75.62</td>
-                          <td>77.08</td>
-                          <td>72.41</td>
-                          <td>72.11</td>
-                          <td>79.84</td>
-                          <td>82.18</td>
-                          <td>84.95</td>
-                          <td>78.46</td>
-                          <td>79.71</td>
-                          <td>84.93</td>
-                          <td>81.44</td>
-                          <td>82.35</td>
-                      </tr>
-                      <tr>
-                          <td>AdaBelief</td>
-                          <td>62.98</td>
-                          <td>75.09</td>
-                          <td class="chhg">80.53</td>
-                          <td class="chhg">85.47</td>
-                          <td>75.78</td>
-                          <td>78.48</td>
-                          <td class="clow">70.66</td>
-                          <td>73.30</td>
-                          <td>80.98</td>
-                          <td>83.31</td>
-                          <td>84.80</td>
-                          <td>78.55</td>
-                          <td class="chig">81.00</td>
-                          <td>85.03</td>
-                          <td class="chig">83.21</td>
-                          <td>83.56</td>
-                      </tr>
-                      <tr>
-                          <td>AdaBound</td>
-                          <td>66.59</td>
-                          <td class="chig">77.00</td>
-                          <td>78.11</td>
-                          <td>84.45</td>
-                          <td>78.76</td>
-                          <td class="chhg">79.88</td>
-                          <td class="clow">68.59</td>
-                          <td class="clow">70.31</td>
-                          <td>80.67</td>
-                          <td class="cllw">49.18</td>
-                          <td class="clow">78.48</td>
-                          <td class="clow">75.03</td>
-                          <td>77.62</td>
-                          <td class="clow">82.73</td>
-                          <td>83.08</td>
-                          <td>82.38</td>
-                      </tr>
-                      <tr>
-                          <td>AdaFactor</td>
-                          <td>63.91</td>
-                          <td>74.49</td>
-                          <td>75.41</td>
-                          <td>84.42</td>
-                          <td>75.38</td>
-                          <td>77.83</td>
-                          <td>74.02</td>
-                          <td class="clow">71.16</td>
-                          <td>80.36</td>
-                          <td>82.82</td>
-                          <td>85.17</td>
-                          <td>78.78</td>
-                          <td>78.81</td>
-                          <td>84.90</td>
-                          <td>81.94</td>
-                          <td>82.36</td>
-                      </tr>
-                      <tr>
-                          <td>LARS</td>
-                          <td>64.35</td>
-                          <td>75.71</td>
-                          <td>78.25</td>
-                          <td>84.45</td>
-                          <td>76.23</td>
-                          <td class="cllw">72.43</td>
-                          <td>71.36</td>
-                          <td>72.64</td>
-                          <td>81.29</td>
-                          <td class="clow">61.40</td>
-                          <td class="cllw">75.93</td>
-                          <td>77.66</td>
-                          <td>78.78</td>
-                          <td>82.98</td>
-                          <td class="cllw">81.00</td>
-                          <td>82.05</td>
-                      </tr>
-                      <tr>
-                          <td>NovoGrad</td>
-                          <td>64.24</td>
-                          <td>76.09</td>
-                          <td class="chig">79.36</td>
-                          <td class="chig">85.23</td>
-                          <td class="clow">74.83</td>
-                          <td class="clow">74.23</td>
-                          <td>73.13</td>
-                          <td class="cllw">67.03</td>
-                          <td>81.82</td>
-                          <td class="clow">79.99</td>
-                          <td class="clow">82.86</td>
-                          <td>77.16</td>
-                          <td>80.42</td>
-                          <td>83.51</td>
-                          <td>81.28</td>
-                          <td>82.98</td>
-                      </tr>
-                      <tr>
-                          <td>Sophia</td>
-                          <td>64.30</td>
-                          <td>74.18</td>
-                          <td>75.19</td>
-                          <td class="clow">82.54</td>
-                          <td>76.60</td>
-                          <td>78.95</td>
-                          <td>71.47</td>
-                          <td>72.74</td>
-                          <td>80.61</td>
-                          <td>83.76</td>
-                          <td>85.39</td>
-                          <td>77.67</td>
-                          <td>78.90</td>
-                          <td>84.58</td>
-                          <td>81.67</td>
-                          <td>82.96</td>
-                      </tr>
-                      <tr>
-                          <td>AdaGrad</td>
-                          <td class="cllw">45.79</td>
-                          <td class="cllw">71.29</td>
-                          <td class="cllw">73.30</td>
-                          <td class="clow">81.81</td>
-                          <td class="cllw">33.87</td>
-                          <td>77.93</td>
-                          <td class="clow">67.24</td>
-                          <td class="clow">67.50</td>
-                          <td class="cllw">75.83</td>
-                          <td>83.03</td>
-                          <td>83.03</td>
-                          <td class="cllw">32.28</td>
-                          <td class="cllw">44.40</td>
-                          <td class="cllw">79.67</td>
-                          <td class="clow">78.71</td>
-                          <td class="cllw">38.09</td>
-                      </tr>
-                      <tr>
-                          <td>AdaDelta</td>
-                          <td>66.72</td>
-                          <td>74.14</td>
-                          <td class="clow">75.07</td>
-                          <td>83.58</td>
-                          <td>75.32</td>
-                          <td>77.88</td>
-                          <td class="clow">65.44</td>
-                          <td class="clow">71.32</td>
-                          <td>80.25</td>
-                          <td class="clow">74.25</td>
-                          <td class="clow">81.06</td>
-                          <td class="clow">75.91</td>
-                          <td class="clow">76.40</td>
-                          <td>84.05</td>
-                          <td>82.62</td>
-                          <td>82.08</td>
-                      </tr>
-                      <tr>
-                          <td>RMSProp</td>
-                          <td class="clow">59.33</td>
-                          <td class="clow">73.30</td>
-                          <td class="clow">74.25</td>
-                          <td class="cllw">79.38</td>
-                          <td class="clow">73.94</td>
-                          <td class="clow">76.83</td>
-                          <td>70.71</td>
-                          <td class="clow">71.63</td>
-                          <td class="clow">77.52</td>
-                          <td>82.29</td>
-                          <td>85.17</td>
-                          <td>77.40</td>
-                          <td class="clow">77.14</td>
-                          <td>84.01</td>
-                          <td class="clow">79.72</td>
-                          <td>81.83</td>
-                      </tr>
-                      </tbody>
-                  </table>
-              </div>
-          </div>
-      </div>
-  </div>
-</div>
-</section>
-
-<section class="section">
-  <div class="container">
-      <div class="columns is-centered">
-          <div class="column is-full has-text-centered content">
-              <h2 class="title is-3">Transfer Learning to Object Detection and 2D Pose Estimation</h2>
-              <div class="content">
-                  <p class="mt-3">Transfer learning to object detection (Det.) with RetinaNet and 2D pose estimation (Pose.) with TopDown on COCO, evaluated by mAP (%) and AP$^{50}$ (%). We employ pre-trained VGG, ResNet-50 (R-50), Swin-T, and ConvNeXt-T (CX-T) with different pre-training settings, where 100-epoch pre-train by SGD, LARS, or RSB A3 (LAMB), 300-epoch pre-train by AdamW or RSB A2 (LAMB), and 600-epoch pre-train with RSB A1 (LAMB).</p>
-                  <table>
-                      <thead>
-                          <tr>
-                              <th>Pre-training</th>
-                              <th colspan="3">2D Pose Estimation</th>
-                              <th colspan="8">Object Detection</th>
-                          </tr>
-                          <tr>
-                              <th></th>
-                              <th>VGG (SGD)</th>
-                              <th>R-50 (SGD)</th>
-                              <th>Swin-T (AdamW)</th>
-                              <th>VGG (SGD)</th>
-                              <th>R-50 (SGD)</th>
-                              <th>R-50 (A3)</th>
-                              <th>R-50 (A3)</th>
-                              <th>R-50 (A2)</th>
-                              <th>R-50 (A1)</th>
-                              <th>Swin-T (AdamW)</th>
-                              <th>CX-T (AdamW)</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr>
-                              <td>SGD-M</td>
-                              <td class="clow">47.5</td>
-                              <td class="clow">45.6</td>
-                              <td class="clow">38.4</td>
-                              <td class="clow">38.4</td>
-                              <td>36.6</td>
-                              <td class="clow">27.5</td>
-                              <td class="clow">28.7</td>
-                              <td class="cllw">23.7</td>
-                              <td class="clow">34.6</td>
-                              <td class="clow">37.2</td>
-                              <td class="clow">38.5</td>
-                          </tr>
-                          <tr>
-                              <td>SGDP</td>
-                              <td class="clow">47.3</td>
-                              <td class="cllw">41.2</td>
-                              <td class="clow">38.9</td>
-                              <td class="clow">38.9</td>
-                              <td>36.6</td>
-                              <td class="cllw">17.6</td>
-                              <td class="cllw">18.5</td>
-                              <td class="clow">26.8</td>
-                              <td class="cllw">26.7</td>
-                              <td class="clow">37.2</td>
-                              <td class="cllw">22.5</td>
-                          </tr>
-                          <tr>
-                              <td>LION</td>
-                              <td>69.5</td>
-                              <td>71.5</td>
-                              <td>71.3</td>
-                              <td>71.3</td>
-                              <td class="clow">32.1</td>
-                              <td>35.8</td>
-                              <td>35.4</td>
-                              <td>37.6</td>
-                              <td>34.6</td>
-                              <td class="chig">41.9</td>
-                              <td></td>
-                          </tr>
-                          <tr>
-                              <td>Adam</td>
-                              <td class="chig">69.8</td>
-                              <td>71.6</td>
-                              <td>72.7</td>
-                              <td>72.7</td>
-                              <td>36.2</td>
-                              <td>36.2</td>
-                              <td>35.8</td>
-                              <td>38.3</td>
-                              <td>38.4</td>
-                              <td class="chig">41.9</td>
-                              <td>43.1</td>
-                          </tr>
-                          <tr>
-                              <td>Adamax</td>
-                              <td>69.0</td>
-                              <td>71.2</td>
-                              <td>72.4</td>
-                              <td>72.4</td>
-                              <td class="chig">36.8</td>
-                              <td>36.8</td>
-                              <td>36.4</td>
-                              <td>38.3</td>
-                              <td>38.4</td>
-                              <td>41.5</td>
-                              <td>42.0</td>
-                          </tr>
-                          <tr>
-                              <td>AdamP</td>
-                              <td>69.7</td>
-                              <td>71.5</td>
-                              <td class="chhg">72.8</td>
-                              <td class="chhg">72.8</td>
-                              <td>36.5</td>
-                              <td class="chig">37.2</td>
-                              <td class="chig">36.5</td>
-                              <td class="chig">38.5</td>
-                              <td>38.9</td>
-                              <td>41.7</td>
-                              <td class="chig">43.3</td>
-                          </tr>
-                          <tr>
-                              <td>AdamW</td>
-                              <td class="chig">70.0</td>
-                              <td class="chig">72.0</td>
-                              <td class="chhg">72.8</td>
-                              <td class="chhg">72.8</td>
-                              <td class="chig">37.1</td>
-                              <td class="chig">37.1</td>
-                              <td class="chig">36.7</td>
-                              <td>38.4</td>
-                              <td class="chhg">39.5</td>
-                              <td>41.8</td>
-                              <td class="chhg">43.4</td>
-                          </tr>
-                          <tr>
-                              <td>Adan</td>
-                              <td>69.7</td>
-                              <td class="chhg">72.1</td>
-                              <td class="chhg">72.8</td>
-                              <td class="chhg">72.8</td>
-                              <td class="chhg">37.7</td>
-                              <td>37.0</td>
-                              <td>36.0</td>
-                              <td class="chhg">38.6</td>
-                              <td class="chig">39.0</td>
-                              <td class="chhg">42.0</td>
-                              <td>43.2</td>
-                          </tr>
-                          <tr>
-                              <td>LAMB</td>
-                              <td>68.5</td>
-                              <td>71.5</td>
-                              <td>71.7</td>
-                              <td>71.7</td>
-                              <td class="chig">36.7</td>
-                              <td class="chhg">37.5</td>
-                              <td class="chhg">37.7</td>
-                              <td class="chhg">38.6</td>
-                              <td class="chig">38.9</td>
-                              <td>41.8</td>
-                              <td>42.6</td>
-                          </tr>
-                          <tr>
-                              <td>NAdam</td>
-                              <td>69.7</td>
-                              <td class="chig">71.8</td>
-                              <td>71.9</td>
-                              <td>71.9</td>
-                              <td>36.0</td>
-                              <td>36.6</td>
-                              <td>36.1</td>
-                              <td>38.2</td>
-                              <td>38.4</td>
-                              <td class="chig">41.9</td>
-                              <td class="chhg">43.4</td>
-                          </tr>
-                          <tr>
-                              <td>RAdam</td>
-                              <td class="chig">69.8</td>
-                              <td class="chig">71.8</td>
-                              <td>72.6</td>
-                              <td>72.6</td>
-                              <td>36.6</td>
-                              <td>36.5</td>
-                              <td>36.0</td>
-                              <td>38.2</td>
-                              <td>38.4</td>
-                              <td>41.6</td>
-                              <td class="chig">43.3</td>
-                          </tr>
-                          <tr>
-                              <td>AdaBelief</td>
-                              <td>69.6</td>
-                              <td>67.0</td>
-                              <td>61.8</td>
-                              <td>61.8</td>
-                              <td>36.2</td>
-                              <td class="clow">34.4</td>
-                              <td class="clow">33.1</td>
-                              <td>36.4</td>
-                              <td>38.2</td>
-                              <td class="clow">40.0</td>
-                              <td>41.4</td>
-                          </tr>
-                          <tr>
-                              <td>AdaBound</td>
-                              <td class="cllw">34.0</td>
-                              <td class="clow">44.9</td>
-                              <td class="cllw">28.4</td>
-                              <td class="cllw">28.4</td>
-                              <td>35.9</td>
-                              <td class="clow">34.2</td>
-                              <td class="clow">31.9</td>
-                              <td>37.0</td>
-                              <td class="clow">35.0</td>
-                              <td class="clow">38.8</td>
-                              <td>41.2</td>
-                          </tr>
-                          <tr>
-                              <td>AdaFactor</td>
-                              <td class="chhg">72.8</td>
-                              <td>71.7</td>
-                              <td class="chhg">72.8</td>
-                              <td class="chhg">72.8</td>
-                              <td>35.6</td>
-                              <td>37.0</td>
-                              <td>36.4</td>
-                              <td class="chig">38.5</td>
-                              <td>37.8</td>
-                              <td>40.5</td>
-                              <td>43.1</td>
-                          </tr>
-                          <tr>
-                              <td>LARS</td>
-                              <td>54.4</td>
-                              <td>63.4</td>
-                              <td class="clow">47.6</td>
-                              <td class="clow">47.6</td>
-                              <td>35.8</td>
-                              <td class="clow">28.9</td>
-                              <td class="clow">28.8</td>
-                              <td class="clow">34.7</td>
-                              <td>36.9</td>
-                              <td class="clow">34.6</td>
-                              <td>40.5</td>
-                          </tr>
-                          <tr>
-                              <td>NovoGrad</td>
-                              <td>64.2</td>
-                              <td>70.7</td>
-                              <td>69.8</td>
-                              <td>69.8</td>
-                              <td>35.6</td>
-                              <td class="clow">27.2</td>
-                              <td class="clow">26.3</td>
-                              <td>35.2</td>
-                              <td class="clow">28.6</td>
-                              <td>40.4</td>
-                              <td class="clow">39.0</td>
-                          </tr>
-                          <tr>
-                              <td>Sophia</td>
-                              <td>69.7</td>
-                              <td>71.6</td>
-                              <td>72.3</td>
-                              <td>72.3</td>
-                              <td>36.4</td>
-                              <td>35.8</td>
-                              <td>35.3</td>
-                              <td>38.0</td>
-                              <td>38.7</td>
-                              <td>40.4</td>
-                              <td>42.5</td>
-                          </tr>
-                          <tr>
-                              <td>AdaGrad</td>
-                              <td>66.0</td>
-                              <td>61.2</td>
-                              <td class="clow">48.4</td>
-                              <td class="clow">48.4</td>
-                              <td class="cllw">26.4</td>
-                              <td class="clow">21.9</td>
-                              <td class="clow">28.3</td>
-                              <td class="clow">32.7</td>
-                              <td class="clow">27.1</td>
-                              <td class="cllw">32.9</td>
-                              <td></td>
-                          </tr>
-                          <tr>
-                              <td>AdaDelta</td>
-                              <td class="clow">44.3</td>
-                              <td class="clow">49.3</td>
-                              <td>52.0</td>
-                              <td>52.0</td>
-                              <td class="clow">34.9</td>
-                              <td class="clow">32.7</td>
-                              <td class="clow">32.7</td>
-                              <td>35.9</td>
-                              <td class="clow">33.9</td>
-                              <td>40.0</td>
-                              <td></td>
-                          </tr>
-                          <tr>
-                              <td>RMSProp</td>
-                              <td>68.8</td>
-                              <td>71.6</td>
-                              <td>72.5</td>
-                              <td>72.5</td>
-                              <td>35.3</td>
-                              <td>36.2</td>
-                              <td>35.6</td>
-                              <td>37.8</td>
-                              <td>38.3</td>
-                              <td>41.5</td>
-                              <td>43.1</td>
-                          </tr>
-                      </tbody>
-                  </table>
-              </div>
-          </div>
-      </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-      <div class="columns is-centered">
-          <div class="column is-full has-text-centered content">
-              <h2 class="title is-3">ImageNet-1K Benchmark</h2>
-              <div class="content">
-                  <p class="mt-3">Top-1 accuracy (%) of DeiT-S and ResNet-50 training 300 epochs by popular optimizers using DeiT and RSB A2 training recipes on ImageNet-1K.</p>
-                  <table>
-                      <thead>
-                          <tr>
-                              <th>Backbone</th>
-                              <th>DeiT-S (DeiT)</th>
-                              <th>R-50 (A2)</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr>
-                              <td>SGD-M</td>
-                              <td class="clow">75.35</td>
-                              <td>78.82</td>
-                          </tr>
-                          <tr>
-                              <td>SGDP</td>
-                              <td class="clow">76.34</td>
-                              <td>78.02</td>
-                          </tr>
-                          <tr>
-                              <td>LION</td>
-                              <td>78.78</td>
-                              <td>78.92</td>
-                          </tr>
-                          <tr>
-                              <td>Adam</td>
-                              <td>78.44</td>
-                              <td>78.16</td>
-                          </tr>
-                          <tr>
-                              <td>Adamax</td>
-                              <td>77.71</td>
-                              <td>78.05</td>
-                          </tr>
-                          <tr>
-                              <td>AdamP</td>
-                              <td>79.26</td>
-                              <td>79.28</td>
-                          </tr>
-                          <tr>
-                              <td>AdamW</td>
-                              <td class="chig">80.38</td>
-                              <td class="chig">79.88</td>
-                          </tr>
-                          <tr>
-                              <td>Adan</td>
-                              <td class="chhg">80.81</td>
-                              <td class="chhg">79.91</td>
-                          </tr>
-                          <tr>
-                              <td>LAMB</td>
-                              <td class="chig">80.23</td>
-                              <td class="chig">79.84</td>
-                          </tr>
-                          <tr>
-                              <td>NAdam</td>
-                              <td>78.26</td>
-                              <td>78.97</td>
-                          </tr>
-                          <tr>
-                              <td>RAdam</td>
-                              <td>78.54</td>
-                              <td>78.75</td>
-                          </tr>
-                          <tr>
-                              <td>AdaBelief</td>
-                              <td class="clow">75.32</td>
-                              <td>78.25</td>
-                          </tr>
-                          <tr>
-                              <td>AdaBound</td>
-                              <td class="clow">72.96</td>
-                              <td class="clow">75.37</td>
-                          </tr>
-                          <tr>
-                              <td>AdaFactor</td>
-                              <td>79.98</td>
-                              <td>79.36</td>
-                          </tr>
-                          <tr>
-                              <td>LARS</td>
-                              <td class="clow">73.18</td>
-                              <td>79.66</td>
-                          </tr>
-                          <tr>
-                              <td>NovoGrad</td>
-                              <td class="clow">71.26</td>
-                              <td class="clow">76.83</td>
-                          </tr>
-                          <tr>
-                              <td>Sophia</td>
-                              <td>79.65</td>
-                              <td>79.13</td>
-                          </tr>
-                          <tr>
-                              <td>AdaGrad</td>
-                              <td class="cllw">54.96</td>
-                              <td class="cllw">74.92</td>
-                          </tr>
-                          <tr>
-                              <td>AdaDelta</td>
-                              <td class="clow">74.14</td>
-                              <td class="clow">77.40</td>
-                          </tr>
-                          <tr>
-                              <td>RMSProp</td>
-                              <td>78.03</td>
-                              <td>78.04</td>
-                          </tr>
-                      </tbody>
-                  </table>
-              </div>
-          </div>
-      </div>
-  </div>
-</section>
-
-<section class="section">
-  <!-- Results. -->
-  <div class="columns is-centered has-text-centered">
-    <div class="column is-six-fifths">
-      <h2 class="title is-3">Implementation Details (Vision Backbones)</h2>
-    </div>
-  </div>
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-        <div class="column is-full-width">
-            <div class="content has-text-justified">
-              <table>
-                <caption>Three categories of typical vision backbones proposed in the past decade.</caption>
-                <thead>
-                    <tr>
-                        <th>Backbone</th>
-                        <th>Date</th>
-                        <th>Stage-wise design</th>
-                        <th>Block-wise design</th>
-                        <th>Operator (token mixer)</th>
-                        <th>Resolution</th>
-                        <th>Training setting</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>AlexNet</td>
-                        <td>NIPS'2012</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>Conv</td>
-                        <td>224</td>
-                        <td>PyTorch</td>
-                    </tr>
-                    <tr>
-                        <td>VGG-13</td>
-                        <td>ICLR'2014</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>Conv</td>
-                        <td>224</td>
-                        <td>PyTorch</td>
-                    </tr>
-                    <tr>
-                        <td>ResNet-50/101</td>
-                        <td>CVPR'2016</td>
-                        <td>Hierarchical</td>
-                        <td>Bottleneck</td>
-                        <td>Conv</td>
-                        <td>32</td>
-                        <td>PyTorch</td>
-                    </tr>
-                    <tr>
-                        <td>ResNet-101</td>
-                        <td>CVPR'2016</td>
-                        <td>Hierarchical</td>
-                        <td>Bottleneck</td>
-                        <td>Conv</td>
-                        <td>32</td>
-                        <td>DeiT</td>
-                    </tr>
-                    <tr>
-                        <td>MobileNet.V2</td>
-                        <td>CVPR'2018</td>
-                        <td>Hierarchical</td>
-                        <td>Inv-bottleneck</td>
-                        <td>Conv</td>
-                        <td>224</td>
-                        <td>PyTorch</td>
-                    </tr>
-                    <tr>
-                        <td>EfficientNet-B0</td>
-                        <td>ICML'2019</td>
-                        <td>Hierarchical</td>
-                        <td>Inv-bottleneck</td>
-                        <td>Conv &amp; SE</td>
-                        <td>224</td>
-                        <td>RSB A2</td>
-                    </tr>
-                    <tr>
-                        <td>DeiT-S (ViT)</td>
-                        <td>ICML'2021</td>
-                        <td>Patchfy &amp; Isotropic</td>
-                        <td>Metaformer</td>
-                        <td>Attention</td>
-                        <td>224</td>
-                        <td>DeiT</td>
-                    </tr>
-                    <tr>
-                        <td>MLP-Mixer-S</td>
-                        <td>NIPS'2021</td>
-                        <td>Patchfy &amp; Isotropic</td>
-                        <td>Metaformer</td>
-                        <td>MLP</td>
-                        <td>224</td>
-                        <td>DeiT</td>
-                    </tr>
-                    <tr>
-                        <td>Swin-T</td>
-                        <td>ICCV'2021</td>
-                        <td>Patchfy &amp; Hierarchical</td>
-                        <td>Metaformer</td>
-                        <td>Attention</td>
-                        <td>224</td>
-                        <td>ConvNeXt</td>
-                    </tr>
-                    <tr>
-                        <td>ConvNeXt-T</td>
-                        <td>CVPR'2022</td>
-                        <td>Patchfy &amp; Hierarchical</td>
-                        <td>Metaformer</td>
-                        <td>Conv</td>
-                        <td>32</td>
-                        <td>ConvNeXt</td>
-                    </tr>
-                    <tr>
-                        <td>MogaNet-S</td>
-                        <td>ICLR'2024</td>
-                        <td>Patchfy &amp; Hierarchical</td>
-                        <td>Metaformer</td>
-                        <td>Conv &amp; Gating</td>
-                        <td>32</td>
-                        <td>ConvNeXt</td>
-                    </tr>
-                    <tr>
-                        <td>IdentityFormer-S12</td>
-                        <td>TPAMI'2024</td>
-                        <td>Patchfy &amp; Hierarchical</td>
-                        <td>Metaformer</td>
-                        <td>Identity</td>
-                        <td>224</td>
-                        <td>RSB A2</td>
-                    </tr>
-                    <tr>
-                        <td>PoolFormerV2-S12</td>
-                        <td>TPAMI'2024</td>
-                        <td>Patchfy &amp; Hierarchical</td>
-                        <td>Metaformer</td>
-                        <td>Pooling</td>
-                        <td>224</td>
-                        <td>RSB A2</td>
-                    </tr>
-                    <tr>
-                        <td>ConvFormer-S12</td>
-                        <td>TPAMI'2024</td>
-                        <td>Patchfy &amp; Hierarchical</td>
-                        <td>Metaformer</td>
-                        <td>Conv</td>
-                        <td>224</td>
-                        <td>RSB A2</td>
-                    </tr>
-                    <tr>
-                        <td>AttentionFormer-S12</td>
-                        <td>TPAMI'2024</td>
-                        <td>Patchfy &amp; Hierarchical</td>
-                        <td>Metaformer</td>
-                        <td>Attention</td>
-                        <td>224</td>
-                        <td>RSB A2</td>
-                    </tr>
-                </tbody>
-            </table>
+                            <td>VGG-13</td>
+                            <td>ICLR'2014</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>Conv</td>
+                            <td>224</td>
+                            <td>PyTorch</td>
+                        </tr>
+                        <tr>
+                            <td>ResNet-50/101</td>
+                            <td>CVPR'2016</td>
+                            <td>Hierarchical</td>
+                            <td>Bottleneck</td>
+                            <td>Conv</td>
+                            <td>32</td>
+                            <td>PyTorch</td>
+                        </tr>
+                        <tr>
+                            <td>ResNet-101</td>
+                            <td>CVPR'2016</td>
+                            <td>Hierarchical</td>
+                            <td>Bottleneck</td>
+                            <td>Conv</td>
+                            <td>32</td>
+                            <td>DeiT</td>
+                        </tr>
+                        <tr>
+                            <td>MobileNet.V2</td>
+                            <td>CVPR'2018</td>
+                            <td>Hierarchical</td>
+                            <td>Inv-bottleneck</td>
+                            <td>Conv</td>
+                            <td>224</td>
+                            <td>PyTorch</td>
+                        </tr>
+                        <tr>
+                            <td>EfficientNet-B0</td>
+                            <td>ICML'2019</td>
+                            <td>Hierarchical</td>
+                            <td>Inv-bottleneck</td>
+                            <td>Conv &amp; SE</td>
+                            <td>224</td>
+                            <td>RSB A2</td>
+                        </tr>
+                        <tr>
+                            <td>DeiT-S (ViT)</td>
+                            <td>ICML'2021</td>
+                            <td>Patchfy &amp; Isotropic</td>
+                            <td>Metaformer</td>
+                            <td>Attention</td>
+                            <td>224</td>
+                            <td>DeiT</td>
+                        </tr>
+                        <tr>
+                            <td>MLP-Mixer-S</td>
+                            <td>NIPS'2021</td>
+                            <td>Patchfy &amp; Isotropic</td>
+                            <td>Metaformer</td>
+                            <td>MLP</td>
+                            <td>224</td>
+                            <td>DeiT</td>
+                        </tr>
+                        <tr>
+                            <td>Swin-T</td>
+                            <td>ICCV'2021</td>
+                            <td>Patchfy &amp; Hierarchical</td>
+                            <td>Metaformer</td>
+                            <td>Attention</td>
+                            <td>224</td>
+                            <td>ConvNeXt</td>
+                        </tr>
+                        <tr>
+                            <td>ConvNeXt-T</td>
+                            <td>CVPR'2022</td>
+                            <td>Patchfy &amp; Hierarchical</td>
+                            <td>Metaformer</td>
+                            <td>Conv</td>
+                            <td>32</td>
+                            <td>ConvNeXt</td>
+                        </tr>
+                        <tr>
+                            <td>MogaNet-S</td>
+                            <td>ICLR'2024</td>
+                            <td>Patchfy &amp; Hierarchical</td>
+                            <td>Metaformer</td>
+                            <td>Conv &amp; Gating</td>
+                            <td>32</td>
+                            <td>ConvNeXt</td>
+                        </tr>
+                        <tr>
+                            <td>IdentityFormer-S12</td>
+                            <td>TPAMI'2024</td>
+                            <td>Patchfy &amp; Hierarchical</td>
+                            <td>Metaformer</td>
+                            <td>Identity</td>
+                            <td>224</td>
+                            <td>RSB A2</td>
+                        </tr>
+                        <tr>
+                            <td>PoolFormerV2-S12</td>
+                            <td>TPAMI'2024</td>
+                            <td>Patchfy &amp; Hierarchical</td>
+                            <td>Metaformer</td>
+                            <td>Pooling</td>
+                            <td>224</td>
+                            <td>RSB A2</td>
+                        </tr>
+                        <tr>
+                            <td>ConvFormer-S12</td>
+                            <td>TPAMI'2024</td>
+                            <td>Patchfy &amp; Hierarchical</td>
+                            <td>Metaformer</td>
+                            <td>Conv</td>
+                            <td>224</td>
+                            <td>RSB A2</td>
+                        </tr>
+                        <tr>
+                            <td>AttentionFormer-S12</td>
+                            <td>TPAMI'2024</td>
+                            <td>Patchfy &amp; Hierarchical</td>
+                            <td>Metaformer</td>
+                            <td>Attention</td>
+                            <td>224</td>
+                            <td>RSB A2</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
-</div>
-</section>
- 
-<section class="section">
-  <!-- Results. -->
-  <div class="columns is-centered has-text-centered">
-    <div class="column is-six-fifths">
-      <h2 class="title is-3">Implementation Details (Optimizer)</h2>
     </div>
-  </div>
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-        <div class="column is-full-width">
-            <div class="content has-text-justified">
-              <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-                <caption>Four categories of typical optimizers with their components. From top to bottom are (a) fixed learning rate with momentum gradient, (b) adaptive learning rate with momentum gradient, (c) estimated learning rate with momentum gradient, and (d) adaptive learning rate with current gradient.</caption>
-                <thead>
-                    <tr>
-                        <th>Optimizer</th>
-                        <th>Date</th>
-                        <th>Learning rate</th>
-                        <th>Gradient</th>
-                        <th>Weight decay</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>SGD-M</td>
-                        <td>TSMC'1971</td>
-                        <td>Fixed lr</td>
-                        <td>Momentum</td>
-                        <td>✓</td>
-                    </tr>
-                    <tr>
-                        <td>SGDP</td>
-                        <td>ICLR'2021</td>
-                        <td>Fixed lr</td>
-                        <td>Momentum</td>
-                        <td>Decoupled</td>
-                    </tr>
-                    <tr>
-                        <td>LION</td>
-                        <td>NIPS'2023</td>
-                        <td>Fixed lr</td>
-                        <td>Sign Momentum</td>
-                        <td>Decoupled</td>
-                    </tr>
-                    <tr>
-                        <td>Adam</td>
-                        <td>ICLR'2015</td>
-                        <td>Estimated second moment</td>
-                        <td>Momentum</td>
-                        <td>✓</td>
-                    </tr>
-                    <tr>
-                        <td>Adamax</td>
-                        <td>ICLR'2015</td>
-                        <td>Estimated second moment</td>
-                        <td>Momentum</td>
-                        <td>✓</td>
-                    </tr>
-                    <tr>
-                        <td>AdamW</td>
-                        <td>ICLR'2019</td>
-                        <td>Estimated second moment</td>
-                        <td>Momentum</td>
-                        <td>Decoupled</td>
-                    </tr>
-                    <tr>
-                        <td>AdamP</td>
-                        <td>ICLR'2021</td>
-                        <td>Estimated second moment</td>
-                        <td>Momentum</td>
-                        <td>Decoupled</td>
-                    </tr>
-                    <tr>
-                        <td>LAMB</td>
-                        <td>ICLR'2020</td>
-                        <td>Estimated second moment</td>
-                        <td>Momentum</td>
-                        <td>Decoupled</td>
-                    </tr>
-                    <tr>
-                        <td>NAdam</td>
-                        <td>ICLR'2018</td>
-                        <td>Estimated second moment</td>
-                        <td>Nesterov Momentum</td>
-                        <td>✓</td>
-                    </tr>
-                    <tr>
-                        <td>RAdam</td>
-                        <td>ICLR'2020</td>
-                        <td>Estimated second moment</td>
-                        <td>Momentum</td>
-                        <td>Decoupled</td>
-                    </tr>
-                    <tr>
-                        <td>Adan</td>
-                        <td>TPAMI'2023</td>
-                        <td>Estimated second moment Nesterov</td>
-                        <td>Momentum</td>
-                        <td>Decoupled</td>
-                    </tr>
-                    <tr>
-                        <td>AdaBelief</td>
-                        <td>NIPS'2019</td>
-                        <td>Estimated second moment variance</td>
-                        <td>Momentum</td>
-                        <td>Decoupled</td>
-                    </tr>
-                    <tr>
-                        <td>AdaBound</td>
-                        <td>ICLR'2019</td>
-                        <td>Estimated second moment</td>
-                        <td>Momentum</td>
-                        <td>Decoupled</td>
-                    </tr>
-                    <tr>
-                        <td>AdaFactor</td>
-                        <td>ICML'2018</td>
-                        <td>Estimated second moment (decomposition)</td>
-                        <td>Momentum</td>
-                        <td>Decoupled</td>
-                    </tr>
-                    <tr>
-                        <td>LARS</td>
-                        <td>ICLR'2018</td>
-                        <td>L2-norm of Gradient</td>
-                        <td>Momentum</td>
-                        <td>Decoupled</td>
-                    </tr>
-                    <tr>
-                        <td>Novograd</td>
-                        <td>arXiv'2020</td>
-                        <td>Sum of estimated second momentum</td>
-                        <td>Momentum</td>
-                        <td>Decoupled</td>
-                    </tr>
-                    <tr>
-                        <td>Sophia</td>
-                        <td>arXiv'2023</td>
-                        <td>Parameter-based estimator</td>
-                        <td>Sign Momentum</td>
-                        <td>Decoupled</td>
-                    </tr>
-                    <tr>
-                        <td>AdaGrad</td>
-                        <td>JMLR'2011</td>
-                        <td>Second moment</td>
-                        <td>Gradient</td>
-                        <td>✓</td>
-                    </tr>
-                    <tr>
-                        <td>AdaDelta</td>
-                        <td>arXiv'2012</td>
-                        <td>Estimated second moment param moment</td>
-                        <td>Gradient</td>
-                        <td>✓</td>
-                    </tr>
-                    <tr>
-                        <td>RMSProp</td>
-                        <td>arXiv'2012</td>
-                        <td>Estimated second moment</td>
-                        <td>Gradient</td>
-                        <td>✓</td>
-                    </tr>
-                </tbody>
-            </table>
+    </section>
+     
+    <section class="section">
+      <!-- Results. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-six-fifths">
+          <h2 class="title is-3">Implementation Details (Optimizer)</h2>
+        </div>
+      </div>
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-full-width">
+                <div class="content has-text-justified">
+                  <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                    <caption>Four categories of typical optimizers with their components. From top to bottom are (a) fixed learning rate with momentum gradient, (b) adaptive learning rate with momentum gradient, (c) estimated learning rate with momentum gradient, and (d) adaptive learning rate with current gradient.</caption>
+                    <thead>
+                        <tr>
+                            <th>Optimizer</th>
+                            <th>Date</th>
+                            <th>Learning rate</th>
+                            <th>Gradient</th>
+                            <th>Weight decay</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>SGD-M</td>
+                            <td>TSMC'1971</td>
+                            <td>Fixed lr</td>
+                            <td>Momentum</td>
+                            <td>✓</td>
+                        </tr>
+                        <tr>
+                            <td>SGDP</td>
+                            <td>ICLR'2021</td>
+                            <td>Fixed lr</td>
+                            <td>Momentum</td>
+                            <td>Decoupled</td>
+                        </tr>
+                        <tr>
+                            <td>LION</td>
+                            <td>NIPS'2023</td>
+                            <td>Fixed lr</td>
+                            <td>Sign Momentum</td>
+                            <td>Decoupled</td>
+                        </tr>
+                        <tr>
+                            <td>Adam</td>
+                            <td>ICLR'2015</td>
+                            <td>Estimated second moment</td>
+                            <td>Momentum</td>
+                            <td>✓</td>
+                        </tr>
+                        <tr>
+                            <td>Adamax</td>
+                            <td>ICLR'2015</td>
+                            <td>Estimated second moment</td>
+                            <td>Momentum</td>
+                            <td>✓</td>
+                        </tr>
+                        <tr>
+                            <td>AdamW</td>
+                            <td>ICLR'2019</td>
+                            <td>Estimated second moment</td>
+                            <td>Momentum</td>
+                            <td>Decoupled</td>
+                        </tr>
+                        <tr>
+                            <td>AdamP</td>
+                            <td>ICLR'2021</td>
+                            <td>Estimated second moment</td>
+                            <td>Momentum</td>
+                            <td>Decoupled</td>
+                        </tr>
+                        <tr>
+                            <td>LAMB</td>
+                            <td>ICLR'2020</td>
+                            <td>Estimated second moment</td>
+                            <td>Momentum</td>
+                            <td>Decoupled</td>
+                        </tr>
+                        <tr>
+                            <td>NAdam</td>
+                            <td>ICLR'2018</td>
+                            <td>Estimated second moment</td>
+                            <td>Nesterov Momentum</td>
+                            <td>✓</td>
+                        </tr>
+                        <tr>
+                            <td>RAdam</td>
+                            <td>ICLR'2020</td>
+                            <td>Estimated second moment</td>
+                            <td>Momentum</td>
+                            <td>Decoupled</td>
+                        </tr>
+                        <tr>
+                            <td>Adan</td>
+                            <td>TPAMI'2023</td>
+                            <td>Estimated second moment Nesterov</td>
+                            <td>Momentum</td>
+                            <td>Decoupled</td>
+                        </tr>
+                        <tr>
+                            <td>AdaBelief</td>
+                            <td>NIPS'2019</td>
+                            <td>Estimated second moment variance</td>
+                            <td>Momentum</td>
+                            <td>Decoupled</td>
+                        </tr>
+                        <tr>
+                            <td>AdaBound</td>
+                            <td>ICLR'2019</td>
+                            <td>Estimated second moment</td>
+                            <td>Momentum</td>
+                            <td>Decoupled</td>
+                        </tr>
+                        <tr>
+                            <td>AdaFactor</td>
+                            <td>ICML'2018</td>
+                            <td>Estimated second moment (decomposition)</td>
+                            <td>Momentum</td>
+                            <td>Decoupled</td>
+                        </tr>
+                        <tr>
+                            <td>LARS</td>
+                            <td>ICLR'2018</td>
+                            <td>L2-norm of Gradient</td>
+                            <td>Momentum</td>
+                            <td>Decoupled</td>
+                        </tr>
+                        <tr>
+                            <td>Novograd</td>
+                            <td>arXiv'2020</td>
+                            <td>Sum of estimated second momentum</td>
+                            <td>Momentum</td>
+                            <td>Decoupled</td>
+                        </tr>
+                        <tr>
+                            <td>Sophia</td>
+                            <td>arXiv'2023</td>
+                            <td>Parameter-based estimator</td>
+                            <td>Sign Momentum</td>
+                            <td>Decoupled</td>
+                        </tr>
+                        <tr>
+                            <td>AdaGrad</td>
+                            <td>JMLR'2011</td>
+                            <td>Second moment</td>
+                            <td>Gradient</td>
+                            <td>✓</td>
+                        </tr>
+                        <tr>
+                            <td>AdaDelta</td>
+                            <td>arXiv'2012</td>
+                            <td>Estimated second moment param moment</td>
+                            <td>Gradient</td>
+                            <td>✓</td>
+                        </tr>
+                        <tr>
+                            <td>RMSProp</td>
+                            <td>arXiv'2012</td>
+                            <td>Estimated second moment</td>
+                            <td>Gradient</td>
+                            <td>✓</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
-</div>
-</section>
-
-<section class="section">
-<div class="columns is-centered has-text-centered">
-<div class="column is-six-fifths">
-<h2 class="title is-3"> A Decade's Battle on the Bias of Vision Backbone and Optimizer </h2>
-</div>
-</div>
-<div class="container">
-<div class="columns is-centered">
-<div class="column is-full-width">
-<div class="content has-text-justified">
-<p>
-The <strong><em>backbone-optimizer coupling bias (BOCB)</em></strong> is a phenomenon we observed during the benchmarking, which arises from the intricate interplay between the design principles of vision backbones and the inherent properties of optimizers. In particular, we notice that traditional CNNs, such as VGG and ResNets, exhibit a marked coupling with SGD optimizers. In contrast, modern meta-architectures like ViTs and ConvNeXt strongly correlate with adaptive learning rate optimizers, particularly AdamW. We assume that such a coupling bias may stem from the increasing complexity of optimization as backbone architectures evolve. Concretely, modern backbones incorporate complex elements such as stage-wise hierarchical structures, advanced token mixing, and block-wise heterogeneity. These designs shape a more intricate and challenging optimization landscape, necessitating adaptive learning rate strategies and effective momentum handling. Thus, modern backbones have stronger couplings with optimizers that can navigate these complex landscapes. The BOCB phenomenon has several implications for the design and deployment of vision backbones:
-<ul>
-<li><b>User-Friendliness</b>: Backbones with weaker coupling, typically traditional CNNs, offer greater flexibility as they can be effectively optimized with different optimizers. This makes them more user-friendly, especially for practitioners with limited resources for extensive hyper-parameter tuning. Conversely, modern architectures like ViTs and ConvNeXt, which exhibit strong coupling with adaptive learning rate optimizers, demand careful optimizer selection and meticulous hyper-parameter tuning for optimal performance.</li>
-</ul>
-<ul>
-<li><b>Performance and Generalization</b>: While weaker coupling offers more user-friendliness, stronger coupling can potentially lead to better performance and generalization. Tailoring the optimization process to certain architectural characteristics of modern backbones, such as stage-wise hierarchical structures and attention mechanisms for token mixing, can more effectively navigate complex optimization landscapes, unlocking superior performance and generalization capabilities.</li>
-</ul>
-<ul>
-<li><b>Design Principles</b>: The BOCB phenomenon highlights the need to consider the coupling between backbone designs and optimizer choices. When designing new backbone architectures, it is crucial to account for both the inductive bias introduced by the macro design principles (e.g., hierarchical structures, attention mechanisms) and the optimizer matching bias. A balanced approach that harmonizes the backbone design with the appropriate optimizer choice can lead to optimal performance and efficient optimization, enabling the full potential of the proposed architecture to be realized.</li>
-</ul>
-</p>
-<p style="color: gray; font-size: 1.2em; text-align: center;">For details and materials, please refer to the full paper.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-
-<section class="section" id="BibTeX">
-<div class="container content">
-<h2 class="title">BibTeX</h2>
-<pre><code>
-@article{li2024battle,
-title={A Decade's Battle on Bias of Visual Backbone and Optimizer},
-author={Siyuan Li and Juanxi Tian and Zedong Wang and Luyuan Zhang and Zicheng Liu and Cheng Tan and Weiyang Jin and Lei Xin and Yang Liu and Baigui Sun and Stan Z. Li},
-year={2024},
-}
-</code></pre>
-</div>
-</section>
-
-<section class="section" id="Contribution">
-  <div class="container content">
-    <h2 class="title">Contribution</h2>
-    <p>The main contributors are:</p>
-    <div class="maintainers">
-      <div class="maintainer">
-        <a href="https://github.com/tianshijing">
-          <img src="images/JuanxiTian.png" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;" alt="Juanxi Tian">
-          <span>@Juanxi Tian</span>
-        </a>
+    </div>
+    </section>
+    
+    <section class="section">
+    <div class="columns is-centered has-text-centered">
+    <div class="column is-six-fifths">
+    <h2 class="title is-3"> A Decade's Battle on the Bias of Vision Backbone and Optimizer </h2>
+    </div>
+    </div>
+    <div class="container">
+    <div class="columns is-centered">
+    <div class="column is-full-width">
+    <div class="content has-text-justified">
+    <p>
+    The <strong><em>backbone-optimizer coupling bias (BOCB)</em></strong> is a phenomenon we observed during the benchmarking, which arises from the intricate interplay between the design principles of vision backbones and the inherent properties of optimizers. In particular, we notice that traditional CNNs, such as VGG and ResNets, exhibit a marked coupling with SGD optimizers. In contrast, modern meta-architectures like ViTs and ConvNeXt strongly correlate with adaptive learning rate optimizers, particularly AdamW. We assume that such a coupling bias may stem from the increasing complexity of optimization as backbone architectures evolve. Concretely, modern backbones incorporate complex elements such as stage-wise hierarchical structures, advanced token mixing, and block-wise heterogeneity. These designs shape a more intricate and challenging optimization landscape, necessitating adaptive learning rate strategies and effective momentum handling. Thus, modern backbones have stronger couplings with optimizers that can navigate these complex landscapes. The BOCB phenomenon has several implications for the design and deployment of vision backbones:
+    <ul>
+    <li><b>User-Friendliness</b>: Backbones with weaker coupling, typically traditional CNNs, offer greater flexibility as they can be effectively optimized with different optimizers. This makes them more user-friendly, especially for practitioners with limited resources for extensive hyper-parameter tuning. Conversely, modern architectures like ViTs and ConvNeXt, which exhibit strong coupling with adaptive learning rate optimizers, demand careful optimizer selection and meticulous hyper-parameter tuning for optimal performance.</li>
+    </ul>
+    <ul>
+    <li><b>Performance and Generalization</b>: While weaker coupling offers more user-friendliness, stronger coupling can potentially lead to better performance and generalization. Tailoring the optimization process to certain architectural characteristics of modern backbones, such as stage-wise hierarchical structures and attention mechanisms for token mixing, can more effectively navigate complex optimization landscapes, unlocking superior performance and generalization capabilities.</li>
+    </ul>
+    <ul>
+    <li><b>Design Principles</b>: The BOCB phenomenon highlights the need to consider the coupling between backbone designs and optimizer choices. When designing new backbone architectures, it is crucial to account for both the inductive bias introduced by the macro design principles (e.g., hierarchical structures, attention mechanisms) and the optimizer matching bias. A balanced approach that harmonizes the backbone design with the appropriate optimizer choice can lead to optimal performance and efficient optimization, enabling the full potential of the proposed architecture to be realized.</li>
+    </ul>
+    </p>
+    <p style="color: gray; font-size: 1.2em; text-align: center;">For details and materials, please refer to the full paper.</p>
+    </div>
+    </div>
+    </div>
+    </div>
+    </section>
+    
+    <section class="section" id="BibTeX">
+    <div class="container content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>
+    @article{li2024battle,
+    title={A Decade's Battle on Bias of Visual Backbone and Optimizer},
+    author={Siyuan Li and Juanxi Tian and Zedong Wang and Luyuan Zhang and Zicheng Liu and Cheng Tan and Weiyang Jin and Lei Xin and Yang Liu and Baigui Sun and Stan Z. Li},
+    year={2024},
+    }
+    </code></pre>
+    </div>
+    </section>
+    
+    <section class="section" id="Contribution">
+      <div class="container content">
+        <h2 class="title">Contribution</h2>
+        <p>The main contributors are:</p>
+        <div class="maintainers">
+          <div class="maintainer">
+            <a href="https://github.com/tianshijing">
+              <img src="images/JuanxiTian.png" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;" alt="Juanxi Tian">
+              <span>@Juanxi Tian</span>
+            </a>
+          </div>
+          <div class="maintainer">
+            <a href="https://github.com/Jacky1128">
+              <img src="images/ZedongWang.png" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;" alt="Zedong Wang">
+              <span>@Zedong Wang</span>
+            </a>
+          </div>
+          <div class="maintainer">
+            <a href="https://github.com/Lupin1998">
+              <img src="images/SiyuanLi.png" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;" alt="Siyuan Li">
+              <span>@Siyuan Li</span>
+            </a>
+          </div>
+        </div>
       </div>
-      <div class="maintainer">
-        <a href="https://github.com/Jacky1128">
-          <img src="images/ZedongWang.png" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;" alt="Zedong Wang">
-          <span>@Zedong Wang</span>
-        </a>
+    </section>
+    
+    <section class="section" id="Acknowledgement">
+      <div class="container content">
+      <h2 class="title">Acknowledgement</h2>
+      <p>This website is adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>, licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
+      <p>
+      <a href='https://github.com/Computer-Vision-in-the-Wild/'><img id="painting_icon" width="10%" src="https://avatars.githubusercontent.com/u/97258247?s=200&v=4" alt="CVinW"></a>
+      </p>
+      <p class="centered-text">© 2024 BOCB. All rights reserved.</p>
       </div>
-      <div class="maintainer">
-        <a href="https://github.com/Lupin1998">
-          <img src="images/SiyuanLi.png" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;" alt="Siyuan Li">
-          <span>@Siyuan Li</span>
-        </a>
+      </section>
+    
+
+
       </div>
     </div>
-  </div>
-</section>
-
-<section class="section" id="Acknowledgement">
-  <div class="container content">
-  <h2 class="title">Acknowledgement</h2>
-  <p>This website is adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>, licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
-  <p>
-  <a href='https://github.com/Computer-Vision-in-the-Wild/'><img id="painting_icon" width="10%" src="https://avatars.githubusercontent.com/u/97258247?s=200&v=4" alt="CVinW"></a>
-  </p>
-  <p class="centered-text">© 2024 BOCB. All rights reserved.</p>
-  </div>
   </section>
 
-
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+  if ($navbarBurgers.length > 0) {
+    $navbarBurgers.forEach( el => {
+      el.addEventListener('click', () => {
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  }
+});
+</script>
 </body>
-
 </html>
