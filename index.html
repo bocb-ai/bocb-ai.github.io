@@ -1750,7 +1750,7 @@ slides[slideIndex].style.display = 'block';
 <section class="section">
 <div class="columns is-centered has-text-centered">
 <div class="column is-six-fifths">
-<h2 class="title is-3"> A Decade's Battle on the Bias of Vision Backbone and Optimizer </h2>
+<h2 class="title is-3"> What is BOCB? </h2>
 </div>
 </div>
 <div class="container">
@@ -1758,7 +1758,7 @@ slides[slideIndex].style.display = 'block';
 <div class="column is-full-width">
 <div class="content has-text-justified">
 <p>
-The <strong><em>backbone-optimizer coupling bias (BOCB)</em></strong> is a phenomenon we observed during the benchmarking, which arises from the intricate interplay between the design principles of vision backbones and the inherent properties of optimizers. In particular, we notice that traditional CNNs, such as VGG and ResNets, exhibit a marked coupling with SGD optimizers. In contrast, modern meta-architectures like ViTs and ConvNeXt strongly correlate with adaptive learning rate optimizers, particularly AdamW. We assume that such a coupling bias may stem from the increasing complexity of optimization as backbone architectures evolve. Concretely, modern backbones incorporate complex elements such as stage-wise hierarchical structures, advanced token mixing, and block-wise heterogeneity. These designs shape a more intricate and challenging optimization landscape, necessitating adaptive learning rate strategies and effective momentum handling. Thus, modern backbones have stronger couplings with optimizers that can navigate these complex landscapes. The BOCB phenomenon has several implications for the design and deployment of vision backbones:
+The phenomenon of <strong><em>backbone-optimizer coupling bias (BOCB)</em></strong> we observed during the benchmarking arises from the intricate interplay between the design principles of vision backbones and the inherent properties of optimizers. In particular, we notice that traditional CNNs, such as VGG and ResNets, exhibit a marked coupling with SGD optimizers. In contrast, modern meta-architectures like ViTs and ConvNeXt strongly correlate with adaptive learning rate optimizers, particularly AdamW. As aforementioned, we assume that such a coupling bias may stem from the increasing complexity of optimization as backbone architectures evolve. Concretely, recent backbones incorporate complex elements such as stage-wise hierarchical structures, advanced token-mixers, and block-wise heterogeneous structures. These designs shape a more intricate and challenging optimization landscape, necessitating adaptive learning rate strategies and effective momentum handling. Thus, modern backbones exhibit stronger couplings with optimizers that can navigate these complex landscapes. The BOCB phenomenon has several implications for the design and deployment of vision backbones:
 <ul>
 <li><b>User-Friendliness</b>: Backbones with weaker coupling, typically traditional CNNs, offer greater flexibility as they can be effectively optimized with different optimizers. This makes them more user-friendly, especially for practitioners with limited resources for extensive hyper-parameter tuning. Conversely, modern architectures like ViTs and ConvNeXt, which exhibit strong coupling with adaptive learning rate optimizers, demand careful optimizer selection and meticulous hyper-parameter tuning for optimal performance.</li>
 </ul>
@@ -1768,11 +1768,57 @@ The <strong><em>backbone-optimizer coupling bias (BOCB)</em></strong> is a pheno
 <ul>
 <li><b>Design Principles</b>: The BOCB phenomenon highlights the need to consider the coupling between backbone designs and optimizer choices. When designing new backbone architectures, it is crucial to account for both the inductive bias introduced by the macro design principles (e.g., hierarchical structures, attention mechanisms) and the optimizer matching bias. A balanced approach that harmonizes the backbone design with the appropriate optimizer choice can lead to optimal performance and efficient optimization, enabling the full potential of the proposed architecture to be realized.</li>
 </ul>
-</p>
-<p style="color: gray; font-size: 1.2em; text-align: center;">For details and materials, please refer to the full paper.</p>
 </div>
 </div>
 </div>
+</div>
+</section>
+
+<style>
+.category-a {
+    filter: opacity(0.7) brightness(1.3); /* 模拟透明度2.1 */
+}
+.category-b {
+    filter: opacity(0.8667) brightness(1.15); /* 模拟透明度2.6 */
+}
+.category-c {
+    filter: opacity(0.9333) brightness(1.1); /* 模拟透明度2.8 */
+}
+.category-d {
+    filter: opacity(0.8333) brightness(1.18); /* 模拟透明度2.5 */
+}
+</style>
+
+<section class="section">
+<div class="columns is-centered has-text-centered">
+    <div class="column is-six-fifths">
+    <h2 class="title is-3"> Where the BOCB Comes from? </h2>
+    </div>
+</div>
+<div class="container">
+    <div class="columns is-centered">
+    <div class="column is-full-width">
+        <div class="content has-text-justified">
+        <p>
+            To investigate the causes of <strong><em>BOCB</em></strong>, we first consider what matters the most: optimizers or backbones. As shown in Figure 4 and Table 1, four categories of optimizers show different extents of BOCB with vision backbones. 
+            <span class="category-a" style="color: rgb(229,166,175); font-weight: bold;">Category (a)</span> shows a broader performance dispersion, necessitating meticulous hyper-parameter tuning to classical CNNs while demonstrating less adaptability to advanced backbones' optimization demands. 
+            <span class="category-b" style="color: rgb(154,207,241); font-weight: bold;">Category (b)</span> and <span class="category-c" style="color: rgb(158,218,200); font-weight: bold;">Category (c)</span> exhibit a robust, hyperparameter-insensitive performance peak, adept at navigating the complex optimization landscapes of primary CNNs and modern DNNs. 
+            <span class="category-d" style="color: rgb(189,184,224); font-weight: bold;">Category (d)</span> shows the worst performances and heavy BOCB.
+            The trajectory of vision backbone macro design has significantly sculpted the optimization landscape, progressing through distinct phases that reflect the intricate relationship between network architectural complexity and training challenges.
+        </p>
+        <ul>
+            <li><b>Foundational Backbones</b>: Primary CNNs like AlexNet and VGG established a fundamental paradigm in computer vision. These architectures featured a straightforward design of stacked convolutional and pooling layers, culminated by fully connected layers. This conventional paradigm was effective but set the stage for further optimization of landscape alterations.</li>
+        </ul>
+        <ul>
+            <li><b>Classical Backbone Advancements</b>: The introduction of ResNet marked a pivotal shift towards stage-wise hierarchical designs, significantly enhancing feature extraction and representation learning ability. ResNet-50, in particular, demonstrated a well-balanced approach to BOCB, which exhibited strong compatibility with SGD optimizers and a relatively lower BOCB compared to its contemporaries.</li>
+        </ul>
+        <ul>
+            <li><b>Modern Backbone Evolution</b>: The transition to Modern DNN backbones, such as ConvNeXt and MogaNet, introduced complex block-wise heterogeneous structures, increasing the optimization challenge and the degree of BOCB due to their sophisticated feature extraction mechanisms. Representing a pinnacle in evolution, the MetaFormer architecture incorporates both stage-wise and block-wise heterogeneity into its design. This innovative macro design refines the optimization landscape by harmonizing with optimizers, leading to reduced BOCB and enhanced performance.</li>
+        </ul>
+        <p style="color: gray; font-size: 1.5em; text-align: center;">For details, please refer to the full paper.</p>
+        </div>
+    </div>
+    </div>
 </div>
 </section>
 
