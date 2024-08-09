@@ -1,5 +1,3 @@
-**Official project of BOCB**
-
 <div align="center">
 <h2><a href="https://github.com/Westlake-AI/Backbone-vs-Optimizer">A Decade’s Battle on Bias of Visual Backbone and Optimizer</a></h2>
 
