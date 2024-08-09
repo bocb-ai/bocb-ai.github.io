@@ -1576,6 +1576,21 @@ slides[slideIndex].style.display = 'block';
 </div>
 </section>
  
+<style>
+.category-a {
+    filter: opacity(2.1);
+}
+.category-b {
+    filter: opacity(2.6);
+}
+.category-c {
+    filter: opacity(2.8);
+}
+.category-d {
+    filter: opacity(2.5);
+}
+</style>
+
 <section class="section">
   <!-- Results. -->
   <div class="columns is-centered has-text-centered">
@@ -1588,7 +1603,7 @@ slides[slideIndex].style.display = 'block';
         <div class="column is-full-width">
             <div class="content has-text-justified">
               <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-                <caption>Four categories of typical optimizers with their components. From top to bottom are (a) fixed learning rate with momentum gradient, (b) adaptive learning rate with momentum gradient, (c) estimated learning rate with momentum gradient, and (d) adaptive learning rate with current gradient.</caption>
+                <caption>Four categories of typical optimizers with their components. From top to bottom are <span class="category-a" style="color: rgb(229,166,175); font-weight: bold;">(a) fixed learning rate with momentum gradient</span>, <span class="category-b" style="color: rgb(154,207,241); font-weight: bold;">(b) adaptive learning rate with momentum gradient</span>, <span class="category-c" style="color: rgb(158,218,200); font-weight: bold;">(c) estimated learning rate with momentum gradient</span>, and <span class="category-d" style="color: rgb(189,184,224); font-weight: bold;">(d) adaptive learning rate with current gradient</span></caption>.
                 <thead>
                     <tr>
                         <th>Optimizer</th>
@@ -1774,21 +1789,6 @@ The phenomenon of <strong><em>backbone-optimizer coupling bias (BOCB)</em></stro
 </div>
 </section>
 
-<style>
-.category-a {
-    filter: opacity(2.1); /* 模拟不透明度2.1 */
-}
-.category-b {
-    filter: opacity(2.6); /* 模拟不透明度2.6 */
-}
-.category-c {
-    filter: opacity(2.8); /* 模拟不透明度2.8 */
-}
-.category-d {
-    filter: opacity(2.5); /* 模拟不透明度2.5 */
-}
-</style>
-
 <section class="section">
 <div class="columns is-centered has-text-centered">
     <div class="column is-six-fifths">
@@ -1815,7 +1815,7 @@ The phenomenon of <strong><em>backbone-optimizer coupling bias (BOCB)</em></stro
         <ul>
             <li><b>Modern Backbone Evolution</b>: The transition to Modern DNN backbones, such as ConvNeXt and MogaNet, introduced complex block-wise heterogeneous structures, increasing the optimization challenge and the degree of BOCB due to their sophisticated feature extraction mechanisms. Representing a pinnacle in evolution, the MetaFormer architecture incorporates both stage-wise and block-wise heterogeneity into its design. This innovative macro design refines the optimization landscape by harmonizing with optimizers, leading to reduced BOCB and enhanced performance.</li>
         </ul>
-        <p style="color: gray; font-size: 1.2em; text-align: center;">For details, please refer to the full paper.</p>
+        <p style="color: gray; font-size: 1.5em; text-align: center;">For details, please refer to the full paper.</p>
         </div>
     </div>
     </div>
