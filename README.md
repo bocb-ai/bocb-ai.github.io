@@ -7,4 +7,3 @@
 </div>
 
 
-![BOCB_ok2](https://github.com/user-attachments/assets/e133de00-ef32-4dbd-95ed-dcc27b3144f3)
