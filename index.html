@@ -438,8 +438,9 @@ transform: scale(1.05);
     <div class="columns is-centered has-text-centered">
     <div class="column is-six-fifths">
     <h2 class="title is-3">New team & New series work!</h2>
+    <img src="images/logo1.jpg" alt="Logo" class="static-image" style="width: 2.11em; height: 3em;">
     <div class="content has-text-justified">
-    <p>A new team, Black-Box Optimization & Coupling Bias (BOCB), has been established by Juanxi Tian, Siyuan Li, and Zedong Wang. We believe that our first work, 'Backbone-Optimizer Coupling Bias,' marks a promising start for our team. Moving forward, we will focus on a broader range of scenarios in Deep Learning, exploring more intriguing and even counterintuitive phenomena to better understand the Coupling Bias in complex DL systems. We aim to make significant optimizations and improvements. Stay tuned for more exciting developments.</p>
+    <p>A new team, Black-Box Optimization & Coupling Bias (BOCB), has been established by Juanxi Tian, Siyuan Li, and Zedong Wang. We believe that our first work, 'Backbone-Optimizer Coupling Bias' marks a promising start for our team. Moving forward, we will focus on a broader range of scenarios in Deep Learning, exploring more intriguing and even counterintuitive phenomena to better understand the Coupling Bias in complex DL systems. We aim to make significant optimizations and improvements. Stay tuned for more exciting developments.</p>
     </div>
     </div>
     </div>
@@ -465,7 +466,7 @@ transform: scale(1.05);
 <img src="images/Optimizer.svg" alt="Four categories optimizer">
 </div>
 <div class="slide">
-<h3>Violinplot of the performance stability for different backbones./h3>
+<h3>Violinplot of the performance stability for different backbones.</h3>
 <img src="images/violinplot_backbone_hyper.png" alt="Hyper-parameters consistency">
 </div>
 <div class="slide">
@@ -541,7 +542,7 @@ slides[slideIndex].style.display = 'block';
               <h2 class="title is-3" id="leaderboard">CIFAR100 Benchmark</h2>
               <div class="content">
                   <p class="mt-3">Top-1 accuracy (\%) of representative vision backbones with 20 popular optimizers on CIFAR-100. The torch-style training settings are used for AlexNet, VGG-13, R-50 (ResNet-50), DN-121 (DenseNet-121), MobV2 (MobileNet.V2), and RVGG-A1 (RepVGG-A1), while other backbones adopt modern recipes, including Eff-B0 (EfficientNet-B0), ViT variants, ConvNeXt variants (CNX-T and CNXV2-T), Moga-S (MogaNet-S), URLK-T (UniRepLKNet-T), and TNX-T (TransNeXt-T). We list MetaFormer S12 variants apart from other modern DNNs as IF-12, PFV2-12, CF-12, AF-12, and CAF-12.</p>
-                  <p>% The <span style="background-color: lightblue;">blue</span> and <span style="background-color: gray90;">gray</span> features denote the top-4 and trivial results, while others are inliers.</p>
+                  <p>The <span style="background-color: lightblue;">blue</span> and <span style="background-color: #aaaaaa;">gray</span> features denote the top-4 and trivial results, while others are inliers.</p>
                   <p>Two bottom lines report mean, std, and range on statistics that removed the worst result for all models.</p>
                   <p class="mt-3"><strong>You can swipe left and right to see the full table.</strong></p>  
                   <div class="table-container">
@@ -1503,8 +1504,9 @@ slides[slideIndex].style.display = 'block';
                         <th>Date</th>
                         <th>Stage-wise design</th>
                         <th>Block-wise design</th>
-                        <th>Operator (token mixer)</th>
-                        <th>Resolution</th>
+                        <th>Operator (feature extractor)</th>
+                        <th>Residual branch</th>
+                        <th>Input size</th>
                         <th>Training setting</th>
                     </tr>
                 </thead>
@@ -1513,55 +1515,72 @@ slides[slideIndex].style.display = 'block';
                         <td>AlexNet</td>
                         <td>NIPS'2012</td>
                         <td>-</td>
-                        <td>-</td>
+                        <td>Plain</td>
                         <td>Conv</td>
+                        <td>-</td>
                         <td>224</td>
                         <td>PyTorch</td>
                     </tr>
                     <tr>
                         <td>VGG-13</td>
-                        <td>ICLR'2014</td>
+                        <td>ICLR'2015</td>
                         <td>-</td>
+                        <td>Plain</td>
                         <td>-</td>
                         <td>Conv</td>
+                        <td>-</td>
                         <td>224</td>
                         <td>PyTorch</td>
                     </tr>
                     <tr>
-                        <td>ResNet-50/101</td>
+                        <td>ResNet</td>
                         <td>CVPR'2016</td>
                         <td>Hierarchical</td>
                         <td>Bottleneck</td>
                         <td>Conv</td>
+                        <td>Addition</td>
                         <td>32</td>
                         <td>PyTorch</td>
                     </tr>
                     <tr>
-                        <td>ResNet-101</td>
-                        <td>CVPR'2016</td>
+                        <td>DenseNet</td>
+                        <td>CVPR'2017</td>
                         <td>Hierarchical</td>
                         <td>Bottleneck</td>
                         <td>Conv</td>
+                        <td>Concatenation</td>
                         <td>32</td>
-                        <td>DeiT</td>
+                        <td>PyTorch</td>
                     </tr>
                     <tr>
                         <td>MobileNet.V2</td>
                         <td>CVPR'2018</td>
                         <td>Hierarchical</td>
                         <td>Inv-bottleneck</td>
-                        <td>Conv</td>
+                        <td>SepConv</td>
+                        <td>Addition</td>
                         <td>224</td>
                         <td>PyTorch</td>
                     </tr>
                     <tr>
-                        <td>EfficientNet-B0</td>
+                        <td>EfficientNet</td>
                         <td>ICML'2019</td>
                         <td>Hierarchical</td>
                         <td>Inv-bottleneck</td>
                         <td>Conv &amp; SE</td>
+                        <td>Addition</td>
                         <td>224</td>
                         <td>RSB A2</td>
+                    </tr>
+                    <tr>
+                        <td>RepVGG</td>
+                        <td>CVPR'2021</td>
+                        <td>Hierarchical</td>
+                        <td>Inv-bottleneck</td>
+                        <td>Conv</td>
+                        <td>Addition</td>
+                        <td>224</td>
+                        <td>PyTorch</td>
                     </tr>
                     <tr>
                         <td>DeiT-S (ViT)</td>
@@ -1569,6 +1588,7 @@ slides[slideIndex].style.display = 'block';
                         <td>Patchfy &amp; Isotropic</td>
                         <td>Metaformer</td>
                         <td>Attention</td>
+                        <td>PreNorm</td>
                         <td>224</td>
                         <td>DeiT</td>
                     </tr>
@@ -1578,69 +1598,117 @@ slides[slideIndex].style.display = 'block';
                         <td>Patchfy &amp; Isotropic</td>
                         <td>Metaformer</td>
                         <td>MLP</td>
+                        <td>PreNorm</td>
                         <td>224</td>
                         <td>DeiT</td>
                     </tr>
                     <tr>
-                        <td>Swin-T</td>
+                        <td>Swin Transformer</td>
                         <td>ICCV'2021</td>
                         <td>Patchfy &amp; Hierarchical</td>
                         <td>Metaformer</td>
-                        <td>Attention</td>
+                        <td>Local Attention</td>
+                        <td>PreNorm</td>
                         <td>224</td>
                         <td>ConvNeXt</td>
                     </tr>
                     <tr>
-                        <td>ConvNeXt-T</td>
+                        <td>ConvNeXt</td>
                         <td>CVPR'2022</td>
                         <td>Patchfy &amp; Hierarchical</td>
-                        <td>Metaformer</td>
-                        <td>Conv</td>
+                        <td>MetaNeXt</td>
+                        <td>DWConv</td>
+                        <td>PreNorm &amp; LayerScale</td>
                         <td>32</td>
                         <td>ConvNeXt</td>
                     </tr>
                     <tr>
-                        <td>MogaNet-S</td>
+                        <td>ConvNeXt.V2</td>
+                        <td>CVPR'2023</td>
+                        <td>Patchfy &amp; Hierarchical</td>
+                        <td>MetaNeXt</td>
+                        <td>DWConv</td>
+                        <td>PreNorm &amp; LayerScale</td>
+                        <td>32</td>
+                        <td>ConvNeXt</td>
+                    </tr>
+                    <tr>
+                        <td>MogaNet</td>
                         <td>ICLR'2024</td>
                         <td>Patchfy &amp; Hierarchical</td>
                         <td>Metaformer</td>
-                        <td>Conv &amp; Gating</td>
+                        <td>DWConv &amp; Gating</td>
+                        <td>PreNorm &amp; LayerScale</td>
                         <td>32</td>
                         <td>ConvNeXt</td>
                     </tr>
                     <tr>
-                        <td>IdentityFormer-S12</td>
+                        <td>UniRepLKNet</td>
+                        <td>CVPR'2024</td>
+                        <td>Patchfy &amp; Hierarchical</td>
+                        <td>Metaformer</td>
+                        <td>DWConv &amp; SE</td>
+                        <td>PreNorm &amp; LayerScale</td>
+                        <td>224</td>
+                        <td>ConvNeXt</td>
+                    </tr>
+                    <tr>
+                        <td>TransNeXt</td>
+                        <td>CVPR'2024</td>
+                        <td>Patchfy &amp; Hierarchical</td>
+                        <td>Metaformer</td>
+                        <td>Attention &amp; Gating</td>
+                        <td>PreNorm &amp; LayerScale</td>
+                        <td>224</td>
+                        <td>DeiT</td>
+                    </tr>
+                    <tr>
+                        <td>IdentityFormer</td>
                         <td>TPAMI'2024</td>
                         <td>Patchfy &amp; Hierarchical</td>
                         <td>Metaformer</td>
                         <td>Identity</td>
+                        <td>PreNorm &amp; ResScale</td>
                         <td>224</td>
                         <td>RSB A2</td>
                     </tr>
                     <tr>
-                        <td>PoolFormerV2-S12</td>
+                        <td>PoolFormerV2</td>
                         <td>TPAMI'2024</td>
                         <td>Patchfy &amp; Hierarchical</td>
                         <td>Metaformer</td>
                         <td>Pooling</td>
+                        <td>PreNorm &amp; ResScale</td>
                         <td>224</td>
                         <td>RSB A2</td>
                     </tr>
                     <tr>
-                        <td>ConvFormer-S12</td>
+                        <td>ConvFormer</td>
                         <td>TPAMI'2024</td>
                         <td>Patchfy &amp; Hierarchical</td>
                         <td>Metaformer</td>
-                        <td>Conv</td>
+                        <td>SepConv</td>
+                        <td>PreNorm &amp; ResScale</td>
                         <td>224</td>
                         <td>RSB A2</td>
                     </tr>
                     <tr>
-                        <td>AttentionFormer-S12</td>
+                        <td>AttentionFormer</td>
                         <td>TPAMI'2024</td>
                         <td>Patchfy &amp; Hierarchical</td>
                         <td>Metaformer</td>
                         <td>Attention</td>
+                        <td>PreNorm &amp; ResScale</td>
+                        <td>224</td>
+                        <td>RSB A2</td>
+                    </tr>
+                    <tr>
+                        <td>CAFormer</td>
+                        <td>TPAMI'2024</td>
+                        <td>Patchfy &amp; Hierarchical</td>
+                        <td>Metaformer</td>
+                        <td>SepConv &amp; Attention</td>
+                        <td>PreNorm &amp; ResScale</td>
                         <td>224</td>
                         <td>RSB A2</td>
                     </tr>
